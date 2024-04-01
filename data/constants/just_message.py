@@ -22,7 +22,7 @@ ERROR_UNBANNED = "User not unbanned correctly, ID is correctly? Try again"
 INPUT_TEAM_NAME = "Enter a team name: "
 TEAM_NAME_TOO_LONG = "Team name is too long. Send message up to 255 symbols"
 ERROR_CREATE_TEAM = "Some error when try create team, try again"
-SUCCESSFUL_CREATE_TEAM = "<b>{0}</b> Team was created!\n\nkey for join: <code>{1}</code>"
+SUCCESSFUL_CREATE_TEAM = "<b>{0}</b> Team was created!"
 
 TEAM_LIST_IS_EMPTY = "Team list is empty"
 TEAM_MENU = "Team menu"
@@ -32,15 +32,17 @@ WARNING_DELETE_TEAM = "Do you want to delete <b>{0}</b>? \n\n(The action cannot 
 SUCCESSFUL_DELETE_TEAM = "Successfully deleted <b>({0})</b>"
 ERROR_DELETE_TEAM = "Error delete team \n<code>{0}</code>"
 
-WARNING_REGENERATE_KEY_TEAM = "Do you want to regenerate team key for <b>{0}</b>? \n\nAll registered users will be canceled"
-SUCCESSFUL_REGENERATE_TEAM = "Successfully regenerate key for <b>({0})</b>. new key: <code>{1}</code>"
-ERROR_REGENERATE_TEAM = "Error regenerate team key \n<code>{0}</code>"
+WARNING_GENERATE_KEY_TEAM = "Do you want to generate key for <b>{0}</b>?"
+SUCCESSFUL_GENERATE_TEAM = "Successfully generate join key for <b>({0})</b>. \n\njoin key: <code>{1}</code>"
+ERROR_GENERATE_TEAM = "Error generate join key \n<code>{0}</code>"
 
 CHOICE_NEW_STATUS_TEAM = "Choice new team status for <b>{0}</b>"
 SUCCESSFUL_CHANGE_STATUS_TEAM = "Successfully change status for <b>({0})</b>. new status: <b>{1}</b>"
 ERROR_CHANGE_STATUS_TEAM = "Error change team status \n<code>{0}</code>"
 
 INPUT_TEAM_KEY = "Hello! You not join to any team. Admin could send you your team key!\n\nInput Your team key: "
-TEAM_UUID_NOT_EXIST = "Team with this key not exist!"
-TEAM_KEY_FAIL_UPDATE = "Some error. Team key was not set"
-TEAM_KEY_SUCCESS_UPDATE = "Team key was set successfully!"
+JOIN_KEY_NOT_EXIST = "Key not exist!"
+JOIN_KEY_ACTIVATED_BEFORE = "Key had activated before!"
+JOIN_KEY_FAIL_UPDATE = "Some error. Team key was not set"
+JOIN_KEY_SUCCESS_UPDATE = "Team key was set successfully!"
+

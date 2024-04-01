@@ -1,14 +1,13 @@
 from aiogram import Router, types, F
 from aiogram.filters import Command
 from aiogram.fsm.context import FSMContext
-from aiogram.types import CallbackQuery
 
 from data.constants.access import ADMIN
 from data.constants.buttons_text import MAIN_MENU, BAN_SYSTEM, TEAMS, CANCEL, SETTINGS
 from data.constants.just_message import CANCELED
 from domain.filters.isAdminFilter import IsAdminFilter
 from domain.middlewares.IsUserRole import UserRoleMiddleware
-from domain.routers.admin.sub_router import ban_system
+from domain.routers.admin.sub_router.bun_ import ban_system
 from domain.routers.admin.sub_router.teams_ import teams
 from presenter.keyboards.admin_keyboard import kb_menu_admin, kb_ban_system, kb_teams
 

@@ -1,18 +1,14 @@
-import uuid
 
-from aiogram import Router, F, types
+from aiogram import Router, F
 from aiogram.fsm.context import FSMContext
 from aiogram.types import CallbackQuery
 
 from data.constants.access import TEAM_STATUS_LIST
-from data.constants.buttons_text import APPROVE_REGENERATE_TEAM
-from data.constants.just_message import SUCCESSFUL_DELETE_TEAM, \
-    ERROR_DELETE_TEAM, WARNING_REGENERATE_KEY_TEAM, SUCCESSFUL_REGENERATE_TEAM, ERROR_REGENERATE_TEAM, \
-    CHOICE_NEW_STATUS_TEAM, PRESS_BACK_TO_TEAM_MENU, SUCCESSFUL_CHANGE_STATUS_TEAM, ERROR_CHANGE_STATUS_TEAM
+from data.constants.just_message import CHOICE_NEW_STATUS_TEAM, PRESS_BACK_TO_TEAM_MENU, SUCCESSFUL_CHANGE_STATUS_TEAM, \
+    ERROR_CHANGE_STATUS_TEAM
 from data.repository.TeamRepository import TeamRepository
 from domain.states.team_.TeamManagment import TeamManagmentState
-from presenter.keyboards.admin_keyboard import kb_team_delete, kb_teams, kb_team_regenerate, kb_team_change_status, \
-    kb_team_managment_help
+from presenter.keyboards.admin_keyboard import kb_teams, kb_team_change_status, kb_team_managment_help
 
 router = Router()
 
@@ -47,7 +43,7 @@ async def callback_team_choice_status(callback: CallbackQuery, state: FSMContext
         await state.clear()
         await callback.message.answer(SUCCESSFUL_CHANGE_STATUS_TEAM.format(data['team_name'], callback.data), reply_markup=kb_teams.as_markup())
     except Exception as e:
-        print(f"approve_regenerate_team: {e}")
+        print(f"callback_team_choice_status: {e}")
         await state.clear()
         await callback.message.answer(ERROR_CHANGE_STATUS_TEAM.format(e), reply_markup=kb_teams.as_markup())
 

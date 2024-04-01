@@ -3,8 +3,8 @@ from typing import Callable, Dict, Any, Awaitable
 from aiogram import BaseMiddleware, types
 from aiogram.types import TelegramObject
 
+from data.repository.AccessRepository import AccessRepository
 from data.repository.TeamRepository import TeamRepository
-from data.repository.UserRepository import UserRepository
 
 
 class UserHasTeamMiddleware(BaseMiddleware):
@@ -18,26 +18,16 @@ class UserHasTeamMiddleware(BaseMiddleware):
             event: TelegramObject,
             data: Dict[str, Any]
     ) -> Any:
-        if isinstance(event, types.Message) or isinstance(event, types.CallbackQuery):
-            user_id = event.from_user.id
-        else:
+        if not isinstance(event, (types.Message, types.CallbackQuery)):
             return
-
-        user = UserRepository().get_user(user_id)
 
         if self.has_team:
-            if not user['team_uuid']:
+            access = AccessRepository().get_access_by_user_id(event.from_user.id)
+            if not access or not TeamRepository().get_team_by_uuid(access['team_uuid']):
                 return
-
-            if not TeamRepository().get_team_by_uuid(user['team_uuid']):
-                return
-
-            return await handler(event, data)
         else:
-            if not user['team_uuid']:
-                return await handler(event, data)
+            access = AccessRepository().get_access_by_user_id(event.from_user.id)
+            if access and TeamRepository().get_team_by_uuid(access['team_uuid']):
+                return
 
-            if not TeamRepository().get_team_by_uuid(user['team_uuid']):
-                return await handler(event, data)
-
-            return
+        return await handler(event, data)

@@ -9,7 +9,6 @@ from domain.filters.isAdminFilter import IsAdminFilter
 from domain.filters.isTeamFilter import IsTeamFilter
 from domain.middlewares.IsUserHasTeam import UserHasTeamMiddleware
 from domain.middlewares.IsUserRole import UserRoleMiddleware
-from presenter.keyboards.admin_keyboard import kb_menu_admin
 from presenter.keyboards.user_keyboard import kb_menu_user
 
 router = Router()

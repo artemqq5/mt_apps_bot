@@ -1,7 +1,7 @@
 from typing import Callable, Any, Dict, Awaitable
 
 from aiogram import BaseMiddleware, types
-from aiogram.types import TelegramObject, Update
+from aiogram.types import TelegramObject
 
 from data.constants.just_message import REGISTER_FAIL, REGISTER_SUCCESS, SEND_REQUEST_TO_ADMIN
 from data.repository.UserRepository import UserRepository
@@ -14,11 +14,10 @@ class UserRegistationMiddleware(BaseMiddleware):
             event: TelegramObject,
             data: Dict[str, Any]
     ) -> Any:
-        if isinstance(event, types.Message) or isinstance(event, types.CallbackQuery):
-            user = event.from_user
-        else:
-            print(type(event))
+        if not isinstance(event, (types.Message, types.CallbackQuery)):
             return
+
+        user = event.from_user
 
         if not UserRepository().get_user(user.id):
             if not UserRepository().add_user(user.id, user.username, user.first_name, user.last_name, user.language_code):

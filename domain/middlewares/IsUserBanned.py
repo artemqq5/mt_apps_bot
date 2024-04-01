@@ -1,7 +1,7 @@
 from typing import Callable, Any, Dict, Awaitable
 
 from aiogram import BaseMiddleware, types
-from aiogram.types import TelegramObject, Update, ReplyKeyboardRemove
+from aiogram.types import TelegramObject, ReplyKeyboardRemove
 
 from data.constants.just_message import YOU_ARE_BLOKED
 from data.repository.UserRepository import UserRepository
@@ -14,11 +14,10 @@ class UserBannedMiddleware(BaseMiddleware):
             event: TelegramObject,
             data: Dict[str, Any]
     ) -> Any:
-        if isinstance(event, types.Message) or isinstance(event, types.CallbackQuery):
-            user_id = event.from_user.id
-        else:
-            print(type(event))
+        if not isinstance(event, (types.Message, types.CallbackQuery)):
             return
+
+        user_id = event.from_user.id
 
         if UserRepository().is_banned(user_id)['banned']:
             await event.bot.send_message(chat_id=user_id, text=YOU_ARE_BLOKED, reply_markup=ReplyKeyboardRemove())

@@ -3,8 +3,9 @@ from aiogram.utils.keyboard import ReplyKeyboardBuilder, InlineKeyboardBuilder
 
 from data.constants.access import Trial_TEAM, Basic_TEAM, Standard_TEAM, Premium_TEAM, Ultimate_TEAM
 from data.constants.buttons_text import TEAMS, BAN_SYSTEM, CANCEL, BAN_USER_CATEGORY, SHOW_BANNED_USERS, \
-    UNBAN_USER_CATEGORY, CREATE_TEAM, SHOW_ALL_TEAM, DELETE_TEAM, CHANGE_STATUS, REGENERATE_JOIN_KEY, BACK_TO_TEAM_MENU, \
-    APPROVE_REGENERATE_TEAM, APPROVE_DELETE_TEAM, TRIAL, BASIC, STANDART, PREMIUM, ULTIMATE, SETTINGS
+    UNBAN_USER_CATEGORY, CREATE_TEAM, SHOW_ALL_TEAM, DELETE_TEAM, CHANGE_STATUS, BACK_TO_TEAM_MENU, \
+    APPROVE_GENERATE_TEAM, APPROVE_DELETE_TEAM, TRIAL, BASIC, STANDART, PREMIUM, ULTIMATE, SETTINGS, \
+    GENERATE_JOIN_KEY, USERS_TEAM_LIST, ACCESS_NOT_ACTIVATE
 
 kb_menu_admin = ReplyKeyboardBuilder(markup=[
     [KeyboardButton(text=TEAMS)],
@@ -29,8 +30,10 @@ kb_teams = ReplyKeyboardBuilder(markup=[
 def kb_team_managment(team_id):
     return InlineKeyboardBuilder(markup=[
         [InlineKeyboardButton(text=DELETE_TEAM, callback_data=f"{team_id}*CALLBACK*DELETE")],
+        [InlineKeyboardButton(text=GENERATE_JOIN_KEY, callback_data=f"{team_id}*CALLBACK*GENERATEJOINKEY")],
+        [InlineKeyboardButton(text=ACCESS_NOT_ACTIVATE, callback_data=f"{team_id}*CALLBACK*ACCESSNOTACTIVATE")],
+        [InlineKeyboardButton(text=USERS_TEAM_LIST, callback_data=f"{team_id}*CALLBACK*USERS")],
         [InlineKeyboardButton(text=CHANGE_STATUS, callback_data=f"{team_id}*CALLBACK*CHANGESTATUS")],
-        [InlineKeyboardButton(text=REGENERATE_JOIN_KEY, callback_data=f"{team_id}*CALLBACK*REGENERATEJOINKEY")],
     ])
 
 
@@ -45,8 +48,8 @@ kb_team_delete = ReplyKeyboardBuilder(markup=[
     [KeyboardButton(text=CANCEL)]
 ])
 
-kb_team_regenerate = ReplyKeyboardBuilder(markup=[
-    [KeyboardButton(text=APPROVE_REGENERATE_TEAM)],
+kb_team_generate = ReplyKeyboardBuilder(markup=[
+    [KeyboardButton(text=APPROVE_GENERATE_TEAM)],
     [KeyboardButton(text=BACK_TO_TEAM_MENU)],
     [KeyboardButton(text=CANCEL)]
 ])
