@@ -6,9 +6,10 @@ from data.constants.access import Trial_TEAM, Basic_TEAM, Standard_TEAM, Premium
 from data.constants.buttons_text import TEAMS, BAN_SYSTEM, CANCEL, BAN_USER_CATEGORY, SHOW_BANNED_USERS, \
     UNBAN_USER_CATEGORY, CREATE_TEAM, SHOW_ALL_TEAM, DELETE_TEAM, CHANGE_STATUS, BACK_TO_TEAM_MENU, \
     APPROVE_GENERATE_TEAM, APPROVE_DELETE, TRIAL, BASIC, STANDART, PREMIUM, ULTIMATE, SETTINGS, \
-    GENERATE_JOIN_KEY, ACCESS_TEAM, DELETE_ACCESS, CHANGE_ACCESS_STATUS, BYER, TEAM_LEAD
+    GENERATE_JOIN_KEY, ACCESS_TEAM, DELETE_ACCESS, CHANGE_ACCESS_STATUS, BYER, TEAM_LEAD, APPS
 
 kb_menu_admin = ReplyKeyboardBuilder(markup=[
+    [KeyboardButton(text=APPS)],
     [KeyboardButton(text=TEAMS)],
     [KeyboardButton(text=BAN_SYSTEM)],
     [KeyboardButton(text=SETTINGS)],

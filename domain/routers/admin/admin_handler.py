@@ -24,25 +24,31 @@ async def start(message: types.Message, state: FSMContext):
     await message.answer(MAIN_MENU, reply_markup=kb_menu_admin.as_markup())
 
 
-@router.message(F.text == SETTINGS, IsAdminFilter(True))
-async def settings(message: types.Message):
-    await message.answer(SETTINGS)
-
-
 @router.message(F.text == CANCEL, IsAdminFilter(True))
 async def cancel(message: types.Message, state: FSMContext):
     await state.clear()
     await message.answer(CANCELED, reply_markup=kb_menu_admin.as_markup())
 
 
-@router.message(F.text == BAN_SYSTEM)
-async def ban_category(message: types.Message):
-    await message.answer(BAN_SYSTEM, reply_markup=kb_ban_system.as_markup())
-
-
 @router.message(F.text == TEAMS)
 async def teams_menu(message: types.Message):
     await message.answer(TEAMS, reply_markup=kb_teams.as_markup())
+
+
+@router.message(F.text == BAN_SYSTEM)
+async def ban_menu(message: types.Message):
+    await message.answer(BAN_SYSTEM, reply_markup=kb_ban_system.as_markup())
+
+
+@router.message(F.text == SETTINGS, IsAdminFilter(True))
+async def settings(message: types.Message):
+    await message.answer(SETTINGS)
+
+
+
+
+
+
 
 
 
