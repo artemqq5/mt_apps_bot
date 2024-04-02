@@ -42,7 +42,7 @@ async def approve_generate_team(message: types.Message, state: FSMContext):
             raise Exception
 
         await state.clear()
-        await message.answer(SUCCESSFUL_GENERATE_TEAM.format(data['team_name'], f"t.me/mt_rent_apps_test_bot?start={access_uuid}"),
+        await message.answer(SUCCESSFUL_GENERATE_TEAM.format(data['team_name'], f"t.me/mt_rent_apps_bot?start={access_uuid}"),
                              reply_markup=kb_teams.as_markup())
     except Exception as e:
         print(f"approve_generate_team: {e}")
