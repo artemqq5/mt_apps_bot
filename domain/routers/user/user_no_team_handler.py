@@ -48,9 +48,3 @@ async def start(message: types.Message, command: CommandObject):
 @router.message(F.text == SETTINGS, IsAdminFilter(False), IsTeamFilter(False))
 async def settings(message: types.Message):
     await message.answer(SETTINGS)
-
-
-@router.message(F.text == CANCEL, IsAdminFilter(False), IsTeamFilter(False))
-async def cancel(message: types.Message):
-    await message.answer(CANCELED, reply_markup=kb_menu_no_user.as_markup())
-
