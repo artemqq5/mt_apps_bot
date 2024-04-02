@@ -36,7 +36,3 @@ class UserRepository(DefaultDataBase):
     def unban_user_by_id(self, telegram_id):
         query = "UPDATE `users` SET `banned` = 0, `ban_message` = null WHERE `telegram_id` = %s;"
         return self._update(query, (telegram_id,))
-
-    def update_team_key(self, team_uuid, telegram_id):
-        query = "UPDATE `users` SET `team_uuid` = %s WHERE `telegram_id` = %s;"
-        return self._update(query, (team_uuid, telegram_id))

@@ -1,7 +1,7 @@
 from typing import Callable, Any, Dict, Awaitable
 
 from aiogram import BaseMiddleware, types
-from aiogram.types import TelegramObject, Update
+from aiogram.types import TelegramObject
 
 from data.repository.UserRepository import UserRepository
 
@@ -17,10 +17,10 @@ class UserRoleMiddleware(BaseMiddleware):
             event: TelegramObject,
             data: Dict[str, Any]
     ) -> Any:
-        if isinstance(event, types.Message) or isinstance(event, types.CallbackQuery):
-            user_id = event.from_user.id
-        else:
+        if not isinstance(event, (types.Message, types.CallbackQuery)):
             return
+
+        user_id = event.from_user.id
 
         if not UserRepository().is_admin(user_id)['role'] == self.role:
             return

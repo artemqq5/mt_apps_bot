@@ -1,7 +1,7 @@
 from aiogram.types import KeyboardButton
 from aiogram.utils.keyboard import ReplyKeyboardBuilder
 
-from data.constants.buttons_text import MAIN_MENU, SETTINGS, CANCEL, SKIP
+from data.constants.buttons_text import CANCEL, SKIP
 
 kb_skip = ReplyKeyboardBuilder(markup=[
     [KeyboardButton(text=SKIP)],

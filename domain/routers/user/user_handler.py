@@ -9,7 +9,6 @@ from domain.filters.isAdminFilter import IsAdminFilter
 from domain.filters.isTeamFilter import IsTeamFilter
 from domain.middlewares.IsUserHasTeam import UserHasTeamMiddleware
 from domain.middlewares.IsUserRole import UserRoleMiddleware
-from presenter.keyboards.admin_keyboard import kb_menu_admin
 from presenter.keyboards.user_keyboard import kb_menu_user
 
 router = Router()
@@ -22,7 +21,7 @@ router.callback_query.middleware(UserHasTeamMiddleware(True))
 
 
 @router.message(Command("start"), IsAdminFilter(False), IsTeamFilter(True))
-async def start_(message: types.Message, state: FSMContext):
+async def start(message: types.Message, state: FSMContext):
     await state.clear()
     await message.answer(MAIN_MENU, reply_markup=kb_menu_user.as_markup())
 
@@ -33,11 +32,11 @@ async def settings(message: types.Message):
 
 
 @router.message(F.text == APPS, IsAdminFilter(False))
-async def settings(message: types.Message):
+async def apps(message: types.Message):
     await message.answer(APPS)
 
 
 @router.message(F.text == CANCEL, IsAdminFilter(False), IsTeamFilter(True))
-async def cancel_(message: types.Message, state: FSMContext):
+async def cancel(message: types.Message, state: FSMContext):
     await state.clear()
     await message.answer(CANCELED, reply_markup=kb_menu_user.as_markup())

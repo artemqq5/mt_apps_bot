@@ -1,14 +1,13 @@
 from aiogram import Router, types, F
 from aiogram.filters import Command
 from aiogram.fsm.context import FSMContext
-from aiogram.types import CallbackQuery
 
 from data.constants.access import ADMIN
 from data.constants.buttons_text import MAIN_MENU, BAN_SYSTEM, TEAMS, CANCEL, SETTINGS
 from data.constants.just_message import CANCELED
 from domain.filters.isAdminFilter import IsAdminFilter
 from domain.middlewares.IsUserRole import UserRoleMiddleware
-from domain.routers.admin.sub_router import ban_system
+from domain.routers.admin.sub_router.bun_ import ban_system
 from domain.routers.admin.sub_router.teams_ import teams
 from presenter.keyboards.admin_keyboard import kb_menu_admin, kb_ban_system, kb_teams
 
@@ -20,7 +19,7 @@ router.callback_query.middleware(UserRoleMiddleware(ADMIN))
 
 
 @router.message(Command("start"), IsAdminFilter(True))
-async def start_(message: types.Message, state: FSMContext):
+async def start(message: types.Message, state: FSMContext):
     await state.clear()
     await message.answer(MAIN_MENU, reply_markup=kb_menu_admin.as_markup())
 
@@ -31,7 +30,7 @@ async def settings(message: types.Message):
 
 
 @router.message(F.text == CANCEL, IsAdminFilter(True))
-async def cancel_(message: types.Message, state: FSMContext):
+async def cancel(message: types.Message, state: FSMContext):
     await state.clear()
     await message.answer(CANCELED, reply_markup=kb_menu_admin.as_markup())
 

@@ -1,5 +1,3 @@
-import uuid
-
 from data.DefaultDataBase import DefaultDataBase
 
 
@@ -26,10 +24,6 @@ class TeamRepository(DefaultDataBase):
     def delete_team(self, team_id):
         query = "DELETE FROM `teams` WHERE `team_id` = %s;"
         return self._delete(query, (team_id,))
-
-    def update_team_key(self, team_uuid, team_id):
-        query = "UPDATE `teams` SET `uuid` = %s WHERE `team_id` = %s;"
-        return self._update(query, (team_uuid, team_id))
 
     def update_team_status(self, team_status, team_id):
         query = "UPDATE `teams` SET `status` = %s WHERE `team_id` = %s;"
