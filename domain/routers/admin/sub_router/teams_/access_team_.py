@@ -43,7 +43,8 @@ async def callback_team_access(callback: CallbackQuery, state: FSMContext):
     for access in access_list:
         user_template = await get_user_template(access.get('user_id'))
 
-        access_template = (f"Created: {access['created_at']}\n"
+        access_template = (f"deeplink: <code>t.me/mt_rent_apps_test_bot?start={access['uuid_']}</code>\n\n"
+                           f"Created: {access['created_at']}\n"
                            f"Activated: {access['activated']}\n"
                            f"Access status: {access['status']}{user_template}")
 
