@@ -19,7 +19,7 @@ router.callback_query.middleware(UserRoleMiddleware(ADMIN))
 
 
 @router.message(Command("start"), IsAdminFilter(True))
-async def start_(message: types.Message, state: FSMContext):
+async def start(message: types.Message, state: FSMContext):
     await state.clear()
     await message.answer(MAIN_MENU, reply_markup=kb_menu_admin.as_markup())
 
@@ -30,7 +30,7 @@ async def settings(message: types.Message):
 
 
 @router.message(F.text == CANCEL, IsAdminFilter(True))
-async def cancel_(message: types.Message, state: FSMContext):
+async def cancel(message: types.Message, state: FSMContext):
     await state.clear()
     await message.answer(CANCELED, reply_markup=kb_menu_admin.as_markup())
 

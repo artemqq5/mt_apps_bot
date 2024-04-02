@@ -1,11 +1,11 @@
 from datetime import datetime
 
 from aiogram import Router, types, F
-from aiogram.filters import Command
+from aiogram.filters import Command, CommandObject
 
 from data.constants.access import USER
 from data.constants.buttons_text import CANCEL, SETTINGS
-from data.constants.just_message import CANCELED, INPUT_TEAM_KEY, JOIN_KEY_FAIL_UPDATE, JOIN_KEY_NOT_EXIST, \
+from data.constants.just_message import CANCELED, JOIN_KEY_FAIL_UPDATE, JOIN_KEY_NOT_EXIST, \
     JOIN_KEY_SUCCESS_UPDATE, JOIN_KEY_ACTIVATED_BEFORE
 from data.repository.AccessRepository import AccessRepository
 from domain.filters.isAdminFilter import IsAdminFilter
@@ -23,24 +23,9 @@ router.message.middleware(UserHasTeamMiddleware(False))
 router.callback_query.middleware(UserHasTeamMiddleware(False))
 
 
-@router.message(Command("start"), IsAdminFilter(False), IsTeamFilter(False))
-async def start_(message: types.Message):
-    await message.answer(INPUT_TEAM_KEY, reply_markup=kb_menu_no_user.as_markup())
-
-
-@router.message(F.text == SETTINGS, IsAdminFilter(False), IsTeamFilter(False))
-async def settings(message: types.Message):
-    await message.answer(SETTINGS)
-
-
-@router.message(F.text == CANCEL, IsAdminFilter(False), IsTeamFilter(False))
-async def cancel_(message: types.Message):
-    await message.answer(CANCELED, reply_markup=kb_menu_no_user.as_markup())
-
-
-@router.message(IsAdminFilter(False), IsTeamFilter(False))
-async def messages(message: types.Message):
-    access_join_key = message.text
+@router.message(Command('start'), IsAdminFilter(False), IsTeamFilter(False))
+async def start(message: types.Message, command: CommandObject):
+    access_join_key = command.args
     access_by_uuid = AccessRepository().get_access_by_uuid(access_join_key)
 
     # join key is not exist
@@ -58,4 +43,14 @@ async def messages(message: types.Message):
         return
 
     await message.answer(JOIN_KEY_SUCCESS_UPDATE, reply_markup=kb_menu_user.as_markup())
+
+
+@router.message(F.text == SETTINGS, IsAdminFilter(False), IsTeamFilter(False))
+async def settings(message: types.Message):
+    await message.answer(SETTINGS)
+
+
+@router.message(F.text == CANCEL, IsAdminFilter(False), IsTeamFilter(False))
+async def cancel(message: types.Message):
+    await message.answer(CANCELED, reply_markup=kb_menu_no_user.as_markup())
 

@@ -18,13 +18,12 @@ router = Router()
 @router.callback_query(F.data.contains("GENERATEJOINKEY"))
 async def callback_team_generate(callback: CallbackQuery, state: FSMContext):
     team_id = callback.data.split("*CALLBACK*")[0]
-
-    await state.set_state(TeamManagmentState.GenerateJoinKey)
-
     team = TeamRepository().get_team_by_id(team_id)
 
     if not team:
         return
+
+    await state.set_state(TeamManagmentState.GenerateJoinKey)
 
     await state.update_data(team_id=team_id)
     await state.update_data(team_name=team['team_name'])
@@ -43,7 +42,7 @@ async def approve_generate_team(message: types.Message, state: FSMContext):
             raise Exception
 
         await state.clear()
-        await message.answer(SUCCESSFUL_GENERATE_TEAM.format(data['team_name'], access_uuid),
+        await message.answer(SUCCESSFUL_GENERATE_TEAM.format(data['team_name'], f"t.me/mt_rent_apps_test_bot?start={access_uuid}"),
                              reply_markup=kb_teams.as_markup())
     except Exception as e:
         print(f"approve_generate_team: {e}")

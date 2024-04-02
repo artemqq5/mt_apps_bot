@@ -13,16 +13,15 @@ from presenter.keyboards.admin_keyboard import kb_teams, kb_team_change_status, 
 router = Router()
 
 
-@router.callback_query(F.data.contains("CHANGESTATUS"))
+@router.callback_query(F.data.contains("CHANGESTATUSTEAM"))
 async def callback_team_change_status(callback: CallbackQuery, state: FSMContext):
     team_id = callback.data.split("*CALLBACK*")[0]
-
-    await state.set_state(TeamManagmentState.ChangeStatus)
-
     team = TeamRepository().get_team_by_id(team_id)
 
     if not team:
         return
+
+    await state.set_state(TeamManagmentState.ChangeStatus)
 
     await state.update_data(team_id=team_id)
     await state.update_data(team_name=team['team_name'])

@@ -28,7 +28,7 @@ TEAM_LIST_IS_EMPTY = "Team list is empty"
 TEAM_MENU = "Team menu"
 PRESS_BACK_TO_TEAM_MENU = f"To return in team menu press {BACK_TO_TEAM_MENU}"
 
-WARNING_DELETE_TEAM = "Do you want to delete <b>{0}</b>? \n\n(The action cannot be undone!) "
+WARNING_DELETE_TEAM = "Do you want to delete <b>{0}</b>? \n\n(The action cannot be undone!)"
 SUCCESSFUL_DELETE_TEAM = "Successfully deleted <b>({0})</b>"
 ERROR_DELETE_TEAM = "Error delete team \n<code>{0}</code>"
 
@@ -45,4 +45,12 @@ JOIN_KEY_NOT_EXIST = "Key not exist!"
 JOIN_KEY_ACTIVATED_BEFORE = "Key had activated before!"
 JOIN_KEY_FAIL_UPDATE = "Some error. Team key was not set"
 JOIN_KEY_SUCCESS_UPDATE = "Team key was set successfully!"
+
+TEAM_HAVENT_ACCESS = "Team haven't access"
+WARNING_DELETE_ACCESS = "Do you want to delete access?"
+SUCCESSFUL_DELETE_ACCESS = "Successfully deleted access"
+ERROR_DELETE_ACCESS = "Error delete access \n<code>{0}</code>"
+CHOICE_NEW_STATUS_ACCESS = "Choice new access status"
+SUCCESSFUL_CHANGE_STATUS_ACCESS = "Successfully change access status. new status: <b>{0}</b>"
+ERROR_CHANGE_STATUS_ACCESS = "Error change access status \n<code>{0}</code>"
 

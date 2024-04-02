@@ -1,11 +1,12 @@
 from aiogram.types import KeyboardButton, InlineKeyboardButton
 from aiogram.utils.keyboard import ReplyKeyboardBuilder, InlineKeyboardBuilder
 
-from data.constants.access import Trial_TEAM, Basic_TEAM, Standard_TEAM, Premium_TEAM, Ultimate_TEAM
+from data.constants.access import Trial_TEAM, Basic_TEAM, Standard_TEAM, Premium_TEAM, Ultimate_TEAM, Byer_ACCESS, \
+    TeamLead_ACCESS
 from data.constants.buttons_text import TEAMS, BAN_SYSTEM, CANCEL, BAN_USER_CATEGORY, SHOW_BANNED_USERS, \
     UNBAN_USER_CATEGORY, CREATE_TEAM, SHOW_ALL_TEAM, DELETE_TEAM, CHANGE_STATUS, BACK_TO_TEAM_MENU, \
-    APPROVE_GENERATE_TEAM, APPROVE_DELETE_TEAM, TRIAL, BASIC, STANDART, PREMIUM, ULTIMATE, SETTINGS, \
-    GENERATE_JOIN_KEY, USERS_TEAM_LIST, ACCESS_NOT_ACTIVATE
+    APPROVE_GENERATE_TEAM, APPROVE_DELETE, TRIAL, BASIC, STANDART, PREMIUM, ULTIMATE, SETTINGS, \
+    GENERATE_JOIN_KEY, ACCESS_TEAM, DELETE_ACCESS, CHANGE_ACCESS_STATUS, BYER, TEAM_LEAD
 
 kb_menu_admin = ReplyKeyboardBuilder(markup=[
     [KeyboardButton(text=TEAMS)],
@@ -29,11 +30,10 @@ kb_teams = ReplyKeyboardBuilder(markup=[
 
 def kb_team_managment(team_id):
     return InlineKeyboardBuilder(markup=[
-        [InlineKeyboardButton(text=DELETE_TEAM, callback_data=f"{team_id}*CALLBACK*DELETE")],
+        [InlineKeyboardButton(text=DELETE_TEAM, callback_data=f"{team_id}*CALLBACK*DELETETEAM")],
         [InlineKeyboardButton(text=GENERATE_JOIN_KEY, callback_data=f"{team_id}*CALLBACK*GENERATEJOINKEY")],
-        [InlineKeyboardButton(text=ACCESS_NOT_ACTIVATE, callback_data=f"{team_id}*CALLBACK*ACCESSNOTACTIVATE")],
-        [InlineKeyboardButton(text=USERS_TEAM_LIST, callback_data=f"{team_id}*CALLBACK*USERS")],
-        [InlineKeyboardButton(text=CHANGE_STATUS, callback_data=f"{team_id}*CALLBACK*CHANGESTATUS")],
+        [InlineKeyboardButton(text=ACCESS_TEAM, callback_data=f"{team_id}*CALLBACK*ACCESSTEAM")],
+        [InlineKeyboardButton(text=CHANGE_STATUS, callback_data=f"{team_id}*CALLBACK*CHANGESTATUSTEAM")],
     ])
 
 
@@ -43,7 +43,7 @@ kb_team_managment_help = ReplyKeyboardBuilder(markup=[
 ])
 
 kb_team_delete = ReplyKeyboardBuilder(markup=[
-    [KeyboardButton(text=APPROVE_DELETE_TEAM)],
+    [KeyboardButton(text=APPROVE_DELETE)],
     [KeyboardButton(text=BACK_TO_TEAM_MENU)],
     [KeyboardButton(text=CANCEL)]
 ])
@@ -60,4 +60,23 @@ kb_team_change_status = InlineKeyboardBuilder(markup=[
     [InlineKeyboardButton(text=STANDART, callback_data=Standard_TEAM)],
     [InlineKeyboardButton(text=PREMIUM, callback_data=Premium_TEAM)],
     [InlineKeyboardButton(text=ULTIMATE, callback_data=Ultimate_TEAM)],
+])
+
+
+def kb_team_access_managment(access_uuid):
+    return InlineKeyboardBuilder(markup=[
+        [InlineKeyboardButton(text=DELETE_ACCESS, callback_data=f"{access_uuid}*CALLBACK*DELETEACCESS")],
+        [InlineKeyboardButton(text=CHANGE_ACCESS_STATUS, callback_data=f"{access_uuid}*CALLBACK*CHANGESTATUSACCESS")],
+    ])
+
+
+kb_access_delete = ReplyKeyboardBuilder(markup=[
+    [KeyboardButton(text=APPROVE_DELETE)],
+    [KeyboardButton(text=BACK_TO_TEAM_MENU)],
+    [KeyboardButton(text=CANCEL)]
+])
+
+kb_access_change_status = InlineKeyboardBuilder(markup=[
+    [InlineKeyboardButton(text=BYER, callback_data=Byer_ACCESS)],
+    [InlineKeyboardButton(text=TEAM_LEAD, callback_data=TeamLead_ACCESS)],
 ])

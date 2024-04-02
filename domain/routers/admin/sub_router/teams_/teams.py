@@ -3,13 +3,14 @@ import uuid
 from aiogram import Router, F, types
 from aiogram.filters import StateFilter
 from aiogram.fsm.context import FSMContext
-from aiogram.utils.formatting import Text, Bold, Code
+from aiogram.utils.formatting import Text, Bold
 
 from data.constants.buttons_text import CREATE_TEAM, SHOW_ALL_TEAM, BACK_TO_TEAM_MENU
 from data.constants.just_message import INPUT_TEAM_NAME, TEAM_NAME_TOO_LONG, ERROR_CREATE_TEAM, SUCCESSFUL_CREATE_TEAM, \
     TEAM_LIST_IS_EMPTY, TEAM_MENU
 from data.repository.TeamRepository import TeamRepository
-from domain.routers.admin.sub_router.teams_ import delete_team_, generate_team_, change_status_team_
+from domain.routers.admin.sub_router.teams_ import delete_team_, generate_deeplink_, change_status_team_, access_team_
+from domain.states.team_.AccessManagment import AccessManagmentState
 from domain.states.team_.CreateTeam import CreateTeamState
 from domain.states.team_.TeamManagment import TeamManagmentState
 from presenter.keyboards._keyboard import kb_cancel
@@ -18,8 +19,9 @@ from presenter.keyboards.admin_keyboard import kb_teams, kb_team_managment
 router = Router()
 router.include_routers(
     delete_team_.router,
-    generate_team_.router,
-    change_status_team_.router
+    generate_deeplink_.router,
+    change_status_team_.router,
+    access_team_.router
 )
 
 
@@ -64,10 +66,9 @@ async def show_teams(message: types.Message, state: FSMContext):
         await message.answer(**team_template.as_kwargs(), reply_markup=kb_team_managment(team['team_id']).as_markup())
 
 
-@router.message(F.text == BACK_TO_TEAM_MENU, StateFilter(TeamManagmentState))
+@router.message(F.text == BACK_TO_TEAM_MENU, StateFilter(TeamManagmentState, AccessManagmentState))
 async def back_team_menu(message: types.Message, state: FSMContext):
     await state.clear()
     await message.answer(TEAM_MENU, reply_markup=kb_teams.as_markup())
-
 
 
