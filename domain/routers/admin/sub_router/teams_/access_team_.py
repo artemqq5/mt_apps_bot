@@ -1,17 +1,15 @@
 from aiogram import Router, F, types
 from aiogram.fsm.context import FSMContext
 from aiogram.types import CallbackQuery
+from aiogram_i18n import I18nContext
 
 from data.constants.access import ACCESS_STATUS_LIST
 from data.constants.buttons_text import APPROVE_DELETE
-from data.constants.just_message import TEAM_HAVENT_ACCESS, WARNING_DELETE_ACCESS, SUCCESSFUL_DELETE_ACCESS, \
-    ERROR_DELETE_ACCESS, \
-    CHOICE_NEW_STATUS_ACCESS, PRESS_BACK_TO_TEAM_MENU, SUCCESSFUL_CHANGE_STATUS_ACCESS, ERROR_CHANGE_STATUS_ACCESS
 from data.repository.AccessRepository import AccessRepository
 from data.repository.UserRepository import UserRepository
 from domain.states.team_.AccessManagment import AccessManagmentState
 from presenter.keyboards.admin_keyboard import kb_teams, kb_team_access_managment, kb_team_delete, \
-    kb_access_change_status, kb_team_managment_help
+    kb_access_change_status
 
 router = Router()
 
@@ -32,12 +30,12 @@ async def get_user_template(user_id):
 
 
 @router.callback_query(F.data.contains("ACCESSTEAM"))
-async def callback_team_access(callback: CallbackQuery, state: FSMContext):
+async def callback_team_access(callback: CallbackQuery, state: FSMContext, i18n: I18nContext):
     team_id = callback.data.split("*CALLBACK*")[0]
     access_list = AccessRepository().get_access_by_team_id(team_id)
 
     if not access_list:
-        await callback.message.answer(TEAM_HAVENT_ACCESS, reply_markup=kb_teams.as_markup())
+        await callback.message.answer(i18n.TEAM_HAVENT_ACCESS(), reply_markup=kb_teams.as_markup())
         return
 
     for access in access_list:
@@ -53,7 +51,7 @@ async def callback_team_access(callback: CallbackQuery, state: FSMContext):
 
 
 @router.callback_query(F.data.contains("DELETEACCESS"))
-async def callback_delete_access(callback: CallbackQuery, state: FSMContext):
+async def callback_delete_access(callback: CallbackQuery, state: FSMContext, i18n: I18nContext):
     access_uuid = callback.data.split("*CALLBACK*")[0]
     access = AccessRepository().get_access_by_uuid(access_uuid)
     if not access:
@@ -61,11 +59,11 @@ async def callback_delete_access(callback: CallbackQuery, state: FSMContext):
 
     await state.set_state(AccessManagmentState.DeleteAccess)
     await state.update_data(access_uuid=access_uuid)
-    await callback.message.answer(WARNING_DELETE_ACCESS, reply_markup=kb_team_delete.as_markup())
+    await callback.message.answer(i18n.WARNING_DELETE_ACCESS(), reply_markup=kb_team_delete.as_markup())
 
 
 @router.message(AccessManagmentState.DeleteAccess, F.text == APPROVE_DELETE)
-async def approve_delete_access(message: types.Message, state: FSMContext):
+async def approve_delete_access(message: types.Message, state: FSMContext, i18n: I18nContext):
     try:
         data = await state.get_data()
 
@@ -73,15 +71,15 @@ async def approve_delete_access(message: types.Message, state: FSMContext):
             raise Exception
 
         await state.clear()
-        await message.answer(SUCCESSFUL_DELETE_ACCESS, reply_markup=kb_teams.as_markup())
+        await message.answer(i18n.SUCCESSFUL_DELETE_ACCESS(), reply_markup=kb_teams.as_markup())
     except Exception as e:
         print(f"approve_delete_access: {e}")
         await state.clear()
-        await message.answer(ERROR_DELETE_ACCESS.format(e), reply_markup=kb_teams.as_markup())
+        await message.answer(i18n.ERROR_DELETE_ACCESS(error=e), reply_markup=kb_teams.as_markup())
 
 
 @router.callback_query(F.data.contains("CHANGESTATUSACCESS"))
-async def callback_access_change_status(callback: CallbackQuery, state: FSMContext):
+async def callback_access_change_status(callback: CallbackQuery, state: FSMContext, i18n: I18nContext):
     access_uuid = callback.data.split("*CALLBACK*")[0]
     access = AccessRepository().get_access_by_uuid(access_uuid)
     if not access:
@@ -90,12 +88,11 @@ async def callback_access_change_status(callback: CallbackQuery, state: FSMConte
     await state.set_state(AccessManagmentState.ChangeStateAccess)
     await state.update_data(access_uuid=access_uuid)
 
-    await callback.message.answer(CHOICE_NEW_STATUS_ACCESS, reply_markup=kb_access_change_status.as_markup())
-    await callback.message.answer(PRESS_BACK_TO_TEAM_MENU, reply_markup=kb_team_managment_help.as_markup())
+    await callback.message.answer(i18n.CHOICE_NEW_STATUS_ACCESS(), reply_markup=kb_access_change_status.as_markup())
 
 
 @router.callback_query(AccessManagmentState.ChangeStateAccess, F.data.in_(ACCESS_STATUS_LIST))
-async def callback_access_choice_status(callback: CallbackQuery, state: FSMContext):
+async def callback_access_choice_status(callback: CallbackQuery, state: FSMContext, i18n: I18nContext):
     try:
         data = await state.get_data()
 
@@ -103,9 +100,9 @@ async def callback_access_choice_status(callback: CallbackQuery, state: FSMConte
             raise Exception
 
         await state.clear()
-        await callback.message.answer(SUCCESSFUL_CHANGE_STATUS_ACCESS.format(callback.data), reply_markup=kb_teams.as_markup())
+        await callback.message.answer(i18n.SUCCESSFUL_CHANGE_STATUS_ACCESS(status=callback.data),
+                                      reply_markup=kb_teams.as_markup())
     except Exception as e:
         print(f"callback_access_choice_status: {e}")
         await state.clear()
-        await callback.message.answer(ERROR_CHANGE_STATUS_ACCESS.format(e), reply_markup=kb_teams.as_markup())
-
+        await callback.message.answer(i18n.ERROR_CHANGE_STATUS_ACCESS(error=e), reply_markup=kb_teams.as_markup())

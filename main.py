@@ -5,10 +5,13 @@ from aiogram import Bot, Dispatcher
 from aiogram.client.default import DefaultBotProperties
 from aiogram.enums import ParseMode
 from aiogram.fsm.storage.memory import MemoryStorage
+from aiogram_i18n import I18nMiddleware
+from aiogram_i18n.cores import FluentRuntimeCore
 
 import config
 from domain.middlewares.IsUserBanned import UserBannedMiddleware
 from domain.middlewares.IsUserRegistration import UserRegistationMiddleware
+from domain.middlewares.LocaleManager import LocaleManager
 from domain.routers.admin import admin_handler
 from domain.routers.user import user_handler, user_no_team_handler
 
@@ -28,6 +31,14 @@ async def main():
     bot = Bot(token=config.BOT_TOKEN, default=default_properties)
 
     try:
+        i18n_middleware = I18nMiddleware(
+            core=FluentRuntimeCore(path='locales'),
+            default_locale='en',
+            manager=LocaleManager()
+        )
+
+        i18n_middleware.setup(dp)
+
         dp.message.outer_middleware(UserRegistationMiddleware())  # register if user not registered
         dp.callback_query.outer_middleware(UserRegistationMiddleware())  # register if user not registered
 

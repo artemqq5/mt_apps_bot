@@ -1,5 +1,5 @@
 CHOUSE = "Chouse"
-MAIN_MENU = "Menu"
+# MAIN_MENU = "Menu"
 SETTINGS = "Settings"
 
 SKIP = "Skip"
@@ -14,7 +14,6 @@ DELETE_TEAM = "Delete team"
 CHANGE_STATUS = "Change status"
 GENERATE_JOIN_KEY = "Generate join key"
 ACCESS_TEAM = "Access"
-BACK_TO_TEAM_MENU = "Back"
 
 BAN_SYSTEM = "Ban system"
 BAN_USER_CATEGORY = "Ban user"

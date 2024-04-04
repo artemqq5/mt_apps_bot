@@ -3,7 +3,6 @@ from typing import Callable, Any, Dict, Awaitable
 from aiogram import BaseMiddleware, types
 from aiogram.types import TelegramObject
 
-from data.constants.just_message import REGISTER_FAIL, REGISTER_SUCCESS, SEND_REQUEST_TO_ADMIN
 from data.repository.UserRepository import UserRepository
 
 
@@ -21,11 +20,11 @@ class UserRegistationMiddleware(BaseMiddleware):
 
         if not UserRepository().get_user(user.id):
             if not UserRepository().add_user(user.id, user.username, user.first_name, user.last_name, user.language_code):
-                await event.bot.send_message(chat_id=user.id, text=REGISTER_FAIL)
+                await event.bot.send_message(chat_id=user.id, text=data['i18n'].REGISTER_FAIL())
                 return None
 
-            await event.bot.send_message(chat_id=user.id, text=REGISTER_SUCCESS)
-            await event.bot.send_message(chat_id=user.id, text=SEND_REQUEST_TO_ADMIN)
+            await event.bot.send_message(chat_id=user.id, text=data['i18n'].REGISTER_SUCCESS())
+            await event.bot.send_message(chat_id=user.id, text=data['i18n'].SEND_REQUEST_TO_ADMIN())
 
         return await handler(event, data)
 

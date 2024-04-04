@@ -4,7 +4,7 @@ from aiogram.utils.keyboard import ReplyKeyboardBuilder, InlineKeyboardBuilder
 from data.constants.access import Trial_TEAM, Basic_TEAM, Standard_TEAM, Premium_TEAM, Ultimate_TEAM, Byer_ACCESS, \
     TeamLead_ACCESS
 from data.constants.buttons_text import TEAMS, BAN_SYSTEM, CANCEL, BAN_USER_CATEGORY, SHOW_BANNED_USERS, \
-    UNBAN_USER_CATEGORY, CREATE_TEAM, SHOW_ALL_TEAM, DELETE_TEAM, CHANGE_STATUS, BACK_TO_TEAM_MENU, \
+    UNBAN_USER_CATEGORY, CREATE_TEAM, SHOW_ALL_TEAM, DELETE_TEAM, CHANGE_STATUS, \
     APPROVE_GENERATE_TEAM, APPROVE_DELETE, TRIAL, BASIC, STANDART, PREMIUM, ULTIMATE, SETTINGS, \
     GENERATE_JOIN_KEY, ACCESS_TEAM, DELETE_ACCESS, CHANGE_ACCESS_STATUS, BYER, TEAM_LEAD, APPS
 
@@ -39,19 +39,16 @@ def kb_team_managment(team_id):
 
 
 kb_team_managment_help = ReplyKeyboardBuilder(markup=[
-    [KeyboardButton(text=BACK_TO_TEAM_MENU)],
     [KeyboardButton(text=CANCEL)]
 ])
 
 kb_team_delete = ReplyKeyboardBuilder(markup=[
     [KeyboardButton(text=APPROVE_DELETE)],
-    [KeyboardButton(text=BACK_TO_TEAM_MENU)],
     [KeyboardButton(text=CANCEL)]
 ])
 
 kb_team_generate = ReplyKeyboardBuilder(markup=[
     [KeyboardButton(text=APPROVE_GENERATE_TEAM)],
-    [KeyboardButton(text=BACK_TO_TEAM_MENU)],
     [KeyboardButton(text=CANCEL)]
 ])
 
@@ -73,7 +70,6 @@ def kb_team_access_managment(access_uuid):
 
 kb_access_delete = ReplyKeyboardBuilder(markup=[
     [KeyboardButton(text=APPROVE_DELETE)],
-    [KeyboardButton(text=BACK_TO_TEAM_MENU)],
     [KeyboardButton(text=CANCEL)]
 ])
 

@@ -1,9 +1,10 @@
 from aiogram import Router, types, F
 from aiogram.filters import Command
 from aiogram.fsm.context import FSMContext
+from aiogram_i18n import I18nContext
 
 from data.constants.access import USER
-from data.constants.buttons_text import MAIN_MENU, CANCEL, SETTINGS, APPS
+from data.constants.buttons_text import CANCEL, SETTINGS, APPS
 from data.constants.just_message import CANCELED
 from domain.filters.isAdminFilter import IsAdminFilter
 from domain.filters.isTeamFilter import IsTeamFilter
@@ -21,9 +22,9 @@ router.callback_query.middleware(UserHasTeamMiddleware(True))
 
 
 @router.message(Command("start"), IsAdminFilter(False), IsTeamFilter(True))
-async def start(message: types.Message, state: FSMContext):
+async def start(message: types.Message, state: FSMContext, i18n: I18nContext):
     await state.clear()
-    await message.answer(MAIN_MENU, reply_markup=kb_menu_user.as_markup())
+    await message.answer(i18n.MAIN_MENU(), reply_markup=kb_menu_user.as_markup())
 
 
 @router.message(F.text == SETTINGS, IsAdminFilter(False), IsTeamFilter(True))
