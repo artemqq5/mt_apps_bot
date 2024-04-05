@@ -18,7 +18,7 @@ class UserBannedMiddleware(BaseMiddleware):
 
         user_id = event.from_user.id
 
-        if UserRepository().is_banned(user_id)['banned']: # todo
+        if UserRepository().is_banned(user_id)['banned']:
             await event.bot.send_message(chat_id=user_id, text=data['i18n'].YOU_ARE_BLOKED(), reply_markup=ReplyKeyboardRemove())
             return
 

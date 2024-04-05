@@ -1,4 +1,8 @@
 SETTINGS = Налаштування
+LOCALIZATION = Змінити мову
+Language-uk = Українська
+Language-en = Англійська
+Language-ru = російська
 
 SKIP = Пропустити
 CANCEL = Скасувати

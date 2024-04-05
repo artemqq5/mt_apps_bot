@@ -13,6 +13,7 @@ from domain.middlewares.IsUserBanned import UserBannedMiddleware
 from domain.middlewares.IsUserRegistration import UserRegistationMiddleware
 from domain.middlewares.LocaleManager import LocaleManager
 from domain.routers.admin import admin_handler
+from domain.routers.common_route_ import localization_
 from domain.routers.user import user_handler, user_no_team_handler
 
 storage = MemoryStorage()
@@ -22,6 +23,7 @@ dp.include_routers(
     admin_handler.router,
     user_handler.router,
     user_no_team_handler.router,
+    localization_.route
 )
 
 

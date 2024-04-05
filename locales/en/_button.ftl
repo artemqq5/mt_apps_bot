@@ -1,4 +1,8 @@
 SETTINGS = Settings
+LOCALIZATION = Change language
+Language-uk = Ukrainian
+Language-en = English
+Language-ru = russian
 
 SKIP = Skip
 CANCEL = Cancel
@@ -36,7 +40,6 @@ CHANGE_ACCESS_STATUS = Change Status
 
 # user
 APPS = Apps
-
 
 
 

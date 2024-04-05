@@ -8,6 +8,8 @@ from domain.filters.isAdminFilter import IsAdminFilter
 from domain.filters.isTeamFilter import IsTeamFilter
 from domain.middlewares.IsUserHasTeam import UserHasTeamMiddleware
 from domain.middlewares.IsUserRole import UserRoleMiddleware
+from domain.routers.common_route_ import localization_
+from presenter.keyboards._keyboard import kb_settings
 from presenter.keyboards.user_keyboard import kb_menu_user
 
 router = Router()
@@ -27,7 +29,7 @@ async def start(message: types.Message, state: FSMContext, i18n: I18nContext):
 
 @router.message(F.text == L.SETTINGS(), IsAdminFilter(False), IsTeamFilter(True))
 async def settings(message: types.Message, i18n: I18nContext):
-    await message.answer(i18n.SETTINGS())
+    await message.answer(i18n.SETTINGS(), reply_markup=kb_settings)
 
 
 @router.message(F.text == L.APPS(), IsAdminFilter(False))

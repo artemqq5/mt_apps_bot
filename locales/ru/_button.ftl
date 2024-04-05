@@ -1,7 +1,11 @@
 SETTINGS = Настройки
+LOCALIZATION = Изменить язык
+Language-uk = Украинский
+Language-en = Английский
+Language-ru = русский
 
 SKIP = Пропустить
-Cancel = Отменить
+CANCEL = Отменить
 
 
 # администратор

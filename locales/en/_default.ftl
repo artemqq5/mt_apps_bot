@@ -68,3 +68,8 @@ UNBAN_USER_SUCCESSFUL = User unbanned successfully
 ERROR_UNBANNED = User not unbanned correctly, ID is correctly? Try again
 SHOW_BANNED_USERS_LIST = <b>List of banned users</b>:
     {$list}
+
+# settings (locale)
+CHOICE_LANG = Choice lang
+SUCCESSFUL_CHANGE_LANG = Successfully changed language to <b>{$lang}</b>
+FAIL_CHANGE_LANG = Error language change (maybe you are trying to change the language to the one currently installed)

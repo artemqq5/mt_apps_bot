@@ -1,6 +1,6 @@
 MAIN_MENU = Меню
 CHOUSE = Вибирай
-CANCELED = "Отменено"
+CANCELED = Скасовано
 
 # реєстрація в боті
 YOU_ARE_BLOKED = Ви заблоковані
@@ -68,3 +68,8 @@ UNBAN_USER_SUCCESSFUL = Користувача успішно розблоков
 ERROR_UNBANNED = Користувач не був розблокований правильно, ID правильний? Спробуйте знову
 SHOW_BANNED_USERS_LIST = <b>Список забанених користувачів</b>:
     {$list}
+
+# settings (locale)
+CHOICE_LANG = Вибір мови
+SUCCESSFUL_CHANGE_LANG = Мову успішно змінено на <b>{$lang}</b>
+FAIL_CHANGE_LANG = Помилка зміни мови (можливо ви намагаєтесь змінити мову на ту що встановлено зараз)

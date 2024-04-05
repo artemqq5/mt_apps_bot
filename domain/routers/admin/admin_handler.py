@@ -7,11 +7,16 @@ from data.constants.access import ADMIN
 from domain.filters.isAdminFilter import IsAdminFilter
 from domain.middlewares.IsUserRole import UserRoleMiddleware
 from domain.routers.admin.sub_router.bun_ import ban_system
+from domain.routers.common_route_ import localization_
 from domain.routers.admin.sub_router.teams_ import teams
+from presenter.keyboards._keyboard import kb_settings
 from presenter.keyboards.admin_keyboard import kb_menu_admin, kb_ban_system, kb_teams
 
 router = Router()
-router.include_routers(ban_system.router, teams.router)
+router.include_routers(
+    ban_system.router,
+    teams.router
+)
 
 router.message.middleware(UserRoleMiddleware(ADMIN))
 router.callback_query.middleware(UserRoleMiddleware(ADMIN))
@@ -41,13 +46,4 @@ async def ban_menu(message: types.Message, i18n: I18nContext):
 
 @router.message(F.text == L.SETTINGS(), IsAdminFilter(True))
 async def settings(message: types.Message, i18n: I18nContext):
-    await message.answer(i18n.SETTINGS())
-
-
-
-
-
-
-
-
-
+    await message.answer(i18n.SETTINGS(), reply_markup=kb_settings)
