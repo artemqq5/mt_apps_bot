@@ -1,14 +1,11 @@
-from aiogram.types import KeyboardButton
-from aiogram.utils.keyboard import ReplyKeyboardBuilder
+from aiogram_i18n import L
+from aiogram_i18n.types import KeyboardButton, ReplyKeyboardMarkup
 
-from data.constants.buttons_text import CANCEL, SKIP
-
-kb_skip = ReplyKeyboardBuilder(markup=[
-    [KeyboardButton(text=SKIP)],
-    [KeyboardButton(text=CANCEL)]
+kb_skip = ReplyKeyboardMarkup(keyboard=[
+    [KeyboardButton(text=L.SKIP())],
+    [KeyboardButton(text=L.CANCEL())]
 ])
 
-
-kb_cancel = ReplyKeyboardBuilder(markup=[
-    [KeyboardButton(text=CANCEL)]
+kb_cancel = ReplyKeyboardMarkup(keyboard=[
+    [KeyboardButton(text=L.CANCEL())]
 ])

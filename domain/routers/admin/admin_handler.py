@@ -1,11 +1,9 @@
 from aiogram import Router, types, F
 from aiogram.filters import Command
 from aiogram.fsm.context import FSMContext
-from aiogram_i18n import I18nContext
+from aiogram_i18n import I18nContext, L
 
 from data.constants.access import ADMIN
-from data.constants.buttons_text import BAN_SYSTEM, TEAMS, CANCEL, SETTINGS
-from data.constants.just_message import CANCELED
 from domain.filters.isAdminFilter import IsAdminFilter
 from domain.middlewares.IsUserRole import UserRoleMiddleware
 from domain.routers.admin.sub_router.bun_ import ban_system
@@ -22,28 +20,28 @@ router.callback_query.middleware(UserRoleMiddleware(ADMIN))
 @router.message(Command("start"), IsAdminFilter(True))
 async def start(message: types.Message, state: FSMContext, i18n: I18nContext):
     await state.clear()
-    await message.answer(i18n.MAIN_MENU(), reply_markup=kb_menu_admin.as_markup())
+    await message.answer(i18n.MAIN_MENU(), reply_markup=kb_menu_admin)
 
 
-@router.message(F.text == CANCEL, IsAdminFilter(True))
-async def cancel(message: types.Message, state: FSMContext):
+@router.message(F.text == L.CANCEL(), IsAdminFilter(True))
+async def cancel(message: types.Message, state: FSMContext, i18n: I18nContext):
     await state.clear()
-    await message.answer(CANCELED, reply_markup=kb_menu_admin.as_markup())
+    await message.answer(i18n.CANCELED(), reply_markup=kb_menu_admin)
 
 
-@router.message(F.text == TEAMS)
-async def teams_menu(message: types.Message):
-    await message.answer(TEAMS, reply_markup=kb_teams.as_markup())
+@router.message(F.text == L.TEAMS())
+async def teams_menu(message: types.Message, i18n: I18nContext):
+    await message.answer(i18n.TEAMS(), reply_markup=kb_teams)
 
 
-@router.message(F.text == BAN_SYSTEM)
-async def ban_menu(message: types.Message):
-    await message.answer(BAN_SYSTEM, reply_markup=kb_ban_system.as_markup())
+@router.message(F.text == L.BAN_SYSTEM())
+async def ban_menu(message: types.Message, i18n: I18nContext):
+    await message.answer(i18n.BAN_SYSTEM(), reply_markup=kb_ban_system)
 
 
-@router.message(F.text == SETTINGS, IsAdminFilter(True))
-async def settings(message: types.Message):
-    await message.answer(SETTINGS)
+@router.message(F.text == L.SETTINGS(), IsAdminFilter(True))
+async def settings(message: types.Message, i18n: I18nContext):
+    await message.answer(i18n.SETTINGS())
 
 
 

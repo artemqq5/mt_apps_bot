@@ -3,9 +3,7 @@ import uuid
 from aiogram import Router, F, types
 from aiogram.fsm.context import FSMContext
 from aiogram.types import CallbackQuery
-from aiogram_i18n import I18nContext
-
-from data.constants.buttons_text import APPROVE_GENERATE_TEAM
+from aiogram_i18n import I18nContext, L
 
 from data.repository.AccessRepository import AccessRepository
 from data.repository.TeamRepository import TeamRepository
@@ -30,10 +28,10 @@ async def callback_team_generate(callback: CallbackQuery, state: FSMContext, i18
     await state.update_data(team_uuid=team['uuid'])
 
     await callback.message.answer(i18n.WARNING_GENERATE_KEY_TEAM(team_name=team['team_name']),
-                                  reply_markup=kb_team_generate.as_markup())
+                                  reply_markup=kb_team_generate)
 
 
-@router.message(TeamManagmentState.GenerateJoinKey, F.text == APPROVE_GENERATE_TEAM)
+@router.message(TeamManagmentState.GenerateJoinKey, F.text == L.APPROVE_GENERATE_TEAM())
 async def approve_generate_team(message: types.Message, state: FSMContext, i18n: I18nContext):
     try:
         data = await state.get_data()
@@ -44,8 +42,8 @@ async def approve_generate_team(message: types.Message, state: FSMContext, i18n:
         await state.clear()
         await message.answer(i18n.SUCCESSFUL_GENERATE_TEAM(team_name=data['team_name'],
                                                            deeplink=f"t.me/mt_rent_apps_bot?start={access_uuid}"),
-                             reply_markup=kb_teams.as_markup())
+                             reply_markup=kb_teams)
     except Exception as e:
         print(f"approve_generate_team: {e}")
         await state.clear()
-        await message.answer(i18n.ERROR_GENERATE_TEAM(error=e), reply_markup=kb_teams.as_markup())
+        await message.answer(i18n.ERROR_GENERATE_TEAM(error=str(e)), reply_markup=kb_teams)

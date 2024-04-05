@@ -1,11 +1,9 @@
-
-
 # YOU_ARE_BLOKED = "You are blocked"
 # REGISTER_FAIL = "Can`t register, try again later :/"
 # REGISTER_SUCCESS = "You are successfully registered!"
 # SEND_REQUEST_TO_ADMIN = "Request to get access has sent to admin! Admin will give you pass key to use this bot"
 
-CANCELED = "Canceled"
+# CANCELED = "Canceled"
 
 # BANNED_USERS_EMPTY = "Empty"
 # INPUT_USER_BAN_MESSAGE = "Input ban message (only admins can view it)"
