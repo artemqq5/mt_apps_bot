@@ -3,6 +3,7 @@ from aiogram.fsm.context import FSMContext
 from aiogram.utils.markdown import hlink
 from aiogram_i18n import L, I18nContext
 
+from data.constants.access import DRAFT_APP_STATUS
 from data.repository.AppRepository import AppRepository
 from domain.states.admin.apps_.AddApplication import AddAplicationState
 from presenter.keyboards._keyboard import kb_apps_platform, kb_cancel
@@ -100,7 +101,7 @@ def preview_app(data, i18n) -> str:
         name_url=name_url,
         platform=data['platform'],
         source=data['source'],
-        status=data['status'],
+        status=DRAFT_APP_STATUS,
         geo=data['geo'],
         desc=data['desc']
     )
