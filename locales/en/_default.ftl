@@ -97,7 +97,10 @@ APP-DESC_TEMPLATE = Name: <b>{$name_url}</b>
 
      GEO: {$geo}
 
+     Status: <b>{$status}</b>
+
      {$desc}
+
 APP-GEO_EDIT_SUCCESSFUL = Geo successfully edited
 APP-GEO_EDIT_FAIL = Error editing geo
 
@@ -112,3 +115,11 @@ APP-DELETE_FAIL = Error deleting application <b>{$name}</b>
 #user(apps)
 USER-CHOICE_PLATFORM_APP = Choose an app platform
 USER-IOS_APPS = Available IOS Apps:
+USER-DESC_TEMPLATE = Name: <b>{$name_url}</b>
+
+     Platform: <b>{$platform}</b>
+     Sources: <b>{$source}</b>
+
+     GEO: {$geo}
+
+     {$desc}

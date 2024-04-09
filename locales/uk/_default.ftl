@@ -97,6 +97,8 @@ APP-DESC_TEMPLATE = Назва: <b>{$name_url}</b>
 
     ГЕО: {$geo}
 
+    Статус: <b>{$status}</b>
+
     {$desc}
 APP-GEO_EDIT_SUCCESSFUL = Гео успішно відредаговані
 APP-GEO_EDIT_FAIL = Помилка при редагуванні гео
@@ -112,3 +114,11 @@ APP-DELETE_FAIL = Помилка при видаленні додатку <b>{$n
 # user (apps)
 USER-CHOICE_PLATFORM_APP = Оберіть платформу додатків
 USER-IOS_APPS = Доступні IOS Додатки:
+USER-DESC_TEMPLATE = Назва: <b>{$name_url}</b>
+
+    Платформа: <b>{$platform}</b>
+    Джерела: <b>{$source}</b>
+
+    ГЕО: {$geo}
+
+    {$desc}

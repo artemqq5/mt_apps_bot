@@ -58,6 +58,7 @@ async def show_application_detail(callback: CallbackQuery, state: FSMContext, i1
             platform=app['platform'],
             source=app['source'],
             geo=app['geo'],
+            status=app['status'],
             desc=app['desc']
         ),
         reply_markup=kb_managment_app(app['id'])

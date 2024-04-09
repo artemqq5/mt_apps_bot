@@ -97,7 +97,10 @@ APP-DESC_TEMPLATE = Имя: <b>{$name_url}</b>
 
      ГЕО: {$geo}
 
+     Статус: <b>{$status}</b>
+
      {$desc}
+
 APP-GEO_EDIT_SUCCESSFUL = Гео успешно отредактировано
 APP-GEO_EDIT_FAIL = Ошибка при редактировании гео
 
@@ -112,3 +115,11 @@ APP-DELETE_FAIL = Ошибка при удалении приложения <b>{
 # user (apps)
 USER-CHOICE_PLATFORM_APP = Выберите платформу приложений
 USER-IOS_APPS = Доступные IOS Приложения:
+USER-DESC_TEMPLATE = Имя: <b>{$name_url}</b>
+
+     Платформа: <b>{$platform}</b>
+     Источники: <b>{$source}</b>
+
+     ГЕО: {$geo}
+
+     {$desc}

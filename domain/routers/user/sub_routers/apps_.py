@@ -37,7 +37,7 @@ async def detail_app_handler(callback: CallbackQuery, state: FSMContext, i18n: I
 
     await callback.message.answer_photo(
         photo=app['image'],
-        caption=i18n.APP.DESC_TEMPLATE(
+        caption=i18n.USER.DESC_TEMPLATE(
             name_url=name_url,
             platform=app['platform'],
             source=app['source'],
