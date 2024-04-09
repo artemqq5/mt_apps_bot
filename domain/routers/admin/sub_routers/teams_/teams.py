@@ -6,8 +6,8 @@ from aiogram.utils.formatting import Text, Bold
 from aiogram_i18n import I18nContext, L
 
 from data.repository.TeamRepository import TeamRepository
-from domain.routers.admin.sub_router.teams_ import delete_team_, generate_deeplink_, change_status_team_, access_team_
-from domain.states.team_.CreateTeam import CreateTeamState
+from domain.routers.admin.sub_routers.teams_ import delete_team_, generate_deeplink_, change_status_team_, access_team_
+from domain.states.admin.team_.CreateTeam import CreateTeamState
 from presenter.keyboards._keyboard import kb_cancel
 from presenter.keyboards.admin_keyboard import kb_teams, kb_team_managment
 

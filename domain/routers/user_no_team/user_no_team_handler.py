@@ -12,7 +12,7 @@ from domain.middlewares.IsUserHasTeam import UserHasTeamMiddleware
 from domain.middlewares.IsUserRole import UserRoleMiddleware
 from domain.routers.common_route_ import localization_
 from presenter.keyboards._keyboard import kb_settings
-from presenter.keyboards.user_keyboard import kb_menu_user, kb_menu_no_user
+from presenter.keyboards.user_keyboard import kb_menu_user, kb_menu_no_user, kb_request_access
 
 router = Router()
 
@@ -48,3 +48,9 @@ async def start(message: types.Message, command: CommandObject, i18n: I18nContex
 @router.message(F.text == L.SETTINGS(), IsAdminFilter(False), IsTeamFilter(False))
 async def settings(message: types.Message, i18n: I18nContext):
     await message.answer(i18n.SETTINGS(), reply_markup=kb_settings)
+
+
+@router.message(IsAdminFilter(False), IsTeamFilter(False))
+async def other(message: types.Message, i18n: I18nContext):
+    await message.answer(i18n.YOU_NEED_BE_REGISTERED(), reply_markup=kb_request_access)
+

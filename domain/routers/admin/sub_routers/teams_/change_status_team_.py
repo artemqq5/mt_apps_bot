@@ -5,7 +5,7 @@ from aiogram_i18n import I18nContext
 
 from data.constants.access import TEAM_STATUS_LIST
 from data.repository.TeamRepository import TeamRepository
-from domain.states.team_.TeamManagment import TeamManagmentState
+from domain.states.admin.team_.TeamManagment import TeamManagmentState
 from presenter.keyboards.admin_keyboard import kb_teams, kb_team_change_status
 
 router = Router()

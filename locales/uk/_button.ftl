@@ -7,6 +7,8 @@ Language-ru = російська
 SKIP = Пропустити
 CANCEL = Скасувати
 
+SEND_REQUEST_ADMIN = Запросити доступ
+
 # адмін
 TEAMS = Команди
 CREATE_TEAM = Створити нову команду
@@ -36,6 +38,22 @@ TEAM_LEAD = Тім лід
 DELETE_ACCESS = Видалити
 CHANGE_ACCESS_STATUS = Змінити статус
 
-
-# користувач
+# Applications
 APPS = Додатки
+ADD_APP = Створити додаток
+SHOW_APPS = Показати додатки
+IOS = IOS
+ANDROID = Android
+PWA = PWA
+
+PUBLUSH_APP = Опублікувати додаток
+START_ADD_OVER = Почати спочатку
+
+# manage app (change geo, change status, delete)
+CHANGE_GEO_APP = Змінити гео
+
+CHANGE_STATUS_APP = Змінити статус
+ACTIVE_STATUS_APP = Активно
+BANNED_STATUS_APP = Бан
+
+DELETE_APP = Видалити додаток

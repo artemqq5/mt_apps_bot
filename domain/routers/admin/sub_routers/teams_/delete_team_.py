@@ -4,8 +4,8 @@ from aiogram.types import CallbackQuery
 from aiogram_i18n import I18nContext, L
 
 from data.repository.TeamRepository import TeamRepository
-from domain.states.team_.TeamManagment import TeamManagmentState
-from presenter.keyboards.admin_keyboard import kb_team_delete, kb_teams
+from domain.states.admin.team_.TeamManagment import TeamManagmentState
+from presenter.keyboards.admin_keyboard import kb_delete, kb_teams
 
 router = Router()
 
@@ -23,7 +23,7 @@ async def callback_team_delete(callback: CallbackQuery, state: FSMContext, i18n:
     await state.update_data(team_id=team_id)
     await state.update_data(team_name=team['team_name'])
 
-    await callback.message.answer(i18n.WARNING_DELETE_TEAM(team_name=team['team_name']), reply_markup=kb_team_delete)
+    await callback.message.answer(i18n.WARNING_DELETE_TEAM(team_name=team['team_name']), reply_markup=kb_delete)
 
 
 @router.message(TeamManagmentState.DeleteTeam, F.text == L.APPROVE_DELETE())

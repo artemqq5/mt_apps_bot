@@ -3,8 +3,8 @@ from aiogram.fsm.context import FSMContext
 from aiogram_i18n import I18nContext, L
 
 from data.repository.UserRepository import UserRepository
-from domain.states.ban_.BanUser import BanUserState
-from domain.states.ban_.UnbanUser import UnbanUserState
+from domain.states.admin.ban_.BanUser import BanUserState
+from domain.states.admin.ban_.UnbanUser import UnbanUserState
 from presenter.keyboards._keyboard import kb_cancel, kb_skip
 from presenter.keyboards.admin_keyboard import kb_ban_system
 

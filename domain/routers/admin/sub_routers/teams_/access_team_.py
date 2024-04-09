@@ -6,8 +6,8 @@ from aiogram_i18n import I18nContext, L
 from data.constants.access import ACCESS_STATUS_LIST
 from data.repository.AccessRepository import AccessRepository
 from data.repository.UserRepository import UserRepository
-from domain.states.team_.AccessManagment import AccessManagmentState
-from presenter.keyboards.admin_keyboard import kb_teams, kb_team_access_managment, kb_team_delete, \
+from domain.states.admin.team_.AccessManagment import AccessManagmentState
+from presenter.keyboards.admin_keyboard import kb_teams, kb_team_access_managment, kb_delete, \
     kb_access_change_status
 
 router = Router()
@@ -58,7 +58,7 @@ async def callback_delete_access(callback: CallbackQuery, state: FSMContext, i18
 
     await state.set_state(AccessManagmentState.DeleteAccess)
     await state.update_data(access_uuid=access_uuid)
-    await callback.message.answer(i18n.WARNING_DELETE_ACCESS(), reply_markup=kb_team_delete)
+    await callback.message.answer(i18n.WARNING_DELETE_ACCESS(), reply_markup=kb_delete)
 
 
 @router.message(AccessManagmentState.DeleteAccess, F.text == L.APPROVE_DELETE())

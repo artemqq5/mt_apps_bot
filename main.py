@@ -14,7 +14,8 @@ from domain.middlewares.IsUserRegistration import UserRegistationMiddleware
 from domain.middlewares.LocaleManager import LocaleManager
 from domain.routers.admin import admin_handler
 from domain.routers.common_route_ import localization_
-from domain.routers.user import user_handler, user_no_team_handler
+from domain.routers.user import user_handler
+from domain.routers.user_no_team import user_no_team_handler
 
 storage = MemoryStorage()
 dp = Dispatcher(storage=storage)

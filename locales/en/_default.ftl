@@ -6,7 +6,7 @@ CANCELED = Canceled
 YOU_ARE_BLOKED = You are blocked
 REGISTER_FAIL = Can`t register, try again later :/
 REGISTER_SUCCESS = You are successfully registered!
-SEND_REQUEST_TO_ADMIN = Request to get access has sent to admin! Admin will give you pass key to use this bot
+YOU_NEED_BE_REGISTERED = To use this bot, you need to request access from the administrator and get a unique link
 
 # team access (access list, delete, change status, generate access) ============================
 TEAM_HAVENT_ACCESS = Team haven't access
@@ -73,3 +73,41 @@ SHOW_BANNED_USERS_LIST = <b>List of banned users</b>:
 CHOICE_LANG = Choice lang
 SUCCESSFUL_CHANGE_LANG = Successfully changed language to <b>{$lang}</b>
 FAIL_CHANGE_LANG = Error language change (maybe you are trying to change the language to the one currently installed)
+
+# applications (add, preview template, publish, show)
+APP-SET_PLATFORM = What platform is the app for?
+APP-SET_NAME = App Name:
+APP-SET_BUNDLE = Specify the application bundle (IOS=1451177077, Android=com.af.smart):
+APP-SET_IMAGE = An image for the application has been sent (not a file):
+APP-SET_GEO = Specify open geos, for example (UA, AL, BR):
+APP-SET_SOURCE = Specify under which sources, for example (Facebook deeplink or onelink):
+APP-SET_DESC = Your comment\description:
+APP-PREVIEW = Preview, see if everything is correct and publish Draft or go back to the beginning. ⚠️⚠️⚠️
+
+APP-SUCCESS_PUBLISHED = You have successfully created an app with the status (Draft), so that it can be seen by other users, you need to activate it (change the status to Active)
+APP-FAIL_PUBLISHED = Failed to create the application, urgently need to look at the logs before they are lost
+
+APP-CHOICE_PLATFORM = Choose a platform
+APP-APP_LIST_EMPTY = There are no applications for this platform
+APP-DESC_TEMPLATE = Name: <b>{$name_url}</b>
+
+     Platform: <b>{$platform}</b>
+     Sources: <b>{$source}</b>
+
+     GEO: {$geo}
+
+     {$desc}
+APP-GEO_EDIT_SUCCESSFUL = Geo successfully edited
+APP-GEO_EDIT_FAIL = Error editing geo
+
+APP-SET_STATUS = Specify new application status <b>{$name}</b>
+APP-STATUS_EDIT_SUCCESS = The status of the application has been changed successfully
+APP-STATUS_EDIT_FAIL = Error editing app status, you may be trying to change to the same status
+
+APP-DELETE_WARNING = Are you sure you want to delete the app <b>{$name}</b>? (it is not deleted from the database)
+APP-DELETE_SUCCESS = App <b>{$name}</b> was successfully deleted and can be reinstalled directly from the database
+APP-DELETE_FAIL = Error deleting application <b>{$name}</b>
+
+#user(apps)
+USER-CHOICE_PLATFORM_APP = Choose an app platform
+USER-IOS_APPS = Available IOS Apps:

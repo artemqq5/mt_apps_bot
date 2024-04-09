@@ -7,7 +7,7 @@ from aiogram_i18n import I18nContext, L
 
 from data.repository.AccessRepository import AccessRepository
 from data.repository.TeamRepository import TeamRepository
-from domain.states.team_.TeamManagment import TeamManagmentState
+from domain.states.admin.team_.TeamManagment import TeamManagmentState
 from presenter.keyboards.admin_keyboard import kb_teams, kb_team_generate
 
 router = Router()
