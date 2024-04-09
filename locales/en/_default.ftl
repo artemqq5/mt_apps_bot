@@ -89,6 +89,7 @@ APP-FAIL_PUBLISHED = Failed to create the application, urgently need to look at 
 
 APP-CHOICE_PLATFORM = Choose a platform
 APP-APP_LIST_EMPTY = There are no applications for this platform
+APP-IOS_APPS = IOS Apps:
 APP-DESC_TEMPLATE = Name: <b>{$name_url}</b>
 
      Platform: <b>{$platform}</b>

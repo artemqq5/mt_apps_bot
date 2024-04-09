@@ -89,6 +89,7 @@ APP-FAIL_PUBLISHED = Не вдалося створити додаток, пот
 
 APP-CHOICE_PLATFORM = Оберіть платформу
 APP-APP_LIST_EMPTY = Додатків під дану платформу немає
+APP-IOS_APPS = IOS Додатки:
 APP-DESC_TEMPLATE = Назва: <b>{$name_url}</b>
 
     Платформа: <b>{$platform}</b>

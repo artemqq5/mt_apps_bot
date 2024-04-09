@@ -6,7 +6,7 @@ from aiogram_i18n import L, I18nContext
 
 from data.repository.AppRepository import AppRepository
 from domain.states.user.ShowApps import ShowAppsState
-from presenter.keyboards.user_keyboard import kb_apps_keyboard, AppKeyboardLink
+from presenter.keyboards.user_keyboard import kb_apps_keyboard, AppKeyboardLink, kb_menu_user
 
 router = Router()
 
@@ -15,7 +15,8 @@ router = Router()
 async def show_applications(message: types.Message, state: FSMContext, i18n: I18nContext):
     applications = AppRepository().show_apps_by_platform(message.text)
     if not applications:
-        await message.answer(i18n.APP.APP_LIST_EMPTY())
+        await message.answer(i18n.APP.APP_LIST_EMPTY(), reply_markup=kb_menu_user)
+        await state.clear()
         return
 
     await message.answer(i18n.USER.IOS_APPS(), reply_markup=kb_apps_keyboard(applications))

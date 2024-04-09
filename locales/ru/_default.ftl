@@ -89,6 +89,7 @@ APP-FAIL_PUBLISHED = Не удалось создать приложение, н
 
 APP-CHOICE_PLATFORM = Выберите платформу
 APP-APP_LIST_EMPTY = Приложений под данную платформу нет
+APP-IOS_APPS = IOS Приложения:
 APP-DESC_TEMPLATE = Имя: <b>{$name_url}</b>
 
      Платформа: <b>{$platform}</b>
