@@ -100,6 +100,7 @@ def preview_app(data, i18n) -> str:
         name_url=name_url,
         platform=data['platform'],
         source=data['source'],
+        status=data['status'],
         geo=data['geo'],
         desc=data['desc']
     )

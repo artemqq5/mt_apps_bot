@@ -41,7 +41,7 @@ CHANGE_ACCESS_STATUS = Change Status
 
 # Applications
 APPS = Applications
-ADD_APP = Add an app
+ADD_APP = Create an app
 SHOW_APPS = Show Apps
 IOS = IOS
 ANDROID = Android

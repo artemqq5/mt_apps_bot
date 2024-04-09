@@ -79,7 +79,7 @@ APP-SET_PLATFORM = What platform is the app for?
 APP-SET_NAME = App Name:
 APP-SET_BUNDLE = Specify the application bundle (IOS=1451177077, Android=com.af.smart):
 APP-SET_IMAGE = An image for the application has been sent (not a file):
-APP-SET_GEO = Specify open geos, for example (UA, AL, BR):
+APP-SET_GEO = Specify open geo, for example (UA, AL, BR):
 APP-SET_SOURCE = Specify under which sources, for example (Facebook deeplink or onelink):
 APP-SET_DESC = Your comment\description:
 APP-PREVIEW = Preview, see if everything is correct and publish Draft or go back to the beginning. ⚠️⚠️⚠️
