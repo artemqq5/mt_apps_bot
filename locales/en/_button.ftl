@@ -47,6 +47,9 @@ IOS = IOS
 ANDROID = Android
 PWA = PWA
 
+PUBLUSH_APP = Publish App
+START_ADD_OVER = Start over
+
 # manage app (change geo, change status, delete)
 CHANGE_GEO_APP = Change geo
 
