@@ -50,7 +50,7 @@ async def settings(message: types.Message, i18n: I18nContext):
     await message.answer(i18n.SETTINGS(), reply_markup=kb_settings)
 
 
-@router.message(IsAdminFilter(False), IsTeamFilter(False))
+@router.message(IsAdminFilter(False), IsTeamFilter(False), F.text != L.LOCALIZATION())
 async def other(message: types.Message, i18n: I18nContext):
     await message.answer(i18n.YOU_NEED_BE_REGISTERED(), reply_markup=kb_request_access)
 
