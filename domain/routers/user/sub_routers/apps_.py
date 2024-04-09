@@ -13,7 +13,7 @@ router = Router()
 
 @router.message(ShowAppsState.show, F.text.in_((L.IOS(),)))  # L.ANDROID(), L.PWA()
 async def show_applications(message: types.Message, state: FSMContext, i18n: I18nContext):
-    applications = AppRepository().show_apps_by_platform(message.text)
+    applications = AppRepository().show_apps_by_platform_for_users(message.text)
     if not applications:
         await message.answer(i18n.APP.APP_LIST_EMPTY(), reply_markup=kb_menu_user)
         await state.clear()
@@ -24,7 +24,7 @@ async def show_applications(message: types.Message, state: FSMContext, i18n: I18
 
 @router.callback_query(AppKeyboardLink.filter())
 async def detail_app_handler(callback: CallbackQuery, state: FSMContext, i18n: I18nContext):
-    app = AppRepository().get_app_by_id(callback.data.split(":")[1])
+    app = AppRepository().get_app_by_id_for_users(callback.data.split(":")[1])
     if not app:
         return
 

@@ -27,5 +27,14 @@ class AppRepository(DefaultDataBase):
 
     def delete_app_by_id(self, app_id):
         query = "UPDATE `apps` SET `visibility` = 0 WHERE `id` = %s;"
-        return self._update(query, (app_id, ))
+        return self._update(query, (app_id,))
 
+    #  USERS =======================================================================================================
+
+    def show_apps_by_platform_for_users(self, platform):
+        query = "SELECT * FROM `apps` WHERE `platform` = %s AND `visibility` = 1 AND `status` = 'Active';"
+        return self._select(query, (platform,))
+
+    def get_app_by_id_for_users(self, app_id):
+        query = "SELECT * FROM `apps` WHERE `id` = %s AND `visibility` = 1 AND `status` = 'Active';"
+        return self._select_one(query, (app_id,))
