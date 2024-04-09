@@ -16,7 +16,6 @@ async def show_applications(message: types.Message, state: FSMContext, i18n: I18
     applications = AppRepository().show_apps_by_platform(message.text)
     if not applications:
         await message.answer(i18n.APP.APP_LIST_EMPTY())
-        await state.clear()
         return
 
     await message.answer(i18n.USER.IOS_APPS(), reply_markup=kb_apps_keyboard(applications))
