@@ -2,6 +2,7 @@ from datetime import datetime
 
 from aiogram import Router, types, F
 from aiogram.filters import Command, CommandObject
+from aiogram.fsm.context import FSMContext
 from aiogram_i18n import I18nContext, L
 
 from data.constants.access import USER
@@ -48,6 +49,12 @@ async def start(message: types.Message, command: CommandObject, i18n: I18nContex
 @router.message(F.text == L.SETTINGS(), IsAdminFilter(False), IsTeamFilter(False))
 async def settings(message: types.Message, i18n: I18nContext):
     await message.answer(i18n.SETTINGS(), reply_markup=kb_settings)
+
+
+@router.message(F.text == L.CANCEL(), IsAdminFilter(False), IsTeamFilter(False))
+async def cancel(message: types.Message, i18n: I18nContext, state: FSMContext):
+    await state.clear()
+    await message.answer(i18n.CANCELED(), reply_markup=kb_menu_no_user)
 
 
 @router.message(IsAdminFilter(False), IsTeamFilter(False), F.text != L.LOCALIZATION())

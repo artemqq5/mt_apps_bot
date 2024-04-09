@@ -6,7 +6,7 @@ class AppRepository(DefaultDataBase):
         super().__init__()
 
     def get_app_by_id(self, app_id):
-        query = "SELECT * FROM `apps` WHERE `id` = %s;"
+        query = "SELECT * FROM `apps` WHERE `id` = %s AND `visibility` = 1;"
         return self._select_one(query, (app_id,))
 
     def add_app(self, name, bundle, image, geo, source, platform, desc):
