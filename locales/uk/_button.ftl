@@ -57,3 +57,11 @@ ACTIVE_STATUS_APP = Активно
 BANNED_STATUS_APP = Бан
 
 DELETE_APP = Видалити додаток
+
+USER-PIXEL_FB = Пікесль FB
+USER-ADD_PIXEL_FB = Додати новий пікесль
+USER-SHOW_MY_PIXELS = Мої пікселі
+
+USER-DELETE_PIXEL = Видалити Pixel
+
+USER-CREATE_APP_LINK = Створити лінку

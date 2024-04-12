@@ -5,6 +5,7 @@ from aiogram.fsm.context import FSMContext
 from aiogram.types import CallbackQuery
 from aiogram_i18n import I18nContext, L
 
+from config import LINK_TO_BOT
 from data.repository.AccessRepository import AccessRepository
 from data.repository.TeamRepository import TeamRepository
 from domain.states.admin.team_.TeamManagment import TeamManagmentState
@@ -41,7 +42,7 @@ async def approve_generate_team(message: types.Message, state: FSMContext, i18n:
 
         await state.clear()
         await message.answer(i18n.SUCCESSFUL_GENERATE_TEAM(team_name=data['team_name'],
-                                                           deeplink=f"t.me/mt_rent_apps_bot?start={access_uuid}"),
+                                                           deeplink=f"{LINK_TO_BOT}?start={access_uuid}"),
                              reply_markup=kb_teams)
     except Exception as e:
         print(f"approve_generate_team: {e}")

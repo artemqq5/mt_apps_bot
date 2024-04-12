@@ -6,7 +6,7 @@ from aiogram_i18n import I18nContext, L
 from data.constants.access import ADMIN
 from domain.filters.isAdminFilter import IsAdminFilter
 from domain.middlewares.IsUserRole import UserRoleMiddleware
-from domain.routers.admin.sub_routers.apps_ import show_, add_
+from domain.routers.admin.sub_routers.apps_ import add_, show_
 from domain.routers.admin.sub_routers.bun_ import ban_system
 from domain.routers.common_route_ import localization_
 from domain.routers.admin.sub_routers.teams_ import teams

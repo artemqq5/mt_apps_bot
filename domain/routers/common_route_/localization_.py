@@ -1,17 +1,9 @@
 from aiogram import Router, F
 from aiogram.types import Message, CallbackQuery
 from aiogram_i18n import L, I18nContext
-from aiogram_i18n.types import ReplyKeyboardMarkup
 
-from data.constants.access import ADMIN
-from data.repository.AccessRepository import AccessRepository
-from data.repository.TeamRepository import TeamRepository
 from data.repository.UserRepository import UserRepository
-from domain.filters.isAdminFilter import IsAdminFilter
-from domain.filters.isTeamFilter import IsTeamFilter
 from presenter.keyboards._keyboard import kb_languages, LanguageCD, keyboard_access
-from presenter.keyboards.admin_keyboard import kb_menu_admin
-from presenter.keyboards.user_keyboard import kb_menu_user, kb_menu_no_user
 
 route = Router()
 

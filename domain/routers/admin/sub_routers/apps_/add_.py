@@ -3,6 +3,7 @@ from aiogram.fsm.context import FSMContext
 from aiogram.utils.markdown import hlink
 from aiogram_i18n import L, I18nContext
 
+from data.KeitaroRepository import KeitaroRepository
 from data.constants.access import DRAFT_APP_STATUS
 from data.repository.AppRepository import AppRepository
 from domain.states.admin.apps_.AddApplication import AddAplicationState
@@ -35,7 +36,9 @@ async def add_bundle(message: types.Message, state: FSMContext, i18n: I18nContex
 @router.message(AddAplicationState.Bundle)
 async def add_image(message: types.Message, state: FSMContext, i18n: I18nContext):
     await state.set_state(AddAplicationState.Image)
+    data = await state.get_data()
     await state.update_data(bundle=message.text)
+    await state.update_data(url=generate_url(message.text, data['platform'], i18n))
     await message.answer(i18n.APP.SET_IMAGE(), reply_markup=kb_cancel)
 
 
@@ -72,11 +75,17 @@ async def add_preview(message: types.Message, state: FSMContext, i18n: I18nConte
 @router.message(AddAplicationState.PreView, F.text == L.PUBLUSH_APP())
 async def add_publish(message: types.Message, state: FSMContext, i18n: I18nContext):
     data = await state.get_data()
+
+    if not KeitaroRepository().create_flow_app(flow_url=data['url'], flow_name=data['name'], sub30=data['bundle']):
+        await state.clear()
+        await message.answer(i18n.APP.FAIL_PUBLISHED(error="Keitaro"), reply_markup=kb_apps)
+        return
+
     if not AppRepository().add_app(
-            name=data['name'], bundle=data['bundle'], image=data['photo'], geo=data['geo'],
+            name=data['name'], url=data['url'], bundle=data['bundle'], image=data['photo'], geo=data['geo'],
             source=data['source'], platform=data['platform'], desc=data['desc']):
         await state.clear()
-        await message.answer(i18n.APP.FAIL_PUBLISHED(), reply_markup=kb_apps)
+        await message.answer(i18n.APP.FAIL_PUBLISHED(error="DataBase"), reply_markup=kb_apps)
         return
 
     await message.answer(i18n.APP.SUCCESS_PUBLISHED(), reply_markup=kb_apps)
@@ -90,18 +99,20 @@ async def add_start_over(message: types.Message, state: FSMContext, i18n: I18nCo
 
 
 def preview_app(data, i18n) -> str:
-    if data['platform'] == i18n.IOS():
-        name_url = hlink(data['name'], f"https://apps.apple.com/app/id{data['bundle']}")
-    elif data['platform'] == i18n.ANDROID():
-        name_url = hlink(data['name'], f"https://play.google.com/store/apps/details?id={data['bundle']}")
-    else:
-        name_url = data['name']
-
     return i18n.APP.DESC_TEMPLATE(
-        name_url=name_url,
+        name_url=hlink(data['name'], data['url']),
         platform=data['platform'],
         source=data['source'],
         status=DRAFT_APP_STATUS,
         geo=data['geo'],
         desc=data['desc']
     )
+
+
+def generate_url(bundle, platform, i18n) -> str | None:
+    if platform == i18n.IOS():
+        return f"https://apps.apple.com/app/id{bundle}"
+    elif platform == i18n.ANDROID():
+        return f"https://play.google.com/store/apps/details?id={bundle}"
+    else:
+        return None

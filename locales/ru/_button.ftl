@@ -44,7 +44,7 @@ APPS = Приложения
 ADD_APP = Создать приложение
 SHOW_APPS = Показать приложения
 IOS = IOS
-ANDROID=Android
+ANDROID = Android
 PWA = PWA
 
 PUBLUSH_APP = Опубликовать приложение
@@ -58,3 +58,11 @@ ACTIVE_STATUS_APP = Активно
 BANNED_STATUS_APP = Бан
 
 DELETE_APP = Удалить приложение
+
+USER-PIXEL_FB = Пикесль FB
+USER-ADD_PIXEL_FB = Добавить новый пикесль
+USER-SHOW_MY_PIXELS = Мои пиксели
+
+USER-DELETE_PIXEL = Удалить Pixel
+
+USER-CREATE_APP_LINK = Создать линку

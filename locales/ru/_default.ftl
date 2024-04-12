@@ -85,7 +85,7 @@ APP-SET_DESC = Ваш комментарий\описание:
 APP-PREVIEW = Предварительный просмотр, посмотри все ли правильно и публикуй Draft или возвращайся к началу. ⚠️⚠️⚠️
 
 APP-SUCCESS_PUBLISHED = Вы успешно создали приложение со статусом (Draft), чтобы его увидели другие пользователи, вам нужно активировать его (изменить статус на Active)
-APP-FAIL_PUBLISHED = Не удалось создать приложение, нужно срочно посмотреть логи, пока они не потерялись
+APP-FAIL_PUBLISHED = Не удалось создать приложение, нужно срочно посмотреть логи, пока они не потерялись ({$error})
 
 APP-CHOICE_PLATFORM = Выберите платформу
 APP-APP_LIST_EMPTY = Приложений под данную платформу нет
@@ -123,3 +123,20 @@ USER-DESC_TEMPLATE = Имя: <b>{$name_url}</b>
      ГЕО: {$geo}
 
      {$desc}
+
+# user (add pixel, show my pixel, delete pixel)
+USER-ADD_PIXEL_ID = Отправьте Pixel ID:
+USER-ADD_TOKEN_EAAG = Отправьте Token EAAG:
+USER-SUCCESS_ADD_PIXEL=Пиксель успешно добавлен
+USER-FAIL_ADD_PIXEL = Не удалось добавить пикесль
+
+USER-HAVENT_ANY_PIXEL = У вас нет созданных пикселей
+USER-YOUR_PIXELS = Ваши пиксели:
+USER-PIXEL_INFO = Pixel ID: <code>{$pixel_id}</code>
+
+     Token EAAG: <code>{$token}</code>
+
+     Пиксель создан: <b>{$date}</b>
+
+USER-SUCCESS_DELETE_PIXEL = Pixel успешно удален из библиотеки
+USER-FAIL_DELETE_PIXEL = Не удалось удалить pixel

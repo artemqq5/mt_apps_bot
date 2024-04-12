@@ -85,7 +85,7 @@ APP-SET_DESC = Your comment\description:
 APP-PREVIEW = Preview, see if everything is correct and publish Draft or go back to the beginning. ⚠️⚠️⚠️
 
 APP-SUCCESS_PUBLISHED = You have successfully created an app with the status (Draft), so that it can be seen by other users, you need to activate it (change the status to Active)
-APP-FAIL_PUBLISHED = Failed to create the application, urgently need to look at the logs before they are lost
+APP-FAIL_PUBLISHED = Failed to create the application, urgently need to look at the logs before they are lost ({$error})
 
 APP-CHOICE_PLATFORM = Choose a platform
 APP-APP_LIST_EMPTY = There are no applications for this platform
@@ -123,3 +123,20 @@ USER-DESC_TEMPLATE = Name: <b>{$name_url}</b>
      GEO: {$geo}
 
      {$desc}
+
+# user (add pixel, show my pixel, delete pixel)
+USER-ADD_PIXEL_ID = Submit Pixel ID:
+USER-ADD_TOKEN_EAAG = Send Token EAAG:
+USER-SUCCESS_ADD_PIXEL = Pixel added successfully
+USER-FAIL_ADD_PIXEL = Failed to add pixel
+
+USER-HAVENT_ANY_PIXEL = You have no pixels created
+USER-YOUR_PIXELS = Your Pixels:
+USER-PIXEL_INFO = Pixel ID: <code>{$pixel_id}</code>
+
+     EAAG token: <code>{$token}</code>
+
+     Pixel created: <b>{$date}</b>
+
+USER-SUCCESS_DELETE_PIXEL = Pixel successfully deleted from library
+USER-FAIL_DELETE_PIXEL = Failed to delete pixel

@@ -11,9 +11,9 @@ from domain.filters.isAdminFilter import IsAdminFilter
 from domain.filters.isTeamFilter import IsTeamFilter
 from domain.middlewares.IsUserHasTeam import UserHasTeamMiddleware
 from domain.middlewares.IsUserRole import UserRoleMiddleware
-from domain.routers.common_route_ import localization_
 from presenter.keyboards._keyboard import kb_settings
-from presenter.keyboards.user_keyboard import kb_menu_user, kb_menu_no_user, kb_request_access
+from presenter.keyboards.no_user_keyboard import kb_menu_no_user, kb_request_access
+from presenter.keyboards.user_keyboard import kb_menu_user
 
 router = Router()
 

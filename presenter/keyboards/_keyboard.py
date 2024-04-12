@@ -7,7 +7,8 @@ from data.repository.AccessRepository import AccessRepository
 from data.repository.TeamRepository import TeamRepository
 from data.repository.UserRepository import UserRepository
 from presenter.keyboards.admin_keyboard import kb_menu_admin
-from presenter.keyboards.user_keyboard import kb_menu_user, kb_menu_no_user
+from presenter.keyboards.no_user_keyboard import kb_menu_no_user
+from presenter.keyboards.user_keyboard import kb_menu_user
 
 kb_skip = ReplyKeyboardMarkup(keyboard=[
     [KeyboardButton(text=L.SKIP())],

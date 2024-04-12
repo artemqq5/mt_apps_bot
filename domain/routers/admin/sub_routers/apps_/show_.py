@@ -10,7 +10,7 @@ from domain.routers.admin.sub_routers.apps_.manage_ import change_geo_, change_s
 from domain.states.admin.apps_.ShowApplication import ShowApplicationState
 from presenter.keyboards._keyboard import kb_apps_platform
 from presenter.keyboards.admin_keyboard import kb_apps, kb_managment_app
-from presenter.keyboards.user_keyboard import kb_apps_keyboard, AppKeyboardLink
+from presenter.keyboards.user_keyboard import apps_keyboard_list, AppKeyboardList
 
 router = Router()
 router.include_routers(
@@ -35,26 +35,19 @@ async def show_applications(message: types.Message, state: FSMContext, i18n: I18
         return
 
     await state.update_data(platform=message.text)
-    await message.answer(i18n.APP.IOS_APPS(), reply_markup=kb_apps_keyboard(applications))
+    await message.answer(i18n.APP.IOS_APPS(), reply_markup=apps_keyboard_list(applications))
 
 
-@router.callback_query(AppKeyboardLink.filter(), IsAdminFilter(True))
+@router.callback_query(AppKeyboardList.filter(), IsAdminFilter(True))
 async def show_application_detail(callback: CallbackQuery, state: FSMContext, i18n: I18nContext):
     app = AppRepository().get_app_by_id(callback.data.split(":")[1])
     if not app:
         return
 
-    if app['platform'] == i18n.IOS():
-        name_url = hlink(app['name'], f"https://apps.apple.com/app/id{app['bundle']}")
-    elif app['platform'] == i18n.ANDROID():
-        name_url = hlink(app['name'], f"https://play.google.com/store/apps/details?id={app['bundle']}")
-    else:
-        name_url = app['name']
-
     await callback.message.answer_photo(
         photo=app['image'],
         caption=i18n.APP.DESC_TEMPLATE(
-            name_url=name_url,
+            name_url=hlink(app['name'], app['url']),
             platform=app['platform'],
             source=app['source'],
             geo=app['geo'],

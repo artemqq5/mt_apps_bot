@@ -58,3 +58,12 @@ ACTIVE_STATUS_APP = Active
 BANNED_STATUS_APP = Ban
 
 DELETE_APP = Delete app
+
+USER-PIXEL_FB = Pixel FB
+USER-ADD_PIXEL_FB = Add new pixel
+USER-SHOW_MY_PIXELS = My Pixels
+
+USER-DELETE_PIXEL = Delete Pixel
+
+USER-CREATE_APP_LINK = Create link
+
