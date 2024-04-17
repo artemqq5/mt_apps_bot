@@ -140,3 +140,5 @@ USER-PIXEL_INFO = Pixel ID: <code>{$pixel_id}</code>
 
 USER-SUCCESS_DELETE_PIXEL = Pixel successfully deleted from library
 USER-FAIL_DELETE_PIXEL = Failed to delete pixel
+
+FLOW-SELECT_PIXEL_FB = Select your pixel for flow:

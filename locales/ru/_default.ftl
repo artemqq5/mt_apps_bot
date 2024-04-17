@@ -140,3 +140,5 @@ USER-PIXEL_INFO = Pixel ID: <code>{$pixel_id}</code>
 
 USER-SUCCESS_DELETE_PIXEL = Pixel успешно удален из библиотеки
 USER-FAIL_DELETE_PIXEL = Не удалось удалить pixel
+
+FLOW-SELECT_PIXEL_FB = Выберите пиксель для потока:

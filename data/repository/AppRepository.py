@@ -9,9 +9,9 @@ class AppRepository(DefaultDataBase):
         query = "SELECT * FROM `apps` WHERE `id` = %s AND `visibility` = 1;"
         return self._select_one(query, (app_id,))
 
-    def add_app(self, name, url, bundle, image, geo, source, platform, desc):
-        query = "INSERT INTO `apps` (`name`, `url`, `bundle`, `image`, `geo`, `source`, `platform`, `desc`) VALUES (%s, %s, %s, %s, %s, %s, %s, %s);"
-        return self._insert(query, (name, url, bundle, image, geo, source, platform, desc))
+    def add_app(self, keitaro_id, name, url, bundle, image, geo, source, platform, desc):
+        query = "INSERT INTO `apps` (`id`, `name`, `url`, `bundle`, `image`, `geo`, `source`, `platform`, `desc`) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s);"
+        return self._insert(query, (keitaro_id, name, url, bundle, image, geo, source, platform, desc))
 
     def show_apps_by_platform(self, platform):
         query = "SELECT * FROM `apps` WHERE `platform` = %s AND `visibility` = 1;"
