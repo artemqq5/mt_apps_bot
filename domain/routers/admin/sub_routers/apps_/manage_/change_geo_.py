@@ -3,7 +3,7 @@ from aiogram.fsm.context import FSMContext
 from aiogram.types import CallbackQuery, Message
 from aiogram_i18n import I18nContext
 
-from data.repository.AppRepository import AppRepository
+from data.repositoryDB.AppRepository import AppRepository
 from domain.states.admin.apps_.manage.ChangeGeoApplication import ChangeGeoApplicationState
 from presenter.keyboards.admin_keyboard import ChangeGeoApp, kb_apps
 

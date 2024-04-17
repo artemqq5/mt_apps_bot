@@ -2,7 +2,7 @@ from aiogram.filters import BaseFilter
 from aiogram.types import Message
 
 from data.constants.access import ADMIN, USER
-from data.repository.UserRepository import UserRepository
+from data.repositoryDB.UserRepository import UserRepository
 
 
 class IsAdminFilter(BaseFilter):

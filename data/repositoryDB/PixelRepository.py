@@ -7,7 +7,7 @@ class PixelRepository(DefaultDataBase):
         super().__init__()
 
     def add_pixel(self, pixel_id, token, user_id):
-        query = "INSERT INTO `pixels` (`pixel_id`, `token`, `user_id`) VALUES (%s, %s, %s);"
+        query = "INSERT INTO `pixels` (`pixel_fb`, `token_fb`, `user_id`) VALUES (%s, %s, %s);"
         return self._insert(query, (pixel_id, token, user_id))
 
     def get_all_pixels(self, user_id):

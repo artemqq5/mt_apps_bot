@@ -6,7 +6,7 @@ from aiogram.fsm.context import FSMContext
 from aiogram_i18n import I18nContext, L
 
 from data.constants.access import USER
-from data.repository.AccessRepository import AccessRepository
+from data.repositoryDB.AccessRepository import AccessRepository
 from domain.filters.isAdminFilter import IsAdminFilter
 from domain.filters.isTeamFilter import IsTeamFilter
 from domain.middlewares.IsUserHasTeam import UserHasTeamMiddleware

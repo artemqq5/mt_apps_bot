@@ -4,7 +4,7 @@ from aiogram.types import CallbackQuery
 from aiogram.utils.markdown import hlink
 from aiogram_i18n import L, I18nContext
 
-from data.repository.AppRepository import AppRepository
+from data.repositoryDB.AppRepository import AppRepository
 from domain.states.user.apps_.ShowApps import ShowAppsState
 from presenter.keyboards.user_keyboard import apps_keyboard_list, AppKeyboardList, kb_menu_user, kb_create_app_link
 

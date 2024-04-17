@@ -1,8 +1,8 @@
 from aiogram.filters import BaseFilter
 from aiogram.types import Message
 
-from data.repository.AccessRepository import AccessRepository
-from data.repository.TeamRepository import TeamRepository
+from data.repositoryDB.AccessRepository import AccessRepository
+from data.repositoryDB.TeamRepository import TeamRepository
 
 
 class IsTeamFilter(BaseFilter):

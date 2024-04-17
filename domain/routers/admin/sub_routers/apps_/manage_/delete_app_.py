@@ -3,7 +3,7 @@ from aiogram.fsm.context import FSMContext
 from aiogram.types import CallbackQuery
 from aiogram_i18n import I18nContext, L
 
-from data.repository.AppRepository import AppRepository
+from data.repositoryDB.AppRepository import AppRepository
 from domain.states.admin.apps_.manage.DeleteApplication import DeleteApplicationState
 from presenter.keyboards.admin_keyboard import kb_apps, DeleteApp, \
     kb_delete

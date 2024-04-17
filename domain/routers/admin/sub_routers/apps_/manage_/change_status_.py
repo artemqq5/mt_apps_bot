@@ -3,7 +3,7 @@ from aiogram.fsm.context import FSMContext
 from aiogram.types import CallbackQuery
 from aiogram_i18n import I18nContext
 
-from data.repository.AppRepository import AppRepository
+from data.repositoryDB.AppRepository import AppRepository
 from domain.states.admin.apps_.manage.ChangeStatusApplication import ChangeStatusApplicationState
 from presenter.keyboards.admin_keyboard import ChangeStatusApp, kb_status_app, kb_apps, ChangeAppStatus
 

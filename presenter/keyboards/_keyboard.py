@@ -3,9 +3,9 @@ from aiogram_i18n import L
 from aiogram_i18n.types import KeyboardButton, ReplyKeyboardMarkup, InlineKeyboardMarkup, InlineKeyboardButton
 
 from data.constants.access import ADMIN
-from data.repository.AccessRepository import AccessRepository
-from data.repository.TeamRepository import TeamRepository
-from data.repository.UserRepository import UserRepository
+from data.repositoryDB.AccessRepository import AccessRepository
+from data.repositoryDB.TeamRepository import TeamRepository
+from data.repositoryDB.UserRepository import UserRepository
 from presenter.keyboards.admin_keyboard import kb_menu_admin
 from presenter.keyboards.no_user_keyboard import kb_menu_no_user
 from presenter.keyboards.user_keyboard import kb_menu_user

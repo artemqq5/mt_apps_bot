@@ -4,8 +4,8 @@ from aiogram.types import CallbackQuery
 from aiogram_i18n import I18nContext, L
 
 from data.constants.access import ACCESS_STATUS_LIST
-from data.repository.AccessRepository import AccessRepository
-from data.repository.UserRepository import UserRepository
+from data.repositoryDB.AccessRepository import AccessRepository
+from data.repositoryDB.UserRepository import UserRepository
 from domain.states.admin.team_.AccessManagment import AccessManagmentState
 from presenter.keyboards.admin_keyboard import kb_teams, kb_team_access_managment, kb_delete, \
     kb_access_change_status

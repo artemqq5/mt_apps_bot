@@ -2,7 +2,7 @@ from aiogram import Router, F
 from aiogram.types import Message, CallbackQuery
 from aiogram_i18n import L, I18nContext
 
-from data.repository.UserRepository import UserRepository
+from data.repositoryDB.UserRepository import UserRepository
 from presenter.keyboards._keyboard import kb_languages, LanguageCD, keyboard_access
 
 route = Router()

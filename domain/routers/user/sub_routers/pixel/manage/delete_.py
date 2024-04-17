@@ -3,7 +3,7 @@ from aiogram.fsm.context import FSMContext
 from aiogram.types import Message, CallbackQuery
 from aiogram_i18n import L, I18nContext
 
-from data.repository.PixelRepository import PixelRepository
+from data.repositoryDB.PixelRepository import PixelRepository
 from presenter.keyboards.user_keyboard import PixelDeleteKeyboard, kb_pixel_menu
 
 router = Router()

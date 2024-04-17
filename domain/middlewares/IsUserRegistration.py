@@ -3,7 +3,7 @@ from typing import Callable, Any, Dict, Awaitable
 from aiogram import BaseMiddleware, types
 from aiogram.types import TelegramObject
 
-from data.repository.UserRepository import UserRepository
+from data.repositoryDB.UserRepository import UserRepository
 
 
 class UserRegistationMiddleware(BaseMiddleware):

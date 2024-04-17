@@ -92,6 +92,8 @@ APP-APP_LIST_EMPTY = There are no applications for this platform
 APP-IOS_APPS = IOS Apps:
 APP-DESC_TEMPLATE = Name: <b>{$name_url}</b>
 
+     ID: {$id}
+
      Platform: <b>{$platform}</b>
      Sources: <b>{$source}</b>
 
@@ -142,3 +144,11 @@ USER-SUCCESS_DELETE_PIXEL = Pixel successfully deleted from library
 USER-FAIL_DELETE_PIXEL = Failed to delete pixel
 
 FLOW-SELECT_PIXEL_FB = Select your pixel for flow:
+FLOW-HAVENT_PIXEL_FB = You have no created pixels, want to create one?
+FLOW-COMMENT = Add a comment to the flow
+FLOW-OFFER_LINK = Send your link
+FLOW-OFFER_LINK_ERROR = Attention! The link must have the mandatory macro ={$subid} and start with https://
+     For example https://example.site/test?asdpg={$subid} - is a minimal example!
+FLOW-FLOW_SUCCESS_CREATED = Flow successfully created, we wish you quality traffic!
+     <code>{$flow}</code>
+FLOW-FLOW_FAIL_CREATED = Failed to create flow, forward this message to admin

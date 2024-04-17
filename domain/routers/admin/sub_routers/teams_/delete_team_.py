@@ -3,7 +3,7 @@ from aiogram.fsm.context import FSMContext
 from aiogram.types import CallbackQuery
 from aiogram_i18n import I18nContext, L
 
-from data.repository.TeamRepository import TeamRepository
+from data.repositoryDB.TeamRepository import TeamRepository
 from domain.states.admin.team_.TeamManagment import TeamManagmentState
 from presenter.keyboards.admin_keyboard import kb_delete, kb_teams
 

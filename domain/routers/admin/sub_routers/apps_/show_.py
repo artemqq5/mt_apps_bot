@@ -4,7 +4,7 @@ from aiogram.types import CallbackQuery
 from aiogram.utils.markdown import hlink
 from aiogram_i18n import L, I18nContext
 
-from data.repository.AppRepository import AppRepository
+from data.repositoryDB.AppRepository import AppRepository
 from domain.filters.isAdminFilter import IsAdminFilter
 from domain.routers.admin.sub_routers.apps_.manage_ import change_geo_, change_status_, delete_app_
 from domain.states.admin.apps_.ShowApplication import ShowApplicationState
@@ -48,6 +48,7 @@ async def show_application_detail(callback: CallbackQuery, state: FSMContext, i1
         photo=app['image'],
         caption=i18n.APP.DESC_TEMPLATE(
             name_url=hlink(app['name'], app['url']),
+            id=app['id'],
             platform=app['platform'],
             source=app['source'],
             geo=app['geo'],

@@ -6,8 +6,8 @@ from aiogram.types import CallbackQuery
 from aiogram_i18n import I18nContext, L
 
 from config import LINK_TO_BOT
-from data.repository.AccessRepository import AccessRepository
-from data.repository.TeamRepository import TeamRepository
+from data.repositoryDB.AccessRepository import AccessRepository
+from data.repositoryDB.TeamRepository import TeamRepository
 from domain.states.admin.team_.TeamManagment import TeamManagmentState
 from presenter.keyboards.admin_keyboard import kb_teams, kb_team_generate
 

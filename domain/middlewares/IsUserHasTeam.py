@@ -3,8 +3,8 @@ from typing import Callable, Dict, Any, Awaitable
 from aiogram import BaseMiddleware, types
 from aiogram.types import TelegramObject
 
-from data.repository.AccessRepository import AccessRepository
-from data.repository.TeamRepository import TeamRepository
+from data.repositoryDB.AccessRepository import AccessRepository
+from data.repositoryDB.TeamRepository import TeamRepository
 
 
 class UserHasTeamMiddleware(BaseMiddleware):

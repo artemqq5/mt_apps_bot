@@ -2,7 +2,7 @@ from aiogram import Router, F, types
 from aiogram.fsm.context import FSMContext
 from aiogram_i18n import L, I18nContext
 
-from data.repository.PixelRepository import PixelRepository
+from data.repositoryDB.PixelRepository import PixelRepository
 from domain.states.user.pixel_.AddPixelFB import AddPixelFBState
 from presenter.keyboards._keyboard import kb_cancel
 from presenter.keyboards.user_keyboard import kb_pixel_menu

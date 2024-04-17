@@ -1,7 +1,7 @@
 from aiogram.types import User
 from aiogram_i18n.managers import BaseManager
 
-from data.repository.UserRepository import UserRepository
+from data.repositoryDB.UserRepository import UserRepository
 
 
 class LocaleManager(BaseManager):

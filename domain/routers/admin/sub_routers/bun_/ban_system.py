@@ -2,7 +2,7 @@ from aiogram import Router, F, types
 from aiogram.fsm.context import FSMContext
 from aiogram_i18n import I18nContext, L
 
-from data.repository.UserRepository import UserRepository
+from data.repositoryDB.UserRepository import UserRepository
 from domain.states.admin.ban_.BanUser import BanUserState
 from domain.states.admin.ban_.UnbanUser import UnbanUserState
 from presenter.keyboards._keyboard import kb_cancel, kb_skip

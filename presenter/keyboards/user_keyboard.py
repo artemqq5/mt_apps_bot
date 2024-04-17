@@ -39,7 +39,21 @@ def pixel_keyboard_list(pixels) -> InlineKeyboardMarkup:
     inline_kb = []
     for p in pixels:
         inline_kb.append(
-            [InlineKeyboardButton(text=p['pixel_id'], callback_data=PixelKeyboardList(id=p['id']).pack())]
+            [InlineKeyboardButton(text=p['pixel_fb'], callback_data=PixelKeyboardList(id=p['id']).pack())]
+        )
+
+    return InlineKeyboardMarkup(inline_keyboard=inline_kb)
+
+
+class PixelChoiceKeyboardList(CallbackData, prefix="pixel*choice*keyboard"):
+    id: int
+
+
+def pixel_choice_keyboard_list(pixels) -> InlineKeyboardMarkup:
+    inline_kb = []
+    for p in pixels:
+        inline_kb.append(
+            [InlineKeyboardButton(text=p['pixel_fb'], callback_data=PixelChoiceKeyboardList(id=p['id']).pack())]
         )
 
     return InlineKeyboardMarkup(inline_keyboard=inline_kb)
@@ -64,3 +78,8 @@ def kb_create_app_link(app_id):
         [InlineKeyboardButton(text=L.USER.CREATE_APP_LINK(), callback_data=AppCreateLinkKeyboard(id=app_id).pack())]
     ])
 
+
+kb_create_pixelfb = ReplyKeyboardMarkup(keyboard=[
+    [KeyboardButton(text=L.USER.ADD_PIXEL_FB())],
+    [KeyboardButton(text=L.CANCEL())]
+])

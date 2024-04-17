@@ -3,9 +3,9 @@ from aiogram.fsm.context import FSMContext
 from aiogram.utils.markdown import hlink
 from aiogram_i18n import L, I18nContext
 
-from data.KeitaroRepository import KeitaroRepository
 from data.constants.access import DRAFT_APP_STATUS
-from data.repository.AppRepository import AppRepository
+from data.repositoryDB.AppRepository import AppRepository
+from data.repositoryKeitaro.KeitaroAppRepository import KeitaroAppRepository
 from domain.states.admin.apps_.AddApplication import AddAplicationState
 from presenter.keyboards._keyboard import kb_apps_platform, kb_cancel
 from presenter.keyboards.admin_keyboard import kb_preview, kb_apps
@@ -76,7 +76,7 @@ async def add_preview(message: types.Message, state: FSMContext, i18n: I18nConte
 async def add_publish(message: types.Message, state: FSMContext, i18n: I18nContext):
     data = await state.get_data()
 
-    response = KeitaroRepository().create_flow_app(
+    response = KeitaroAppRepository().create_flow_app(
         flow_url=data['url'], flow_name=data['name'], sub30=data['bundle']
     )
     if not response:
@@ -84,15 +84,15 @@ async def add_publish(message: types.Message, state: FSMContext, i18n: I18nConte
         await message.answer(i18n.APP.FAIL_PUBLISHED(error="Keitaro"), reply_markup=kb_apps)
         return
 
-    # if not AppRepository().add_app(
-    #         keitaro_id=response, name=data['name'], url=data['url'], bundle=data['bundle'], image=data['photo'], geo=data['geo'],
-    #         source=data['source'], platform=data['platform'], desc=data['desc']):
-    #     await state.clear()
-    #     await message.answer(i18n.APP.FAIL_PUBLISHED(error="DataBase"), reply_markup=kb_apps)
-    #     return
-    #
-    # await message.answer(i18n.APP.SUCCESS_PUBLISHED(), reply_markup=kb_apps)
-    # await state.clear()
+    if not AppRepository().add_app(
+            keitaro_id=response.json()['id'], name=data['name'], url=data['url'], bundle=data['bundle'], image=data['photo'], geo=data['geo'],
+            source=data['source'], platform=data['platform'], desc=data['desc']):
+        await state.clear()
+        await message.answer(i18n.APP.FAIL_PUBLISHED(error="DataBase"), reply_markup=kb_apps)
+        return
+
+    await message.answer(i18n.APP.SUCCESS_PUBLISHED(), reply_markup=kb_apps)
+    await state.clear()
 
 
 @router.message(AddAplicationState.PreView, F.text == L.START_ADD_OVER())
@@ -104,6 +104,7 @@ async def add_start_over(message: types.Message, state: FSMContext, i18n: I18nCo
 def preview_app(data, i18n) -> str:
     return i18n.APP.DESC_TEMPLATE(
         name_url=hlink(data['name'], data['url']),
+        id=data['id'],
         platform=data['platform'],
         source=data['source'],
         status=DRAFT_APP_STATUS,
