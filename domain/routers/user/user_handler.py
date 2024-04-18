@@ -4,16 +4,18 @@ from aiogram.fsm.context import FSMContext
 from aiogram_i18n import I18nContext, L
 
 from data.constants.access import USER
+from data.repositoryDB.FlowRepository import FlowRepository
 from domain.filters.isAdminFilter import IsAdminFilter
 from domain.filters.isTeamFilter import IsTeamFilter
 from domain.middlewares.IsUserHasTeam import UserHasTeamMiddleware
 from domain.middlewares.IsUserRole import UserRoleMiddleware
-from domain.routers.user.sub_routers.apps_ import show_ as apps_show, create_link_
+from domain.routers.user.sub_routers.apps import show_ as apps_show, create_link_
 from domain.states.user.apps_.ShowApps import ShowAppsState
 from presenter.keyboards._keyboard import kb_settings, kb_apps_platform
-from presenter.keyboards.user_keyboard import kb_menu_user, kb_pixel_menu
+from presenter.keyboards.user_keyboard import kb_menu_user, kb_pixel_menu, kb_user_flows
 from domain.routers.user.sub_routers.pixel import add_ as pixel_add, show_ as pixel_show
 from domain.routers.user.sub_routers.pixel.manage import delete_ as pixel_delete
+from domain.routers.user.sub_routers.flows import show_ as flow_show_
 
 router = Router()
 router.include_routers(
@@ -21,7 +23,8 @@ router.include_routers(
     pixel_add.router,
     pixel_delete.router,
     pixel_show.router,
-    create_link_.router
+    create_link_.router,
+    flow_show_.router
 )
 
 router.message.middleware(UserRoleMiddleware(USER))
@@ -41,6 +44,12 @@ async def start(message: types.Message, state: FSMContext, i18n: I18nContext):
 async def apps(message: types.Message, i18n: I18nContext, state: FSMContext):
     await state.set_state(ShowAppsState.Show)
     await message.answer(i18n.USER.CHOICE_PLATFORM_APP(), reply_markup=kb_apps_platform)
+
+
+@router.message(F.text == L.FLOW.MY_FLOWS(), IsAdminFilter(False), IsTeamFilter(True))
+async def flows(message: types.Message, i18n: I18nContext, state: FSMContext):
+    user_flows = FlowRepository().get_flows(message.from_user.id)
+    await message.answer(i18n.FLOW.MY_FLOWS(), reply_markup=kb_user_flows(user_flows))
 
 
 @router.message(F.text == L.USER.PIXEL_FB())

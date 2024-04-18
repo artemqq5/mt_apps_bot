@@ -23,3 +23,8 @@ BANNED_APP_STATUS = "Bunned"
 APP_STATUS_LIST = (ACTIVE_APP_STATUS, BANNED_APP_STATUS)
 
 MACROS = "{subid}"
+
+# source app
+ONELINK = "onelink"
+
+

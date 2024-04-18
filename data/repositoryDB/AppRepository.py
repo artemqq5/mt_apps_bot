@@ -38,3 +38,7 @@ class AppRepository(DefaultDataBase):
     def get_app_by_id_for_users(self, app_id):
         query = "SELECT * FROM `apps` WHERE `id` = %s AND `visibility` = 1 AND `status` = 'Active';"
         return self._select_one(query, (app_id,))
+
+    def get_app_by_bundle_keitaro_for_users(self, bundle):
+        query = "SELECT * FROM `apps` WHERE `bundle` = %s;"
+        return self._select_one(query, (bundle,))

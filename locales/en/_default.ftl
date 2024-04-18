@@ -80,7 +80,7 @@ APP-SET_NAME = App Name:
 APP-SET_BUNDLE = Specify the application bundle (IOS=1451177077, Android=com.af.smart):
 APP-SET_IMAGE = An image for the application has been sent (not a file):
 APP-SET_GEO = Specify open geo, for example (UA, AL, BR):
-APP-SET_SOURCE = Specify under which sources, for example (Facebook deeplink or onelink):
+APP-SET_SOURCE = Specify which source the application is targeting:
 APP-SET_DESC = Your comment\description:
 APP-PREVIEW = Preview, see if everything is correct and publish Draft or go back to the beginning. ⚠️⚠️⚠️
 
@@ -95,7 +95,7 @@ APP-DESC_TEMPLATE = Name: <b>{$name_url}</b>
      ID: {$id}
 
      Platform: <b>{$platform}</b>
-     Sources: <b>{$source}</b>
+     Source: <b>{$source}</b>
 
      GEO: {$geo}
 
@@ -120,7 +120,7 @@ USER-IOS_APPS = Available IOS Apps:
 USER-DESC_TEMPLATE = Name: <b>{$name_url}</b>
 
      Platform: <b>{$platform}</b>
-     Sources: <b>{$source}</b>
+     Source: <b>{$source}</b>
 
      GEO: {$geo}
 
@@ -151,4 +151,27 @@ FLOW-OFFER_LINK_ERROR = Attention! The link must have the mandatory macro ={$sub
      For example https://example.site/test?asdpg={$subid} - is a minimal example!
 FLOW-FLOW_SUCCESS_CREATED = Flow successfully created, we wish you quality traffic!
      <code>{$flow}</code>
-FLOW-FLOW_FAIL_CREATED = Failed to create flow, forward this message to admin
+FLOW-FLOW_FAIL_CREATED = Failed to create flow ({$error}), forward this message to admin
+
+FLOW-MY_FLOWS = My Flows
+FLOW-DETAIL_FLOW = <b>Your working link:</b>
+     <code>{$link_keitaro}</code>
+
+     ========================================
+     <b>ID:</b> {$id}
+     <b>Created date: </b> {$date}
+
+     <b>App:</b> {$app_name}
+     <b>Platform:</b> {$platform}
+     <b>Source:</b> {$source}
+     <b>App Status:</b> {$status}
+
+     <b>Domain:</b> <code>{$domain}</code>
+     <b>Your offer\tracker:</b> <code>{$link_user}</code>
+
+     <b>Pixel ID:</b> {$pixel}
+     <b>Token:</b> {$token}
+
+     <b>GEO:</b> {$geo}
+
+     ⚠️To open GEO, contact support⚠️

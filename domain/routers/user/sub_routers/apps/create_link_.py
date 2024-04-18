@@ -8,8 +8,9 @@ from aiogram_i18n import I18nContext
 from data.constants.access import MACROS
 from data.repositoryDB.AccessRepository import AccessRepository
 from data.repositoryDB.AppRepository import AppRepository
+from data.repositoryDB.FlowRepository import FlowRepository
 from data.repositoryDB.PixelRepository import PixelRepository
-from data.repositoryKeitaro.KeitaroLinkRepository import KeitaroLinkRepository
+from data.repositoryKeitaro.KeitaroLinkRepository import KeitaroLink
 from domain.states.user.flow_.CreateFlow import CreateFlowState
 from presenter.keyboards._keyboard import kb_cancel, kb_skip
 from presenter.keyboards.user_keyboard import AppCreateLinkKeyboard, pixel_choice_keyboard_list, \
@@ -44,9 +45,7 @@ async def choice_pixel(callback: CallbackQuery, i18n: I18nContext, state: FSMCon
 
 @router.message(CreateFlowState.CommentFlow)
 async def comment_flow(message: Message, i18n: I18nContext, state: FSMContext):
-    if message.text == SKIP:
-        await state.update_data(comment=SKIP)
-    else:
+    if message.text != SKIP:
         await state.update_data(comment=message.text)
 
     await state.set_state(CreateFlowState.LinkOffer)
@@ -64,13 +63,31 @@ async def offer_link(message: Message, i18n: I18nContext, state: FSMContext):
     await state.update_data(offer_link=message.text)
     data = await state.get_data()
 
-    response = KeitaroLinkRepository().generate_link_keitaro(data, access)
+    response = KeitaroLink().generate_link_keitaro(data, access)
     if not response:
         await state.clear()
-        await message.answer(i18n.FLOW.FLOW_FAIL_CREATED(), reply_markup=kb_menu_user)
+        await message.answer(i18n.FLOW.FLOW_FAIL_CREATED(error="kt"), reply_markup=kb_menu_user)
         return
 
-    await message.answer(i18n.FLOW.FLOW_SUCCESS_CREATED(flow=response), reply_markup=kb_menu_user)
+    if not FlowRepository().add_flow(
+            link_user=response.link_user,
+            link_keitaro=response.link_keitaro,
+            user_id=response.user_id,
+            pixel=response.pixel,
+            token=response.token,
+            campain_id=response.campain_id,
+            campaign_name=response.campaign_name,
+            offer_id=response.offer_id,
+            offer_name=response.offer_name,
+            domain=response.domain,
+            bundle=response.bundle,
+            comment=response.comment
+    ):
+        await state.clear()
+        await message.answer(i18n.FLOW.FLOW_FAIL_CREATED(error="db"), reply_markup=kb_menu_user)
+        return
+
+    await message.answer(i18n.FLOW.FLOW_SUCCESS_CREATED(flow=response.link_keitaro), reply_markup=kb_menu_user)
     await state.clear()
 
 

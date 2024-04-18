@@ -2,10 +2,10 @@ import json
 
 import requests
 
-from data.DefaultKeitaroRepository import DefaultKeitaroRepository
+from data.DefaultKeitaro import DefaultKeitaro
 
 
-class KeitaroAppRepository(DefaultKeitaroRepository):
+class KeitaroApp(DefaultKeitaro):
 
     # При додаванні прілки, створює поток в кампанії Onelink MT AppsLinks (50)
     def create_flow_app(self, flow_url, flow_name, sub30):

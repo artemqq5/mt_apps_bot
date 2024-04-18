@@ -6,10 +6,10 @@ from aiogram_i18n import I18nContext, L
 from data.constants.access import ADMIN
 from domain.filters.isAdminFilter import IsAdminFilter
 from domain.middlewares.IsUserRole import UserRoleMiddleware
-from domain.routers.admin.sub_routers.apps_ import add_, show_
-from domain.routers.admin.sub_routers.bun_ import ban_system
+from domain.routers.admin.sub_routers.apps import add_, show_
+from domain.routers.admin.sub_routers.bun import ban_system
 from domain.routers.common_route_ import localization_
-from domain.routers.admin.sub_routers.teams_ import teams
+from domain.routers.admin.sub_routers.teams import teams
 from presenter.keyboards._keyboard import kb_settings
 from presenter.keyboards.admin_keyboard import kb_menu_admin, kb_ban_system, kb_teams, kb_apps
 

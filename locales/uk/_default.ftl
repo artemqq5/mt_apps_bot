@@ -80,7 +80,7 @@ APP-SET_NAME = Назва додатку:
 APP-SET_BUNDLE = Вкажи bundle додатку (IOS=1451177077, Android=com.af.smart):
 APP-SET_IMAGE = Надішли картинку для додатку (не файлом):
 APP-SET_GEO = Вкажи відкриті гео, наприклад (UA, AL, BR):
-APP-SET_SOURCE = Вкажи під які джерела, наприклад (Facebook deeplink або onelink):
+APP-SET_SOURCE = Вкажи під яке джерело націлений додаток:
 APP-SET_DESC = Твій коментар\опис:
 APP-PREVIEW = Попередній перегляд, подивись чи все правильно і публікуй Draft або повертайся на початок. ⚠️⚠️⚠️
 
@@ -95,7 +95,7 @@ APP-DESC_TEMPLATE = Назва: <b>{$name_url}</b>
     ID: {$id}
 
     Платформа: <b>{$platform}</b>
-    Джерела: <b>{$source}</b>
+    Джерело: <b>{$source}</b>
 
     ГЕО: {$geo}
 
@@ -119,7 +119,7 @@ USER-IOS_APPS = Доступні IOS Додатки:
 USER-DESC_TEMPLATE = Назва: <b>{$name_url}</b>
 
     Платформа: <b>{$platform}</b>
-    Джерела: <b>{$source}</b>
+    Джерело: <b>{$source}</b>
 
     ГЕО: {$geo}
 
@@ -142,6 +142,7 @@ USER-PIXEL_INFO = Pixel ID: <code>{$pixel_id}</code>
 USER-SUCCESS_DELETE_PIXEL = Pixel успішно видалено з бібліотеки
 USER-FAIL_DELETE_PIXEL = Не вдалося видалити pixel
 
+# flow user (create, show)
 FLOW-SELECT_PIXEL_FB = Оберіть ваш піксель для потоку:
 FLOW-HAVENT_PIXEL_FB = У вас немає створених пікселів, бажаєте створити?
 FLOW-COMMENT = Додайте коментар до потоку
@@ -150,4 +151,27 @@ FLOW-OFFER_LINK_ERROR = Увага! Лінка повина бути з обов
     Наприклад https://example.site/test?asdpg={$subid} - це мінімальний приклад!
 FLOW-FLOW_SUCCESS_CREATED = Поток успішно створено, бажаємо якісного трафіку!
     <code>{$flow}</code>
-FLOW-FLOW_FAIL_CREATED = Не вийшло створити поток, перешліть адміну це повідомлення
+FLOW-FLOW_FAIL_CREATED = Не вийшло створити поток ({$error}), перешліть адміну це повідомлення
+
+FLOW-MY_FLOWS = Мої потоки
+FLOW-DETAIL_FLOW = <b>Ваша робоча лінка:</b>
+    <code>{$link_keitaro}</code>
+
+    =========================================
+    <b>ID:</b> {$id}
+    <b>Дата створення: </b> {$date}
+
+    <b>Додаток:</b> {$app_name}
+    <b>Платформа:</b> {$platform}
+    <b>Джерело:</b> {$source}
+    <b>Статус додатка:</b> {$status}
+
+    <b>Домен:</b> <code>{$domain}</code>
+    <b>Ваш оффер\трекер:</b> <code>{$link_user}</code>
+
+    <b>Pixel ID:</b> {$pixel}
+    <b>Token:</b> {$token}
+
+    <b>ГЕО:</b> {$geo}
+
+    ⚠️Щоб відкрити ГЕО зв'яжіться з сапортом⚠️

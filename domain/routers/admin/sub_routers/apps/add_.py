@@ -3,12 +3,12 @@ from aiogram.fsm.context import FSMContext
 from aiogram.utils.markdown import hlink
 from aiogram_i18n import L, I18nContext
 
-from data.constants.access import DRAFT_APP_STATUS
+from data.constants.access import DRAFT_APP_STATUS, ONELINK
 from data.repositoryDB.AppRepository import AppRepository
-from data.repositoryKeitaro.KeitaroAppRepository import KeitaroAppRepository
+from data.repositoryKeitaro.KeitaroAppRepository import KeitaroApp
 from domain.states.admin.apps_.AddApplication import AddAplicationState
 from presenter.keyboards._keyboard import kb_apps_platform, kb_cancel
-from presenter.keyboards.admin_keyboard import kb_preview, kb_apps
+from presenter.keyboards.admin_keyboard import kb_preview, kb_apps, kb_source
 
 router = Router()
 
@@ -53,10 +53,10 @@ async def add_geo(message: types.Message, state: FSMContext, i18n: I18nContext):
 async def add_source(message: types.Message, state: FSMContext, i18n: I18nContext):
     await state.set_state(AddAplicationState.Source)
     await state.update_data(geo=message.text)
-    await message.answer(i18n.APP.SET_SOURCE(), reply_markup=kb_cancel)
+    await message.answer(i18n.APP.SET_SOURCE(), reply_markup=kb_source)
 
 
-@router.message(AddAplicationState.Source)
+@router.message(AddAplicationState.Source, F.text.in_((ONELINK, )))
 async def add_desc(message: types.Message, state: FSMContext, i18n: I18nContext):
     await state.set_state(AddAplicationState.Desc)
     await state.update_data(source=message.text)
@@ -76,7 +76,7 @@ async def add_preview(message: types.Message, state: FSMContext, i18n: I18nConte
 async def add_publish(message: types.Message, state: FSMContext, i18n: I18nContext):
     data = await state.get_data()
 
-    response = KeitaroAppRepository().create_flow_app(
+    response = KeitaroApp().create_flow_app(
         flow_url=data['url'], flow_name=data['name'], sub30=data['bundle']
     )
     if not response:

@@ -6,7 +6,7 @@ from aiogram_i18n import L, I18nContext
 
 from data.repositoryDB.AppRepository import AppRepository
 from domain.filters.isAdminFilter import IsAdminFilter
-from domain.routers.admin.sub_routers.apps_.manage_ import change_geo_, change_status_, delete_app_
+from domain.routers.admin.sub_routers.apps.manage import change_geo_, change_status_, delete_app_
 from domain.states.admin.apps_.ShowApplication import ShowApplicationState
 from presenter.keyboards._keyboard import kb_apps_platform
 from presenter.keyboards.admin_keyboard import kb_apps, kb_managment_app

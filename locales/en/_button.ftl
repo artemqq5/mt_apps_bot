@@ -67,3 +67,4 @@ USER-DELETE_PIXEL = Delete Pixel
 
 USER-CREATE_APP_LINK = Create link
 
+FLOW-CALL_ADMIN = Chat with support

@@ -3,7 +3,7 @@ from aiogram_i18n import L
 from aiogram_i18n.types import ReplyKeyboardMarkup, KeyboardButton, InlineKeyboardMarkup, InlineKeyboardButton
 
 from data.constants.access import Trial_TEAM, Basic_TEAM, Standard_TEAM, Premium_TEAM, Ultimate_TEAM, Byer_ACCESS, \
-    TeamLead_ACCESS, ACTIVE_APP_STATUS, BANNED_APP_STATUS
+    TeamLead_ACCESS, ACTIVE_APP_STATUS, BANNED_APP_STATUS, ONELINK
 
 kb_menu_admin = ReplyKeyboardMarkup(keyboard=[
     [KeyboardButton(text=L.APPS())],
@@ -79,6 +79,11 @@ kb_access_change_status = InlineKeyboardMarkup(inline_keyboard=[
 kb_apps = ReplyKeyboardMarkup(keyboard=[
     [KeyboardButton(text=L.ADD_APP())],
     [KeyboardButton(text=L.SHOW_APPS())],
+    [KeyboardButton(text=L.CANCEL())]
+])
+
+kb_source = ReplyKeyboardMarkup(keyboard=[
+    [KeyboardButton(text=ONELINK)],
     [KeyboardButton(text=L.CANCEL())]
 ])
 

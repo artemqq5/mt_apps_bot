@@ -65,3 +65,5 @@ USER-SHOW_MY_PIXELS = Мої пікселі
 USER-DELETE_PIXEL = Видалити Pixel
 
 USER-CREATE_APP_LINK = Створити лінку
+
+FLOW-CALL_ADMIN = Чат з підтримкою

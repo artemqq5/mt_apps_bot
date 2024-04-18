@@ -2,9 +2,11 @@ from aiogram.filters.callback_data import CallbackData
 from aiogram_i18n import L
 from aiogram_i18n.types import ReplyKeyboardMarkup, KeyboardButton, InlineKeyboardMarkup, InlineKeyboardButton
 
+from config import LINK_TO_SUPPORT
 
 kb_menu_user = ReplyKeyboardMarkup(keyboard=[
     [KeyboardButton(text=L.APPS())],
+    [KeyboardButton(text=L.FLOW.MY_FLOWS())],
     [KeyboardButton(text=L.USER.PIXEL_FB())],
     [KeyboardButton(text=L.SETTINGS())],
 ])
@@ -82,4 +84,24 @@ def kb_create_app_link(app_id):
 kb_create_pixelfb = ReplyKeyboardMarkup(keyboard=[
     [KeyboardButton(text=L.USER.ADD_PIXEL_FB())],
     [KeyboardButton(text=L.CANCEL())]
+])
+
+
+class FlowShowKeyboard(CallbackData, prefix="flow*show*keyboard"):
+    id: int
+
+
+def kb_user_flows(flows) -> InlineKeyboardMarkup:
+    inline_kb = []
+    for flow in flows:
+        inline_kb.append(
+            [InlineKeyboardButton(text=f"{flow['id']} | {flow['domain']}",
+                                  callback_data=FlowShowKeyboard(id=flow['id']).pack())]
+        )
+
+    return InlineKeyboardMarkup(inline_keyboard=inline_kb)
+
+
+kb_call_admin = InlineKeyboardMarkup(inline_keyboard=[
+    [InlineKeyboardButton(text=L.FLOW.CALL_ADMIN(), url=LINK_TO_SUPPORT)],
 ])

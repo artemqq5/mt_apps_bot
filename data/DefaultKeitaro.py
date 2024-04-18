@@ -6,7 +6,7 @@ from config import API_KEY_KEITARO, KEITARO_CAMPAIGN_ID_APPS_FLOW, KEITARO_GROUP
     KEITARO_DOMAIN_SERVER, KEITARO_CAMPAIGN_ONELINK_ALIAS
 
 
-class DefaultKeitaroRepository:
+class DefaultKeitaro:
 
     def __init__(self):
         self._onelink_campaign_alias = KEITARO_CAMPAIGN_ONELINK_ALIAS

@@ -80,7 +80,7 @@ APP-SET_NAME = Имя приложения:
 APP-SET_BUNDLE = Укажи bundle приложения (IOS=1451177077, Android=com.af.smart):
 APP-SET_IMAGE = Пришли картинку для приложения (не файлом):
 APP-SET_GEO = Укажи открытые гео, например (UA, AL, BR):
-APP-SET_SOURCE = Укажи под какие источники, например (Facebook deeplink или onelink):
+APP-SET_SOURCE = Укажи под какой источник направлено приложение:
 APP-SET_DESC = Ваш комментарий\описание:
 APP-PREVIEW = Предварительный просмотр, посмотри все ли правильно и публикуй Draft или возвращайся к началу. ⚠️⚠️⚠️
 
@@ -95,7 +95,7 @@ APP-DESC_TEMPLATE = Имя: <b>{$name_url}</b>
      ID: {$id}
 
      Платформа: <b>{$platform}</b>
-     Источники: <b>{$source}</b>
+     Источник: <b>{$source}</b>
 
      ГЕО: {$geo}
 
@@ -120,7 +120,7 @@ USER-IOS_APPS = Доступные IOS Приложения:
 USER-DESC_TEMPLATE = Имя: <b>{$name_url}</b>
 
      Платформа: <b>{$platform}</b>
-     Источники: <b>{$source}</b>
+     Источник: <b>{$source}</b>
 
      ГЕО: {$geo}
 
@@ -151,4 +151,27 @@ FLOW-OFFER_LINK_ERROR = Внимание! Ссылка должна быть с 
      Например https://example.site/test?asdpg={$subid} – это минимальный пример!
 FLOW-FLOW_SUCCESS_CREATED=Поток успешно создан, желаем качественного трафика!
      <code>{$flow}</code>
-FLOW-FLOW_FAIL_CREATED = Не удалось создать поток, перешлите админу это сообщение
+FLOW-FLOW_FAIL_CREATED = Не удалось создать поток ({$error}), перешлите админу это сообщение
+
+FLOW-MY_FLOWS = Мои потоки
+FLOW-DETAIL_FLOW = <b>Ваша рабочая ссылка:</b>
+     <code>{$link_keitaro}</code>
+
+     =========================================
+     <b>ID:</b> {$id}
+     <b>Дата создания: </b> {$date}
+
+     <b>Приложение:</b> {$app_name}
+     <b>Платформа:</b> {$platform}
+     <b>Источник:</b> {$source}
+     <b>Статус приложения:</b> {$status}
+
+     <b>Домен:</b> <code>{$domain}</code>
+     <b>Ваш оффер\трекер:</b> <code>{$link_user}</code>
+
+     <b>Pixel ID:</b> {$pixel}
+     <b>Token:</b> {$token}
+
+     <b>ГЕО:</b> {$geo}
+
+     ⚠️Чтобы открыть ГЕО, свяжитесь с сапортом⚠️

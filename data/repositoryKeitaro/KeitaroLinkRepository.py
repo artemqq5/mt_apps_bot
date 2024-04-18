@@ -2,10 +2,11 @@ import json
 
 import requests
 
-from data.DefaultKeitaroRepository import DefaultKeitaroRepository
+from data.DefaultKeitaro import DefaultKeitaro
+from data.repositoryKeitaro.model.KeitaroLinkResponse import KeitaroLinkResponse
 
 
-class KeitaroLinkRepository(DefaultKeitaroRepository):
+class KeitaroLink(DefaultKeitaro):
 
     # Клонує кампанію по шаблону з Keitaro Client Company (36)
     def _clone_campaign(self):
@@ -98,7 +99,7 @@ class KeitaroLinkRepository(DefaultKeitaroRepository):
     # Оновлюємо клоновану кампанію
     # Оновлюємо оффер в потоку клонованої кампанії на той що ми створили
     # Повертаємо користувачу лінку з 33 кампанії з підставленими параметрами усіх попередніх генерацій
-    def generate_link_keitaro(self, data, access) -> str | None:
+    def generate_link_keitaro(self, data, access) -> KeitaroLinkResponse | None:
         clone_campaign = self._clone_campaign()
 
         if not clone_campaign:
@@ -107,7 +108,7 @@ class KeitaroLinkRepository(DefaultKeitaroRepository):
 
         create_offer = self._create_offer(
             offer_url=data['offer_link'],
-            name=KeitaroLinkRepository._generate_offer_name(
+            name=KeitaroLink._generate_offer_name(
                 user_id=access['user_id'],
                 team_id=access['team_id'],
                 team_name=access['team_name'],
@@ -121,7 +122,7 @@ class KeitaroLinkRepository(DefaultKeitaroRepository):
 
         update_campaign = self._update_campaign(
             campaign_id=clone_campaign.json()[0]['id'],
-            name=KeitaroLinkRepository._generate_campaign_name(
+            name=KeitaroLink._generate_campaign_name(
                 user_id=access['user_id'],
                 team_id=access['team_id'],
                 team_name=access['team_name'],
@@ -150,8 +151,17 @@ class KeitaroLinkRepository(DefaultKeitaroRepository):
             bundle_sub30=data['bundle']
         )
 
-        if not create_offer:
-            print(f"generate_link_keitaro (generate_client_link) | {generate_client_link.text}")
-            return
-
-        return generate_client_link
+        return KeitaroLinkResponse(
+            link_user=data['offer_link'],
+            link_keitaro=generate_client_link,
+            user_id=access['user_id'],
+            pixel=data['pixel'],
+            token=data['token'],
+            campain_id=update_campaign.json()['id'],
+            campaign_name=update_campaign.json()['name'],
+            offer_id=create_offer.json()['id'],
+            offer_name=create_offer.json()['name'],
+            domain=self._domain_server,
+            bundle=data['bundle'],
+            comment=data.get('comment', None)
+        )
