@@ -102,12 +102,10 @@ async def add_start_over(message: types.Message, state: FSMContext, i18n: I18nCo
 
 
 def preview_app(data, i18n) -> str:
-    return i18n.APP.DESC_TEMPLATE(
+    return i18n.USER.DESC_TEMPLATE(
         name_url=hlink(data['name'], data['url']),
-        id=data['id'],
         platform=data['platform'],
         source=data['source'],
-        status=DRAFT_APP_STATUS,
         geo=data['geo'],
         desc=data['desc']
     )

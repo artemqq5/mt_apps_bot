@@ -58,6 +58,7 @@ BANNED_STATUS_APP = Бан
 
 DELETE_APP = Видалити додаток
 
+# user
 USER-PIXEL_FB = Пікесль FB
 USER-ADD_PIXEL_FB = Додати новий пікесль
 USER-SHOW_MY_PIXELS = Мої пікселі
@@ -66,4 +67,13 @@ USER-DELETE_PIXEL = Видалити Pixel
 
 USER-CREATE_APP_LINK = Створити лінку
 
+# flow
 FLOW-CALL_ADMIN = Чат з підтримкою
+
+# notify
+NOTIFY-NOTIFICATION = Розсилка
+NOTIFY-CATEGORY_USERS = Активовані користувачі
+NOTIFY-CATEGORY_NO_USERS = Не активовані користувачі
+NOTIFY-CATEGORY_ALL_USERS = Всі користувачі (за винятком адмінів)
+
+

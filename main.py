@@ -29,7 +29,7 @@ dp.include_routers(
 
 
 async def main():
-    logging.basicConfig(level=logging.ERROR)
+    logging.basicConfig(level=config.BOT_CONFIG_LOGGING)
     default_properties = DefaultBotProperties(parse_mode=ParseMode.HTML)
     bot = Bot(token=config.BOT_TOKEN, default=default_properties)
 

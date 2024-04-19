@@ -8,6 +8,7 @@ from data.constants.access import Trial_TEAM, Basic_TEAM, Standard_TEAM, Premium
 kb_menu_admin = ReplyKeyboardMarkup(keyboard=[
     [KeyboardButton(text=L.APPS())],
     [KeyboardButton(text=L.TEAMS())],
+    [KeyboardButton(text=L.NOTIFY.NOTIFICATION())],
     [KeyboardButton(text=L.BAN_SYSTEM())],
     [KeyboardButton(text=L.SETTINGS())],
 ])
@@ -121,4 +122,11 @@ class ChangeAppStatus(CallbackData, prefix="change*status*app"):
 kb_status_app = InlineKeyboardMarkup(inline_keyboard=[
     [InlineKeyboardButton(text=L.ACTIVE_STATUS_APP(), callback_data=ChangeAppStatus(status=ACTIVE_APP_STATUS).pack())],
     [InlineKeyboardButton(text=L.BANNED_STATUS_APP(), callback_data=ChangeAppStatus(status=BANNED_APP_STATUS).pack())],
+])
+
+kb_notification = ReplyKeyboardMarkup(keyboard=[
+    [KeyboardButton(text=L.NOTIFY.CATEGORY_USERS())],
+    [KeyboardButton(text=L.NOTIFY.CATEGORY_NO_USERS())],
+    [KeyboardButton(text=L.NOTIFY.CATEGORY_ALL_USERS())],
+    [KeyboardButton(text=L.CANCEL())]
 ])

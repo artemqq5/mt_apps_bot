@@ -59,12 +59,20 @@ BANNED_STATUS_APP = Бан
 
 DELETE_APP = Удалить приложение
 
+#user
 USER-PIXEL_FB = Пикесль FB
 USER-ADD_PIXEL_FB = Добавить новый пикесль
-USER-SHOW_MY_PIXELS = Мои пиксели
+USER-SHOW_MY_PIXELS=Мои пиксели
 
 USER-DELETE_PIXEL = Удалить Pixel
 
-USER-CREATE_APP_LINK = Создать линку
+USER-CREATE_APP_LINK = Создать ссылку
 
+# flow
 FLOW-CALL_ADMIN = Чат с поддержкой
+
+# notify
+NOTIFY-NOTIFICATION = Рассылка
+NOTIFY-CATEGORY_USERS = Активированные пользователи
+NOTIFY-CATEGORY_NO_USERS=Неактивированные пользователи
+NOTIFY-CATEGORY_ALL_USERS = Все пользователи (за исключением админов)

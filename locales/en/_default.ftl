@@ -175,3 +175,6 @@ FLOW-DETAIL_FLOW = <b>Your working link:</b>
      <b>GEO:</b> {$geo}
 
      ⚠️To open GEO, contact support⚠️
+
+# notification
+NOTIFY-CATEGORY = Select a category for notification
