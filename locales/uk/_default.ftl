@@ -35,6 +35,8 @@ JOIN_KEY_ACTIVATED_BEFORE = Ключ був активований раніше!
 JOIN_KEY_FAIL_UPDATE = Якась помилка. Ключ команди не встановлено
 JOIN_KEY_SUCCESS_UPDATE = Ключ команди встановлено успішно!
 
+ACCESS_TEAM_NAME = Доступи ({$team})
+
 # team (create, team list, delete, change status, domain limit) ===========================================================
 INPUT_TEAM_NAME = Введіть назву команди:
 TEAM_NAME_TOO_LONG = Назва команди занадто довга. Надіслати повідомлення до 255 символів

@@ -95,7 +95,7 @@ def kb_user_flows(flows) -> InlineKeyboardMarkup:
     inline_kb = []
     for flow in flows:
         inline_kb.append(
-            [InlineKeyboardButton(text=f"{flow['id']} | {flow['domain']}",
+            [InlineKeyboardButton(text=f"#{flow['id']} | {flow['domain']}",
                                   callback_data=FlowShowKeyboard(id=flow['id']).pack())]
         )
 

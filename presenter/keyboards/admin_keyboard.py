@@ -27,6 +27,21 @@ kb_teams = ReplyKeyboardMarkup(keyboard=[
 ])
 
 
+class TeamShowCallback(CallbackData, prefix="teams*show*keyboard"):
+    id: int
+
+
+def kb_show_teams(teams) -> InlineKeyboardMarkup:
+    inline_kb = []
+    for team in teams:
+        inline_kb.append(
+            [InlineKeyboardButton(text=f"#{team['team_id']} | {team['team_name']}",
+                                  callback_data=TeamShowCallback(id=team['team_id']).pack())]
+        )
+
+    return InlineKeyboardMarkup(inline_keyboard=inline_kb)
+
+
 def kb_team_managment(team_id):
     return InlineKeyboardMarkup(inline_keyboard=[
         [InlineKeyboardButton(text=L.DELETE_TEAM(), callback_data=f"{team_id}*CALLBACK*DELETETEAM")],
@@ -142,3 +157,18 @@ kb_notify_preview = ReplyKeyboardMarkup(keyboard=[
     [KeyboardButton(text=L.NOTIFY.SEND())],
     [KeyboardButton(text=L.CANCEL())]
 ])
+
+
+class AccessShowCallback(CallbackData, prefix="access*show*keyboard"):
+    uuid_: str
+
+
+def kb_show_access(accesses) -> InlineKeyboardMarkup:
+    inline_kb = []
+    for access in accesses:
+        inline_kb.append(
+            [InlineKeyboardButton(text=f"#{access['user_id']} | {access['uuid_']}",
+                                  callback_data=AccessShowCallback(uuid_=access['uuid_']).pack())]
+        )
+
+    return InlineKeyboardMarkup(inline_keyboard=inline_kb)

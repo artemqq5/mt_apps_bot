@@ -6,10 +6,11 @@ from aiogram_i18n import I18nContext, L
 from config import LINK_TO_BOT
 from data.constants.access import ACCESS_STATUS_LIST
 from data.repositoryDB.AccessRepository import AccessRepository
+from data.repositoryDB.TeamRepository import TeamRepository
 from data.repositoryDB.UserRepository import UserRepository
 from domain.states.admin.team_.AccessManagment import AccessManagmentState
 from presenter.keyboards.admin_keyboard import kb_teams, kb_team_access_managment, kb_delete, \
-    kb_access_change_status
+    kb_access_change_status, kb_show_access, AccessShowCallback
 
 router = Router()
 
@@ -32,22 +33,31 @@ async def get_user_template(user_id):
 @router.callback_query(F.data.contains("ACCESSTEAM"))
 async def callback_team_access(callback: CallbackQuery, state: FSMContext, i18n: I18nContext):
     team_id = callback.data.split("*CALLBACK*")[0]
+    team = TeamRepository().get_team_by_id(team_id)
     access_list = AccessRepository().get_access_by_team_id(team_id)
 
     if not access_list:
         await callback.message.answer(i18n.TEAM_HAVENT_ACCESS(), reply_markup=kb_teams)
         return
 
-    for access in access_list:
-        user_template = await get_user_template(access.get('user_id'))
+    await callback.message.answer(i18n.ACCESS_TEAM_NAME(team=team['team_name']),
+                                  reply_markup=kb_show_access(access_list))
 
-        access_template = (f"deeplink: <code>{LINK_TO_BOT}?start={access['uuid_']}</code>\n\n"
-                           f"Created: {access['created_at']}\n"
-                           f"Activated: {access['activated']}\n"
-                           f"Access status: {access['status']}{user_template}")
 
-        await callback.message.answer(access_template,
-                                      reply_markup=kb_team_access_managment(access['uuid_']))
+@router.callback_query(AccessShowCallback.filter())
+async def team_access_detail(callback: CallbackQuery, i18n: I18nContext, state: FSMContext):
+    uuid_ = callback.data.split(":")[1]
+    access = AccessRepository().get_access_by_uuid(uuid_)
+
+    user_template = await get_user_template(access.get('user_id'))
+
+    access_template = (f"deeplink: <code>{LINK_TO_BOT}?start={access['uuid_']}</code>\n\n"
+                       f"Created: {access['created_at']}\n"
+                       f"Activated: {access['activated']}\n"
+                       f"Access status: {access['status']}{user_template}")
+
+    await callback.message.answer(access_template,
+                                  reply_markup=kb_team_access_managment(access['uuid_']))
 
 
 @router.callback_query(F.data.contains("DELETEACCESS"))

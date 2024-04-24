@@ -35,6 +35,8 @@ JOIN_KEY_ACTIVATED_BEFORE = Key had activated before!
 JOIN_KEY_FAIL_UPDATE = Some error. Team key was not set
 JOIN_KEY_SUCCESS_UPDATE = Team key was set successfully!
 
+ACCESS_TEAM_NAME = Access({$team})
+
 # team (create, team list, delete, change status, domain limit) ===========================================================
 INPUT_TEAM_NAME = Enter a team name:
 TEAM_NAME_TOO_LONG = Team name is too long. Send message up to 255 symbols
