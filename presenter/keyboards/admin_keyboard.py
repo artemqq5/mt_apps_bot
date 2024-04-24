@@ -34,6 +34,7 @@ def kb_team_managment(team_id):
         [InlineKeyboardButton(text=L.ACCESS_TEAM(), callback_data=f"{team_id}*CALLBACK*ACCESSTEAM")],
         [InlineKeyboardButton(text=L.CHANGE_STATUS(), callback_data=f"{team_id}*CALLBACK*CHANGESTATUSTEAM")],
         [InlineKeyboardButton(text=L.DOMAIN_LIMIT(), callback_data=f"{team_id}*CALLBACK*DOMAINLIMIT")],
+        [InlineKeyboardButton(text=L.TEAM_MESSAGING(), callback_data=f"{team_id}*CALLBACK*TEAMMESSAGING")],
     ])
 
 

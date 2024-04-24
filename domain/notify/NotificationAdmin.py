@@ -12,7 +12,7 @@ class NotificationAdmin:
 
         for user in users:
             try:
-                await bot.send_message(chat_id=user['telegram_id'], text=message)
+                await bot.send_message(chat_id=user, text=message)
                 counter += 1
             except Exception as e:
                 print(f"{error_message}: {e}")
@@ -28,6 +28,6 @@ class NotificationAdmin:
     # Розсилка адмінам про те що у певної команди закінчився денний ліміт доменів
     async def daily_domains_limit_over(self, bot: Bot, i18n: I18nContext, team_name):
         message = i18n.ADMIN.NOTIFICATION.DOMAIN_LIMIT_WAS_OVER(team=team_name)
-        users = UserRepository().get_admins()
+        users = [user['telegram_id'] for user in UserRepository().get_admins() if user['banned'] == 0]
         await self.__notify_list_text(bot, users, message, "domain limit over")
 

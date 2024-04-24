@@ -3,6 +3,7 @@ from aiogram.fsm.context import FSMContext
 from aiogram.types import CallbackQuery
 from aiogram_i18n import I18nContext, L
 
+from config import LINK_TO_BOT
 from data.constants.access import ACCESS_STATUS_LIST
 from data.repositoryDB.AccessRepository import AccessRepository
 from data.repositoryDB.UserRepository import UserRepository
@@ -40,7 +41,7 @@ async def callback_team_access(callback: CallbackQuery, state: FSMContext, i18n:
     for access in access_list:
         user_template = await get_user_template(access.get('user_id'))
 
-        access_template = (f"deeplink: <code>t.me/mt_rent_apps_bot?start={access['uuid_']}</code>\n\n"
+        access_template = (f"deeplink: <code>{LINK_TO_BOT}?start={access['uuid_']}</code>\n\n"
                            f"Created: {access['created_at']}\n"
                            f"Activated: {access['activated']}\n"
                            f"Access status: {access['status']}{user_template}")

@@ -45,10 +45,12 @@ class NotificationUser:
     # Стандартна розсилка користувачам
     async def default_messaging_users(self, bot: Bot, i18n: I18nContext, data):
         if data['category'] == i18n.NOTIFY.CATEGORY_NO_USERS():
-            users = [user['telegram_id'] for user in UserRepository().get_users_no_team()]
+            users = [user['telegram_id'] for user in UserRepository().get_users_no_team() if user['banned'] == 0]
         elif data['category'] == i18n.NOTIFY.CATEGORY_USERS():
-            users = [user['telegram_id'] for user in UserRepository().get_users_in_team()]
+            users = [user['telegram_id'] for user in UserRepository().get_users_in_team() if user['banned'] == 0]
+        elif data['category'] == i18n.TEAM_MESSAGING():
+            users = [user['user_id'] for user in AccessRepository().get_team_users(data['team_id']) if user['banned'] == 0]
         else:
-            users = [user['telegram_id'] for user in UserRepository().get_users()]
+            users = [user['telegram_id'] for user in UserRepository().get_users() if user['banned'] == 0]
 
         return await self.__notify_list_any(bot, users, data, "default user message", i18n)

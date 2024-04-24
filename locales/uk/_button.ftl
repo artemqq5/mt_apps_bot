@@ -19,6 +19,7 @@ GENERATE_JOIN_KEY = Створити ключ приєднання
 ACCESS_TEAM = Доступи
 DOMAIN_LIMIT = Ліміт доменів
 CANCEL_DOAMIN_LIMIT = Прибрати ліміт доменів
+TEAM_MESSAGING = Розсилка учасникам
 
 BAN_SYSTEM = Система банів
 BAN_USER_CATEGORY = Забанити користувача

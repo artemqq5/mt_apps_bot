@@ -20,6 +20,7 @@ GENERATE_JOIN_KEY = Сгенерировать deeplink
 ACCESS_TEAM = Доступы
 DOMAIN_LIMIT = Лимит доменов
 CANCEL_DOAMIN_LIMIT = Убрать лимит доменов
+TEAM_MESSAGING = Рассылка участникам
 
 BAN_SYSTEM = Система банов
 BAN_USER_CATEGORY = Заблокировать пользователя

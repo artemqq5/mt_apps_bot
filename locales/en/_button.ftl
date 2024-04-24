@@ -20,7 +20,7 @@ GENERATE_JOIN_KEY = Generate join key
 ACCESS_TEAM = Accesses
 DOMAIN_LIMIT = Domains limit
 CANCEL_DOAMIN_LIMIT = Cancel domains limit
-
+TEAM_MESSAGING = Messaging to members
 
 BAN_SYSTEM = Ban system
 BAN_USER_CATEGORY = Ban user

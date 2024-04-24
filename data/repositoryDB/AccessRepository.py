@@ -17,6 +17,10 @@ class AccessRepository(DefaultDataBase):
         query = "SELECT * FROM `access` WHERE `user_id` = %s;"
         return self._select_one(query, (user_id,))
 
+    def get_team_users(self, team_id):
+        query = "SELECT * FROM `access` WHERE `team_id` = %s AND `user_id` IS NOT NULL;"
+        return self._select(query, (team_id,))
+
     def activate_access(self, access_uuid, user_id, date_activated):
         query = "UPDATE `access` SET `activated` = %s, `user_id` = %s WHERE `uuid_` = %s;"
         return self._update(query, (date_activated, user_id, access_uuid))
