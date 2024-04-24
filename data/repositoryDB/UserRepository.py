@@ -1,4 +1,5 @@
 from data.DefaultDataBase import DefaultDataBase
+from data.constants.access import ADMIN
 
 
 class UserRepository(DefaultDataBase):
@@ -17,9 +18,13 @@ class UserRepository(DefaultDataBase):
         query = "SELECT `banned` FROM `users` WHERE `telegram_id` = %s;"
         return self._select_one(query, (telegram_id,))
 
-    def is_admin(self, telegram_id):
+    def user_role_by_id(self, telegram_id):
         query = "SELECT `role` FROM `users` WHERE `telegram_id` = %s;"
         return self._select_one(query, (telegram_id,))
+
+    def get_admins(self):
+        query = "SELECT * FROM `users` WHERE `role` = %s;"
+        return self._select(query, (ADMIN,))
 
     def ban_user_by_id(self, telegram_id, ban_message=None):
         query = "UPDATE `users` SET `banned` = 1, `ban_message` = %s WHERE `telegram_id` = %s;"

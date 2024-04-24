@@ -28,3 +28,7 @@ class TeamRepository(DefaultDataBase):
     def update_team_status(self, team_status, team_id):
         query = "UPDATE `teams` SET `status` = %s WHERE `team_id` = %s;"
         return self._update(query, (team_status, team_id))
+
+    def update_team_doamin_limit(self, team_id, limit):
+        query = "UPDATE `teams` SET `limit` = %s WHERE `team_id` = %s;"
+        return self._update(query, (limit, team_id))

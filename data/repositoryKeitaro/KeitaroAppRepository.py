@@ -9,7 +9,7 @@ class KeitaroApp(DefaultKeitaro):
 
     # При додаванні прілки, створює поток в кампанії Onelink MT AppsLinks (50)
     def create_flow_app(self, flow_url, flow_name, sub30):
-        create_flow_url = f"https://{self._domain_server}/admin_api/v1/streams"
+        create_flow_url = f"{self._base_url}/streams"
         data = json.dumps({
             "type": "regular",
             "name": flow_name,

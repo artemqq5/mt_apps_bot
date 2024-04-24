@@ -22,7 +22,7 @@ class UserRoleMiddleware(BaseMiddleware):
 
         user_id = event.from_user.id
 
-        if not UserRepository().is_admin(user_id)['role'] == self.role:
+        if not UserRepository().user_role_by_id(user_id)['role'] == self.role:
             return
 
         return await handler(event, data)

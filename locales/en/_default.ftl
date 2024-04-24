@@ -35,7 +35,7 @@ JOIN_KEY_ACTIVATED_BEFORE = Key had activated before!
 JOIN_KEY_FAIL_UPDATE = Some error. Team key was not set
 JOIN_KEY_SUCCESS_UPDATE = Team key was set successfully!
 
-# team (create, team list, delete, change status) ===========================================================
+# team (create, team list, delete, change status, domain limit) ===========================================================
 INPUT_TEAM_NAME = Enter a team name:
 TEAM_NAME_TOO_LONG = Team name is too long. Send message up to 255 symbols
 ERROR_CREATE_TEAM = Some error when try create team, try again
@@ -54,6 +54,10 @@ CHOICE_NEW_STATUS_TEAM = Choice new team status for <b>{$team_name}</b>
 SUCCESSFUL_CHANGE_STATUS_TEAM = Successfully change status for <b>({$team_name})</b>. new status: <b>{$status}</b>
 ERROR_CHANGE_STATUS_TEAM = Error change team status
     <code>{$error}</code>
+
+NEW_DOMAIN_LIMIT = New domain limit for team:
+SET_LIMIT_SUCCESS = New daily limit ({$limit}) successfully set
+SET_LIMIT_FAIL = Error setting new limit
 
 # ban system ================================================================================
 BANNED_USERS_EMPTY = Empty
@@ -175,6 +179,13 @@ FLOW-DETAIL_FLOW = <b>Your working link:</b>
      <b>GEO:</b> {$geo}
 
      ⚠️To open GEO, contact support⚠️
+FLOW-HAVNT_FREE_DOMAINS = There are no free domains, a message has been sent to the admin, they will be replenished soon!
+FLOW-DOMAIN_LIMIT_OVER = Daily domain limit for your team exceeded ({$limit})
+     To increase the daily limit, write to support
 
 # notification
 NOTIFY-CATEGORY = Select a category for notification
+
+#admin notification
+ADMIN-NOTIFICATION-HAVENT_DOMAIN = 🆘 Domains have run out 🆘
+    Urgently replenish the domains in keitaro so that users can create links Onelink!!!

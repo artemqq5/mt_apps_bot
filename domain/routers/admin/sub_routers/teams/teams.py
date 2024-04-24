@@ -6,7 +6,8 @@ from aiogram.utils.formatting import Text, Bold
 from aiogram_i18n import I18nContext, L
 
 from data.repositoryDB.TeamRepository import TeamRepository
-from domain.routers.admin.sub_routers.teams import delete_team_, generate_deeplink_, change_status_team_, access_team_
+from domain.routers.admin.sub_routers.teams import delete_team_, generate_deeplink_, change_status_team_, access_team_, \
+    domain_limit_
 from domain.states.admin.team_.CreateTeam import CreateTeamState
 from presenter.keyboards._keyboard import kb_cancel
 from presenter.keyboards.admin_keyboard import kb_teams, kb_team_managment
@@ -16,7 +17,8 @@ router.include_routers(
     delete_team_.router,
     generate_deeplink_.router,
     change_status_team_.router,
-    access_team_.router
+    access_team_.router,
+    domain_limit_.router
 )
 
 
@@ -54,8 +56,9 @@ async def show_teams(message: types.Message, state: FSMContext, i18n: I18nContex
         team_template = Text(
             "ID: ", team['team_id'], "\n",
             "Team: ", Bold(team['team_name']), "\n",
-            "Status: ", team['status'], "\n",
-            "Created at: ", team['created_at']
+            "Domains Limit: ", Bold(team['limit']), "\n",
+            "Status: ", Bold(team['status']), "\n",
+            "Created at: ", Bold(team['created_at'])
         )
 
         await message.answer(**team_template.as_kwargs(), reply_markup=kb_team_managment(team['team_id']))

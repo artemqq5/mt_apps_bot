@@ -33,6 +33,7 @@ def kb_team_managment(team_id):
         [InlineKeyboardButton(text=L.GENERATE_JOIN_KEY(), callback_data=f"{team_id}*CALLBACK*GENERATEJOINKEY")],
         [InlineKeyboardButton(text=L.ACCESS_TEAM(), callback_data=f"{team_id}*CALLBACK*ACCESSTEAM")],
         [InlineKeyboardButton(text=L.CHANGE_STATUS(), callback_data=f"{team_id}*CALLBACK*CHANGESTATUSTEAM")],
+        [InlineKeyboardButton(text=L.DOMAIN_LIMIT(), callback_data=f"{team_id}*CALLBACK*DOMAINLIMIT")],
     ])
 
 
@@ -130,3 +131,9 @@ kb_notification = ReplyKeyboardMarkup(keyboard=[
     [KeyboardButton(text=L.NOTIFY.CATEGORY_ALL_USERS())],
     [KeyboardButton(text=L.CANCEL())]
 ])
+
+kb_domain_limit = ReplyKeyboardMarkup(keyboard=[
+    [KeyboardButton(text=L.CANCEL_DOAMIN_LIMIT())],
+    [KeyboardButton(text=L.CANCEL())]
+])
+

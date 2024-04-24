@@ -17,6 +17,8 @@ DELETE_TEAM = Видалити команду
 CHANGE_STATUS = Змінити статус
 GENERATE_JOIN_KEY = Створити ключ приєднання
 ACCESS_TEAM = Доступи
+DOMAIN_LIMIT = Ліміт доменів
+CANCEL_DOAMIN_LIMIT = Прибрати ліміт доменів
 
 BAN_SYSTEM = Система банів
 BAN_USER_CATEGORY = Забанити користувача
@@ -75,5 +77,4 @@ NOTIFY-NOTIFICATION = Розсилка
 NOTIFY-CATEGORY_USERS = Активовані користувачі
 NOTIFY-CATEGORY_NO_USERS = Не активовані користувачі
 NOTIFY-CATEGORY_ALL_USERS = Всі користувачі (за винятком адмінів)
-
 

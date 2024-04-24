@@ -18,6 +18,8 @@ DELETE_TEAM = Удалить команду
 CHANGE_STATUS = Изменить статус
 GENERATE_JOIN_KEY = Сгенерировать deeplink
 ACCESS_TEAM = Доступы
+DOMAIN_LIMIT = Лимит доменов
+CANCEL_DOAMIN_LIMIT = Убрать лимит доменов
 
 BAN_SYSTEM = Система банов
 BAN_USER_CATEGORY = Заблокировать пользователя

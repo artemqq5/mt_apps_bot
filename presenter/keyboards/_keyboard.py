@@ -37,7 +37,7 @@ kb_languages = InlineKeyboardMarkup(inline_keyboard=[
 
 
 def keyboard_access(from_user_id) -> ReplyKeyboardMarkup:
-    if UserRepository().is_admin(from_user_id)['role'] == ADMIN:
+    if UserRepository().user_role_by_id(from_user_id)['role'] == ADMIN:
         return kb_menu_admin
     else:
         try:
