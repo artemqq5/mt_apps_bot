@@ -15,7 +15,7 @@ from data.repositoryDB.PixelRepository import PixelRepository
 from data.repositoryDB.TeamRepository import TeamRepository
 from data.repositoryKeitaro.KeitaroLinkRepository import KeitaroLink
 from data.repositoryKeitaro.usecase.domains.KeitaroDomainUseCase import KeitaroDomainUseCase
-from domain.notify.NotificationDefault import NotificationDefault
+from domain.notify.NotificationAdmin import NotificationAdmin
 from domain.states.user.flow_.CreateFlow import CreateFlowState
 from presenter.keyboards._keyboard import kb_cancel, kb_skip
 from presenter.keyboards.user_keyboard import AppCreateLinkKeyboard, pixel_choice_keyboard_list, \
@@ -41,12 +41,12 @@ async def create_link_handler(callback: CallbackQuery, bot: Bot, i18n: I18nConte
     limit = DomainRepository().check_domain_limit(team_id)
     if limit['COUNT(*)'] >= team['limit']:
         await callback.message.answer(i18n.FLOW.DOMAIN_LIMIT_OVER(limit=limit['COUNT(*)']), reply_markup=kb_call_admin)
-        await NotificationDefault().daily_domains_limit_over(bot, i18n, team['team_name'])
+        await NotificationAdmin().daily_domains_limit_over(bot, i18n, team['team_name'])
         return
 
     if not DomainRepository().check_free_domain():
         await callback.message.answer(i18n.FLOW.HAVNT_FREE_DOMAINS(), reply_markup=kb_menu_user)
-        await NotificationDefault().domain_havnt_admins(bot, i18n)
+        await NotificationAdmin().domain_havnt_admins(bot, i18n)
         return
 
     await state.set_state(CreateFlowState.ChoicePixelFB)
@@ -87,7 +87,7 @@ async def offer_link(message: Message, i18n: I18nContext, state: FSMContext, bot
     # Перевіряємо поточні ліміти команди
     if limit['COUNT(*)'] >= team['limit']:
         await message.answer(i18n.FLOW.DOMAIN_LIMIT_OVER(limit=limit['COUNT(*)']), reply_markup=kb_call_admin)
-        await NotificationDefault().daily_domains_limit_over(bot, i18n, team['team_name'])
+        await NotificationAdmin().daily_domains_limit_over(bot, i18n, team['team_name'])
         return
 
     domain = DomainRepository().check_free_domain()
@@ -96,7 +96,7 @@ async def offer_link(message: Message, i18n: I18nContext, state: FSMContext, bot
     if not domain:
         await state.clear()
         await message.answer(i18n.FLOW.HAVNT_FREE_DOMAINS(), reply_markup=kb_menu_user)
-        await NotificationDefault().domain_havnt_admins(bot, i18n)
+        await NotificationAdmin().domain_havnt_admins(bot, i18n)
         return
 
     await state.update_data(offer_link=message.text)

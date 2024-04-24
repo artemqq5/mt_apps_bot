@@ -185,7 +185,21 @@ FLOW-DOMAIN_LIMIT_OVER = Daily domain limit for your team exceeded ({$limit})
 
 # notification
 NOTIFY-CATEGORY = Select a category for notification
+NOTIFY-MESSAGE = Enter the message text:
+NOTIFY-MEDIA = Send photo\gif\video in compressed format (not file)
+NOTIFY-BUTTON_URL = Enter the URL for the button:
+NOTIFY-BUTTON_URL_VALIDATION = Link must start with https://
+NOTIFY-BUTTON_TEXT = Enter the text for the button (up to 50 characters):
+NOTIFY-BUTTON_TEXT_LIMIT = up to 50 characters:
+NOTIFY-PREVIEW = If everything is correct, send to users, they will receive exactly the same message
+NOTIFY-RESULT = <b>=== Notification result ===</b>
+
+     <b>{$get}\{$users}</b> - received your messages
+
+     <b>Mistakes by other users:</b>
+     {$error_messaging_list}
 
 #admin notification
 ADMIN-NOTIFICATION-HAVENT_DOMAIN = 🆘 Domains have run out 🆘
     Urgently replenish the domains in keitaro so that users can create links Onelink!!!
+ADMIN-NOTIFICATION-DOMAIN_LIMIT_WAS_OVER = Team ({$team}) has reached its daily domain limit and wants to create a new link 🤷‍♂️

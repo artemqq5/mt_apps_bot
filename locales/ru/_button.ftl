@@ -64,7 +64,7 @@ DELETE_APP = Удалить приложение
 #user
 USER-PIXEL_FB = Пикесль FB
 USER-ADD_PIXEL_FB = Добавить новый пикесль
-USER-SHOW_MY_PIXELS=Мои пиксели
+USER-SHOW_MY_PIXELS = Мои пиксели
 
 USER-DELETE_PIXEL = Удалить Pixel
 
@@ -75,6 +75,8 @@ FLOW-CALL_ADMIN = Чат с поддержкой
 
 # notify
 NOTIFY-NOTIFICATION = Рассылка
-NOTIFY-CATEGORY_USERS = Активированные пользователи
-NOTIFY-CATEGORY_NO_USERS=Неактивированные пользователи
-NOTIFY-CATEGORY_ALL_USERS = Все пользователи (за исключением админов)
+NOTIFY-CATEGORY_USERS = В Команде
+NOTIFY-CATEGORY_NO_USERS = Без команды
+NOTIFY-CATEGORY_ALL_USERS = Все (за исключением админов)
+NOTIFY-DEFAULT_BUTTON_TEXT = Открыть
+NOTIFY-SEND = Отправить

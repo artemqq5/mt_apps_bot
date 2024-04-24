@@ -74,7 +74,9 @@ FLOW-CALL_ADMIN = Чат з підтримкою
 
 # notify
 NOTIFY-NOTIFICATION = Розсилка
-NOTIFY-CATEGORY_USERS = Активовані користувачі
-NOTIFY-CATEGORY_NO_USERS = Не активовані користувачі
-NOTIFY-CATEGORY_ALL_USERS = Всі користувачі (за винятком адмінів)
+NOTIFY-CATEGORY_USERS = В Команді
+NOTIFY-CATEGORY_NO_USERS = Без команди
+NOTIFY-CATEGORY_ALL_USERS = Всі (за винятком адмінів)
+NOTIFY-DEFAULT_BUTTON_TEXT = Відкрити
+NOTIFY-SEND = Відправити
 

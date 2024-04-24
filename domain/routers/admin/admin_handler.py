@@ -15,6 +15,7 @@ from domain.routers.admin.sub_routers.bun import ban_system
 from domain.routers.admin.sub_routers.notification import notify_
 from domain.routers.common_route_ import localization_
 from domain.routers.admin.sub_routers.teams import teams
+from domain.states.admin.notify.NotificateUser import NotificateUserState
 from presenter.keyboards._keyboard import kb_settings
 from presenter.keyboards.admin_keyboard import kb_menu_admin, kb_ban_system, kb_teams, kb_apps, kb_notification
 
@@ -54,7 +55,8 @@ async def teams_menu(message: types.Message, i18n: I18nContext):
 
 
 @router.message(F.text == L.NOTIFY.NOTIFICATION())
-async def notify(message: types.Message, i18n: I18nContext):
+async def notify(message: types.Message, i18n: I18nContext, state: FSMContext):
+    await state.set_state(NotificateUserState.Category)
     await message.answer(i18n.NOTIFY.CATEGORY(), reply_markup=kb_notification)
 
 
@@ -66,4 +68,3 @@ async def ban_menu(message: types.Message, i18n: I18nContext):
 @router.message(F.text == L.SETTINGS(), IsAdminFilter(True))
 async def settings(message: types.Message, i18n: I18nContext):
     await message.answer(i18n.SETTINGS(), reply_markup=kb_settings)
-

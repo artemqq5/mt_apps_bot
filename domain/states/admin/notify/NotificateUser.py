@@ -5,5 +5,6 @@ class NotificateUserState(StatesGroup):
     Category = State()
     Message = State()
     Media = State()
-    Button = State()
+    ButtonText = State()
+    ButtonUrl = State()
     Preview = State()

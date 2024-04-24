@@ -76,6 +76,8 @@ FLOW-CALL_ADMIN = Chat with support
 
 # notify
 NOTIFY-NOTIFICATION = Mailing
-NOTIFY-CATEGORY_USERS = Activated users
-NOTIFY-CATEGORY_NO_USERS = Not activated users
-NOTIFY-CATEGORY_ALL_USERS = All users (except admins)
+NOTIFY-CATEGORY_USERS = In Team
+NOTIFY-CATEGORY_NO_USERS = No command
+NOTIFY-CATEGORY_ALL_USERS = All (except admins)
+NOTIFY-DEFAULT_BUTTON_TEXT = Open
+NOTIFY-SEND = Send

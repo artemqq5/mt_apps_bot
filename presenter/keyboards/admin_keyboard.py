@@ -137,3 +137,7 @@ kb_domain_limit = ReplyKeyboardMarkup(keyboard=[
     [KeyboardButton(text=L.CANCEL())]
 ])
 
+kb_notify_preview = ReplyKeyboardMarkup(keyboard=[
+    [KeyboardButton(text=L.NOTIFY.SEND())],
+    [KeyboardButton(text=L.CANCEL())]
+])
