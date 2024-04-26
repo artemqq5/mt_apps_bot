@@ -24,7 +24,7 @@ class UserRegistationMiddleware(BaseMiddleware):
                 return None
 
             await event.bot.send_message(chat_id=user.id, text=data['i18n'].REGISTER_SUCCESS())
-            await event.bot.send_message(chat_id=user.id, text=data['i18n'].SEND_REQUEST_TO_ADMIN())
+            await event.bot.send_message(chat_id=user.id, text=data['i18n'].SEND_REQUEST_ADMIN())
 
         return await handler(event, data)
 

@@ -30,7 +30,11 @@ async def create_link_handler(callback: CallbackQuery, bot: Bot, i18n: I18nConte
     KeitaroDomainUseCase().domains_update_db()
 
     id_ = callback.data.split(":")[1]
-    app = AppRepository().get_app_by_id(id_)
+    app = AppRepository().get_app_by_id_for_users(id_)
+
+    if not app:
+        return  # додаток не доступний
+
     pixels = PixelRepository().get_all_pixels(callback.from_user.id)
     if len(pixels) < 1:
         await callback.message.answer(i18n.FLOW.HAVENT_PIXEL_FB(), reply_markup=kb_create_pixelfb)
