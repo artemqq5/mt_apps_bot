@@ -3,6 +3,7 @@ from aiogram.fsm.context import FSMContext
 from aiogram.types import CallbackQuery
 from aiogram_i18n import I18nContext, L
 
+from data.repositoryDB.AccessRepository import AccessRepository
 from data.repositoryDB.TeamRepository import TeamRepository
 from domain.states.admin.team_.TeamManagment import TeamManagmentState
 from presenter.keyboards.admin_keyboard import kb_delete, kb_teams
@@ -33,6 +34,8 @@ async def approve_delete_team(message: types.Message, state: FSMContext, i18n: I
 
         if not TeamRepository().delete_team(data['team_id']):
             raise Exception
+
+        AccessRepository().delete_all_access_by_team_id(data['team_id'])
 
         await state.clear()
         await message.answer(i18n.SUCCESSFUL_DELETE_TEAM(team_name=data['team_name']), reply_markup=kb_teams)

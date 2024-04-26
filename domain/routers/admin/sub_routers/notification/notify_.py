@@ -32,7 +32,7 @@ async def category_notify_category(message: Message, i18n: I18nContext, state: F
 
 @router.message(NotificateUserState.Message)
 async def message_notify(message: Message, i18n: I18nContext, state: FSMContext):
-    await state.update_data(message=message.text)
+    await state.update_data(message=message.html_text)
     await state.set_state(NotificateUserState.Media)
     await message.answer(i18n.NOTIFY.MEDIA(), reply_markup=kb_skip)
 

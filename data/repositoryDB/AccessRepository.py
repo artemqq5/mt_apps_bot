@@ -33,6 +33,10 @@ class AccessRepository(DefaultDataBase):
         query = "DELETE FROM `access` WHERE `uuid_` = %s;"
         return self._delete(query, (access_uuid, ))
 
+    def delete_all_access_by_team_id(self, team_id):
+        query = "DELETE FROM `access` WHERE `team_id` = %s;"
+        return self._delete(query, (team_id,))
+
     def update_access_status(self, access_uuid, access_status):
         query = "UPDATE `access` SET `status` = %s WHERE `uuid_` = %s;"
         return self._update(query, (access_status, access_uuid))
