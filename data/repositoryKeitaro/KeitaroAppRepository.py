@@ -29,6 +29,17 @@ class KeitaroApp(DefaultKeitaro):
                         sub30
                     ]
                 }
+            ],
+            "triggers": [
+                {
+                    "condition": "not_respond",
+                    "target": "stream",
+                    "action": "webhook",
+                    "grab_from_page": f"{self._webhook_base_url}/flows?bundle={sub30}",
+                    "interval": "1",
+                    "reverse": "true",
+                    "scan_page": "true"
+                }
             ]
         })
 
