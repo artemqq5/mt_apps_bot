@@ -49,7 +49,7 @@ class NotificationUser:
         elif data['category'] == i18n.NOTIFY.CATEGORY_USERS():
             users = [user['telegram_id'] for user in UserRepository().get_users_in_team() if user['banned'] == 0]
         elif data['category'] == i18n.TEAM_MESSAGING():
-            users = [user['user_id'] for user in AccessRepository().get_team_users(data['team_id']) if user['banned'] == 0]
+            users = [user['telegram_id'] for user in UserRepository().get_users_by_team_id(data['team_id']) if user['banned'] == 0]
         else:
             users = [user['telegram_id'] for user in UserRepository().get_users() if user['banned'] == 0]
 

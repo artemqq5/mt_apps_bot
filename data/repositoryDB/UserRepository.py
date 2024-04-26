@@ -22,6 +22,10 @@ class UserRepository(DefaultDataBase):
         query = "SELECT u.* FROM `users` u LEFT JOIN `access` a ON u.`telegram_id` = a.`user_id` WHERE a.`user_id` IS NOT NULL AND u.`role` = %s;"
         return self._select(query, (USER,))
 
+    def get_users_by_team_id(self, team_id):
+        query = "SELECT u.* FROM `users` u LEFT JOIN `access` a ON u.`telegram_id` = a.`user_id` WHERE a.`user_id` IS NOT NULL AND u.`role` = %s AND `team_id` = %s;"
+        return self._select(query, (USER, team_id))
+
     def get_users_no_team(self):
         query = "SELECT u.* FROM `users` u LEFT JOIN `access` a ON u.`telegram_id` = a.`user_id` WHERE a.`user_id` IS NULL AND u.`role` = %s;"
         return self._select(query, (USER,))
