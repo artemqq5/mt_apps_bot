@@ -26,9 +26,6 @@ class UserRepository(DefaultDataBase):
         query = "SELECT u.* FROM `users` u LEFT JOIN `access` a ON u.`telegram_id` = a.`user_id` WHERE a.`user_id` IS NULL AND u.`role` = %s;"
         return self._select(query, (USER,))
 
-    def get_users_by_team(self, team_id):
-        query = "SELECT "
-
     def is_banned(self, telegram_id):
         query = "SELECT `banned` FROM `users` WHERE `telegram_id` = %s;"
         return self._select_one(query, (telegram_id,))

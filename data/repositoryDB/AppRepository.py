@@ -1,4 +1,5 @@
 from data.DefaultDataBase import DefaultDataBase
+from data.constants.access import BANNED_APP_STATUS
 
 
 class AppRepository(DefaultDataBase):
@@ -26,8 +27,8 @@ class AppRepository(DefaultDataBase):
         return self._update(query, (status, app_id))
 
     def delete_app_by_id(self, app_id):
-        query = "UPDATE `apps` SET `visibility` = 0 WHERE `id` = %s;"
-        return self._update(query, (app_id,))
+        query = "UPDATE `apps` SET `visibility` = 0, `status` = %s WHERE `id` = %s;"
+        return self._update(query, (BANNED_APP_STATUS, app_id))
 
     #  USERS =======================================================================================================
 
