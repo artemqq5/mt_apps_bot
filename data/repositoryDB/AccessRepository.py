@@ -40,3 +40,5 @@ class AccessRepository(DefaultDataBase):
     def update_access_status(self, access_uuid, access_status):
         query = "UPDATE `access` SET `status` = %s WHERE `uuid_` = %s;"
         return self._update(query, (access_status, access_uuid))
+
+
