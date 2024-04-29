@@ -6,7 +6,7 @@ from aiogram_i18n import I18nContext
 from data.constants.access import BANNED_APP_STATUS, ACTIVE_APP_STATUS
 from data.repositoryDB.AppRepository import AppRepository
 from data.repositoryDB.FlowRepository import FlowRepository
-from presenter.keyboards.user_keyboard import FlowShowKeyboard, kb_flow_edit, kb_call_admin
+from presenter.keyboards.user_keyboard import FlowShowKeyboard, kb_flow_edit
 
 router = Router()
 
@@ -43,5 +43,5 @@ async def show_flow_detail(callback: CallbackQuery, i18n: I18nContext, state: FS
             date=flow['created_at'],
             geo=app['geo']
         ),
-        reply_markup=kb_call_admin
+        reply_markup=kb_flow_edit(id_)
     )

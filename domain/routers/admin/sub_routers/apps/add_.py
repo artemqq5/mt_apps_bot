@@ -79,6 +79,11 @@ async def add_preview(message: types.Message, state: FSMContext, i18n: I18nConte
 async def add_publish(message: types.Message, state: FSMContext, i18n: I18nContext):
     data = await state.get_data()
 
+    if AppRepository().get_app_by_bundle_keitaro_for_users(bundle=data['bundle']):
+        await state.clear()
+        await message.answer(i18n.APP.ALREADY_ADDED(), reply_markup=kb_apps)
+        return
+
     response = KeitaroAppRepository().create_flow_app(
         flow_url=data['url'], flow_name=data['name'], sub30=data['bundle']
     )
