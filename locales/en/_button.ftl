@@ -81,3 +81,9 @@ NOTIFY-CATEGORY_NO_USERS = No command
 NOTIFY-CATEGORY_ALL_USERS = All (except admins)
 NOTIFY-DEFAULT_BUTTON_TEXT = Open
 NOTIFY-SEND = Send
+
+# edit flows
+FLOW-EDIT-APP = Replace App
+FLOW-EDIT-OFFER = Edit offer
+FLOW-EDIT-PIXEL = Replace Pixel
+FLOW-EDIT-COMMENT = Edit Comment

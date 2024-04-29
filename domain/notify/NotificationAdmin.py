@@ -22,7 +22,7 @@ class NotificationAdmin:
     # Розсилка адмінам про те що домени закінчилися
     async def domain_havnt_admins(self, bot: Bot, i18n: I18nContext):
         message = i18n.ADMIN.NOTIFICATION.HAVENT_DOMAIN()
-        users = UserRepository().get_admins()
+        users = [user['telegram_id'] for user in UserRepository().get_admins() if user['banned'] == 0]
         await self.__notify_list_text(bot, users, message, "domain havent")
 
     # Розсилка адмінам про те що у певної команди закінчився денний ліміт доменів

@@ -88,6 +88,7 @@ APP-SET_IMAGE = An image for the application has been sent (not a file):
 APP-SET_GEO = Specify open geo, for example (UA, AL, BR):
 APP-SET_SOURCE = Specify which source the application is targeting:
 APP-SET_DESC = Your comment\description:
+APP-DEFAULT_DESC = To open GEO, contact support
 APP-PREVIEW = Preview, see if everything is correct and publish Draft or go back to the beginning. ⚠️⚠️⚠️
 
 APP-SUCCESS_PUBLISHED = You have successfully created an app with the status (Draft), so that it can be seen by other users, you need to activate it (change the status to Active)
@@ -180,7 +181,7 @@ FLOW-DETAIL_FLOW = <b>Your working link:</b>
 
      <b>GEO:</b> {$geo}
 
-     ⚠️To open GEO, contact support⚠️
+     ⚠️ To open GEO, contact support ⚠️
 FLOW-HAVNT_FREE_DOMAINS = There are no free domains, a message has been sent to the admin, they will be replenished soon!
 FLOW-DOMAIN_LIMIT_OVER = Daily domain limit for your team exceeded ({$limit})
      To increase the daily limit, write to support

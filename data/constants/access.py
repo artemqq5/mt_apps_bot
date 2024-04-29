@@ -18,7 +18,7 @@ ACCESS_STATUS_LIST = (Byer_ACCESS, TeamLead_ACCESS)
 # states for apps
 DRAFT_APP_STATUS = "Draft"
 ACTIVE_APP_STATUS = "Active"
-BANNED_APP_STATUS = "Bunned"
+BANNED_APP_STATUS = "Banned"
 
 APP_STATUS_LIST = (ACTIVE_APP_STATUS, BANNED_APP_STATUS)
 
@@ -26,5 +26,8 @@ MACROS = "{subid}"
 
 # source app
 ONELINK = "onelink"
+
+# desc localization
+DEFAULT_DESC = "default"
 
 

@@ -3,11 +3,11 @@ from aiogram.fsm.context import FSMContext
 from aiogram.utils.markdown import hlink
 from aiogram_i18n import L, I18nContext
 
-from data.constants.access import DRAFT_APP_STATUS, ONELINK
+from data.constants.access import DRAFT_APP_STATUS, ONELINK, DEFAULT_DESC
 from data.repositoryDB.AppRepository import AppRepository
-from data.repositoryKeitaro.KeitaroAppRepository import KeitaroApp
+from data.repositoryKeitaro.KeitaroAppRepository import KeitaroAppRepository
 from domain.states.admin.apps_.AddApplication import AddAplicationState
-from presenter.keyboards._keyboard import kb_apps_platform, kb_cancel
+from presenter.keyboards._keyboard import kb_apps_platform, kb_cancel, kb_skip
 from presenter.keyboards.admin_keyboard import kb_preview, kb_apps, kb_source
 
 router = Router()
@@ -60,13 +60,16 @@ async def add_source(message: types.Message, state: FSMContext, i18n: I18nContex
 async def add_desc(message: types.Message, state: FSMContext, i18n: I18nContext):
     await state.set_state(AddAplicationState.Desc)
     await state.update_data(source=message.text)
-    await message.answer(i18n.APP.SET_DESC(), reply_markup=kb_cancel)
+    await message.answer(i18n.APP.SET_DESC(), reply_markup=kb_skip)
 
 
 @router.message(AddAplicationState.Desc)
 async def add_preview(message: types.Message, state: FSMContext, i18n: I18nContext):
     await state.set_state(AddAplicationState.PreView)
     await state.update_data(desc=message.text)
+    if message.text == i18n.SKIP():
+        await state.update_data(desc=DEFAULT_DESC)
+
     data = await state.get_data()
     await message.answer_photo(photo=data['photo'], caption=preview_app(data, i18n))
     await message.answer(i18n.APP.PREVIEW(), reply_markup=kb_preview)
@@ -76,7 +79,7 @@ async def add_preview(message: types.Message, state: FSMContext, i18n: I18nConte
 async def add_publish(message: types.Message, state: FSMContext, i18n: I18nContext):
     data = await state.get_data()
 
-    response = KeitaroApp().create_flow_app(
+    response = KeitaroAppRepository().create_flow_app(
         flow_url=data['url'], flow_name=data['name'], sub30=data['bundle']
     )
     if not response:
@@ -107,7 +110,7 @@ def preview_app(data, i18n) -> str:
         platform=data['platform'],
         source=data['source'],
         geo=data['geo'],
-        desc=data['desc']
+        desc=(i18n.APP.DEFAULT_DESC() if data['desc'] == DEFAULT_DESC else data['desc'])
     )
 
 

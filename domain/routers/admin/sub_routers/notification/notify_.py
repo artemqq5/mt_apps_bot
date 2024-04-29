@@ -1,21 +1,12 @@
-from doctest import SKIP
-
-from aiogram import Router, F, types, Bot
+from aiogram import Router, F, Bot
 from aiogram.fsm.context import FSMContext
-from aiogram.types import CallbackQuery, Message
-from aiogram.utils.markdown import hlink
+from aiogram.types import Message
 from aiogram_i18n import L, I18nContext
-from aiogram_i18n.types import InlineKeyboardMarkup, InlineKeyboardButton, ReplyKeyboardRemove
 
-from data.repositoryDB.AppRepository import AppRepository
-from domain.filters.isAdminFilter import IsAdminFilter
 from domain.notify.NotificationUser import NotificationUser
-from domain.routers.admin.sub_routers.apps.manage import change_geo_, change_status_, delete_app_
-from domain.states.admin.apps_.ShowApplication import ShowApplicationState
 from domain.states.admin.notify.NotificateUser import NotificateUserState
-from presenter.keyboards._keyboard import kb_apps_platform, kb_cancel, kb_skip
-from presenter.keyboards.admin_keyboard import kb_apps, kb_managment_app, kb_notify_preview, kb_menu_admin
-from presenter.keyboards.user_keyboard import apps_keyboard_list, AppKeyboardList
+from presenter.keyboards._keyboard import kb_cancel, kb_skip
+from presenter.keyboards.admin_keyboard import kb_notify_preview, kb_menu_admin
 
 router = Router()
 

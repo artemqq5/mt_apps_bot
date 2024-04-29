@@ -4,6 +4,7 @@ from aiogram.types import CallbackQuery
 from aiogram.utils.markdown import hlink
 from aiogram_i18n import L, I18nContext
 
+from data.constants.access import DEFAULT_DESC
 from data.repositoryDB.AppRepository import AppRepository
 from domain.filters.isAdminFilter import IsAdminFilter
 from domain.routers.admin.sub_routers.apps.manage import change_geo_, change_status_, delete_app_
@@ -53,7 +54,7 @@ async def show_application_detail(callback: CallbackQuery, state: FSMContext, i1
             source=app['source'],
             geo=app['geo'],
             status=app['status'],
-            desc=app['desc']
+            desc=(i18n.APP.DEFAULT_DESC() if app['desc'] == DEFAULT_DESC else app['desc'])
         ),
         reply_markup=kb_managment_app(app['id'])
     )

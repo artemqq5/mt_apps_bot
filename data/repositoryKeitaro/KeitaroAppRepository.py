@@ -5,7 +5,7 @@ import requests
 from data.DefaultKeitaro import DefaultKeitaro
 
 
-class KeitaroApp(DefaultKeitaro):
+class KeitaroAppRepository(DefaultKeitaro):
 
     # При додаванні прілки, створює поток в кампанії Onelink MT AppsLinks (50)
     def create_flow_app(self, flow_url, flow_name, sub30):
@@ -48,3 +48,14 @@ class KeitaroApp(DefaultKeitaro):
             print(f"create_flow_app {response.text}")
 
         return response
+
+    def _get_all_apps_flow(self):
+        get_all_flows = f"{self._base_url}/campaigns/{self._campaign_app_id}/streams"
+
+        response = requests.get(get_all_flows, headers=self._headers)
+        if not response:
+            print(f"_get_all_apps_flow {response.text}")
+            return None
+
+        return response
+

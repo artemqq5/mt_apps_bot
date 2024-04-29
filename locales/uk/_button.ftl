@@ -81,3 +81,8 @@ NOTIFY-CATEGORY_ALL_USERS = Всі (за винятком адмінів)
 NOTIFY-DEFAULT_BUTTON_TEXT = Відкрити
 NOTIFY-SEND = Відправити
 
+# edit flows
+FLOW-EDIT-APP = Замінити додаток
+FLOW-EDIT-OFFER = Редагувати оффер
+FLOW-EDIT-PIXEL = Замінити Pixel
+FLOW-EDIT-COMMENT = Редагувати коментар

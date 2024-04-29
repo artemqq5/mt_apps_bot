@@ -4,7 +4,9 @@ from aiogram.types import CallbackQuery
 from aiogram.utils.markdown import hlink
 from aiogram_i18n import L, I18nContext
 
+from data.constants.access import DEFAULT_DESC
 from data.repositoryDB.AppRepository import AppRepository
+from data.repositoryKeitaro.usecase.domains.KeitaroAppUseCase import KeitaroAppUseCase
 from domain.states.user.apps_.ShowApps import ShowAppsState
 from presenter.keyboards.user_keyboard import apps_keyboard_list, AppKeyboardList, kb_menu_user, kb_create_app_link
 
@@ -13,6 +15,8 @@ router = Router()
 
 @router.message(ShowAppsState.Show, F.text.in_((L.IOS(),)))  # L.ANDROID(), L.PWA()
 async def show_applications(message: types.Message, state: FSMContext, i18n: I18nContext):
+    # KeitaroAppUseCase().check_available_apps()  # Перевіряємо чи не видалили з кейтаро додаток
+
     applications = AppRepository().show_apps_by_platform_for_users(message.text)
     if not applications:
         await message.answer(i18n.APP.APP_LIST_EMPTY(), reply_markup=kb_menu_user)
@@ -35,6 +39,6 @@ async def detail_app_handler(callback: CallbackQuery, state: FSMContext, i18n: I
             platform=app['platform'],
             source=app['source'],
             geo=app['geo'],
-            desc=app['desc']
+            desc=(i18n.APP.DEFAULT_DESC() if app['desc'] == DEFAULT_DESC else app['desc'])
         ), reply_markup=kb_create_app_link(app['id'])
     )

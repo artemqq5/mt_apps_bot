@@ -6,6 +6,10 @@ class AppRepository(DefaultDataBase):
     def __init__(self):
         super().__init__()
 
+    def get_all_apps(self):
+        query = "SELECT * FROM `apps` WHERE `visibility` = 1 AND `status` != %s;"
+        return self._select(query, (BANNED_APP_STATUS,))
+
     def get_app_by_id(self, app_id):
         query = "SELECT * FROM `apps` WHERE `id` = %s AND `visibility` = 1;"
         return self._select_one(query, (app_id,))
