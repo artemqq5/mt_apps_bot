@@ -87,3 +87,4 @@ FLOW-EDIT-APP = Replace App
 FLOW-EDIT-OFFER = Edit offer
 FLOW-EDIT-PIXEL = Replace Pixel
 FLOW-EDIT-COMMENT = Edit Comment
+FLOW-EDIT-BACK = Return to flow

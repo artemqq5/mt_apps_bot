@@ -131,3 +131,14 @@ def kb_flow_edit(flow_id) -> InlineKeyboardMarkup:
         [InlineKeyboardButton(text=L.FLOW.EDIT.COMMENT(), callback_data=EditFlowComment(id=flow_id).pack())],
         [InlineKeyboardButton(text=L.FLOW.CALL_ADMIN(), url=LINK_TO_SUPPORT)],
     ])
+
+
+def kb_flow_back_edit(flow_id) -> InlineKeyboardMarkup:
+    return InlineKeyboardMarkup(inline_keyboard=[
+        [InlineKeyboardButton(text=L.FLOW.EDIT.BACK(), callback_data=FlowShowKeyboard(id=flow_id).pack())],
+        [InlineKeyboardButton(text=L.FLOW.EDIT.APP(), callback_data=EditFlowApp(id=flow_id).pack())],
+        [InlineKeyboardButton(text=L.FLOW.EDIT.OFFER(), callback_data=EditFlowOffer(id=flow_id).pack())],
+        [InlineKeyboardButton(text=L.FLOW.EDIT.PIXEL(), callback_data=EditFlowPixel(id=flow_id).pack())],
+        [InlineKeyboardButton(text=L.FLOW.EDIT.COMMENT(), callback_data=EditFlowComment(id=flow_id).pack())],
+        [InlineKeyboardButton(text=L.FLOW.CALL_ADMIN(), url=LINK_TO_SUPPORT)],
+    ])

@@ -150,7 +150,7 @@ USER-PIXEL_INFO = Pixel ID: <code>{$pixel_id}</code>
 USER-SUCCESS_DELETE_PIXEL = Pixel успішно видалено з бібліотеки
 USER-FAIL_DELETE_PIXEL = Не вдалося видалити pixel
 
-# flow user (create, show)
+# flow user (create, show, edit)
 FLOW-SELECT_PIXEL_FB = Оберіть ваш піксель для потоку:
 FLOW-HAVENT_PIXEL_FB = У вас немає створених пікселів, бажаєте створити?
 FLOW-COMMENT = Додайте коментар до потоку
@@ -182,10 +182,16 @@ FLOW-DETAIL_FLOW = <b>Ваша робоча лінка:</b>
 
     <b>ГЕО:</b> {$geo}
 
+    <b>Коментар:</b> {$comment}
+
      ⚠️ Щоб відкрити ГЕО зв'яжіться з сапортом ⚠️
 FLOW-HAVNT_FREE_DOMAINS = Немає вільних доменів, адміну відправлено повідомлення, скоро їх поповнять!
 FLOW-DOMAIN_LIMIT_OVER = Перевищено денний ліміт доменів на вашу команду ({$limit})
     Щоб збільшити денний ліміт, напишіть у підтримку
+
+FLOW-EDIT-INPUT_NEW_COMMENT = Введіть новий коментар до потоку:
+FLOW-EDIT-INPUT_NEW_COMMENT_SUCCESS = Комент до потоку успішно оновлено!
+FLOW-EDIT-INPUT_NEW_COMMENT_FAIL = Не вийшло оновити комент, напишіть у підтримку
 
 # notification
 NOTIFY-CATEGORY = Оберіть категорію для розсилки

@@ -151,6 +151,7 @@ USER-PIXEL_INFO = Pixel ID: <code>{$pixel_id}</code>
 USER-SUCCESS_DELETE_PIXEL = Pixel successfully deleted from library
 USER-FAIL_DELETE_PIXEL = Failed to delete pixel
 
+# flow user (create, show, edit)
 FLOW-SELECT_PIXEL_FB = Select your pixel for flow:
 FLOW-HAVENT_PIXEL_FB = You have no created pixels, want to create one?
 FLOW-COMMENT = Add a comment to the flow
@@ -182,10 +183,16 @@ FLOW-DETAIL_FLOW = <b>Your working link:</b>
 
      <b>GEO:</b> {$geo}
 
+     <b>Comment:</b> {$comment}
+
      ⚠️ To open GEO, contact support ⚠️
 FLOW-HAVNT_FREE_DOMAINS = There are no free domains, a message has been sent to the admin, they will be replenished soon!
 FLOW-DOMAIN_LIMIT_OVER = Daily domain limit for your team exceeded ({$limit})
      To increase the daily limit, write to support
+
+FLOW-EDIT-INPUT_NEW_COMMENT = Enter a new flow comment:
+FLOW-EDIT-INPUT_NEW_COMMENT_SUCCESS = Flow comment successfully updated!
+FLOW-EDIT-INPUT_NEW_COMMENT_FAIL = Failed to update comment, write to support
 
 # notification
 NOTIFY-CATEGORY = Select a category for notification
