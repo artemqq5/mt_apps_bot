@@ -90,6 +90,7 @@ APP-SET_SOURCE = Specify which source the application is targeting:
 APP-SET_DESC = Your comment\description:
 APP-DEFAULT_DESC = To open GEO, contact support
 APP-PREVIEW = Preview, see if everything is correct and publish Draft or go back to the beginning. ⚠️⚠️⚠️
+APP-ALREADY_ADDED = This app has already been added, check in existing or database
 
 APP-SUCCESS_PUBLISHED = You have successfully created an app with the status (Draft), so that it can be seen by other users, you need to activate it (change the status to Active)
 APP-FAIL_PUBLISHED = Failed to create the application, urgently need to look at the logs before they are lost ({$error})
