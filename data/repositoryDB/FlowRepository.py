@@ -24,3 +24,7 @@ class FlowRepository(DefaultDataBase):
     def get_flows(self, user_id):
         query = "SELECT * FROM `flows` WHERE `user_id` = %s;"
         return self._select(query, (user_id,))
+
+    def update_comment_flow(self, flow_id, comment):
+        query = "UPDATE `flows` SET `comment` = %s WHERE `id` = %s;"
+        return self._update(query, (comment, flow_id))

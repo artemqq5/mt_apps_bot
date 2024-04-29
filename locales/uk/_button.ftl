@@ -86,3 +86,5 @@ FLOW-EDIT-APP = Замінити додаток
 FLOW-EDIT-OFFER = Редагувати оффер
 FLOW-EDIT-PIXEL = Замінити Pixel
 FLOW-EDIT-COMMENT = Редагувати коментар
+FLOW-EDIT-BACK = Повернутись до потоку
+
