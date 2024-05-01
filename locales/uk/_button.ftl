@@ -58,6 +58,7 @@ CHANGE_GEO_APP = Змінити гео
 CHANGE_STATUS_APP = Змінити статус
 ACTIVE_STATUS_APP = Активно
 BANNED_STATUS_APP = Бан
+DRAFT_STATUS_APP = Чорновик
 
 DELETE_APP = Видалити додаток
 

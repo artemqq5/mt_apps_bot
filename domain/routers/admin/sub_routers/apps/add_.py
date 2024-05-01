@@ -3,7 +3,7 @@ from aiogram.fsm.context import FSMContext
 from aiogram.utils.markdown import hlink
 from aiogram_i18n import L, I18nContext
 
-from data.constants.access import DRAFT_APP_STATUS, MASONS_LINK, DEFAULT_DESC
+from data.constants.access import MASONS_LINK, DEFAULT_DESC
 from data.repositoryDB.AppRepository import AppRepository
 from data.repositoryKeitaro.KeitaroAppRepository import KeitaroAppRepository
 from domain.states.admin.apps_.AddApplication import AddAplicationState
@@ -84,8 +84,8 @@ async def add_publish(message: types.Message, state: FSMContext, i18n: I18nConte
         await message.answer(i18n.APP.ALREADY_ADDED(), reply_markup=kb_apps)
         return
 
-    response = KeitaroAppRepository().create_flow_app(
-        flow_url=data['url'], flow_name=data['name'], sub30=data['bundle']
+    response = KeitaroAppRepository().upload_app_keitaro(
+        flow_url=data['url'], flow_name=data['name'], bundle=data['bundle'], app_name=data['name']
     )
     if not response:
         await state.clear()
@@ -93,13 +93,20 @@ async def add_publish(message: types.Message, state: FSMContext, i18n: I18nConte
         return
 
     if not AppRepository().add_app(
-            keitaro_id=response.json()['id'], name=data['name'], url=data['url'], bundle=data['bundle'], image=data['photo'], geo=data['geo'],
-            source=data['source'], platform=data['platform'], desc=data['desc']):
+            keitaro_id=response.flow_app_id, name=data['name'], url=data['url'], bundle=data['bundle'],
+            image=data['photo'], geo=data['geo'], source=data['source'], platform=data['platform'],
+            desc=data['desc'], organic_campaign_id=response.organic_campaign_id,
+            organic_campaign_name=response.organic_campaign_name
+    ):
         await state.clear()
         await message.answer(i18n.APP.FAIL_PUBLISHED(error="DataBase"), reply_markup=kb_apps)
         return
 
-    await message.answer(i18n.APP.SUCCESS_PUBLISHED(), reply_markup=kb_apps)
+    await message.answer(i18n.APP.SUCCESS_PUBLISHED(
+        id=response.organic_campaign_id,
+        name=response.organic_campaign_name,
+        link=response.link_keitaro
+    ), reply_markup=kb_apps)
     await state.clear()
 
 

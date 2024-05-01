@@ -59,6 +59,7 @@ CHANGE_GEO_APP = Change geo
 CHANGE_STATUS_APP = Change status
 ACTIVE_STATUS_APP = Active
 BANNED_STATUS_APP = Ban
+DRAFT_STATUS_APP = Draft
 
 DELETE_APP = Delete app
 
