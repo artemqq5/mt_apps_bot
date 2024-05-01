@@ -30,7 +30,7 @@ def validate_user_link(link: str) -> bool:
 
 
 # source app
-ONELINK = "onelink"
+MASONS_LINK = "masons link"
 
 # desc localization
 DEFAULT_DESC = "default"
