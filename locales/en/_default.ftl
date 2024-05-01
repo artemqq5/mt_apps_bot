@@ -73,7 +73,7 @@ ERROR_BANNED = User not banned correctly
 UNBAN_USER_SUCCESSFUL = User unbanned successfully
 ERROR_UNBANNED = User not unbanned correctly, ID is correctly? Try again
 SHOW_BANNED_USERS_LIST = <b>List of banned users</b>:
-    {$list}
+BANNED_USERS_LIST_EMPTY = <b>No banned users</b>
 
 # settings (locale)
 CHOICE_LANG = Choice lang

@@ -14,20 +14,22 @@ router = Router()
 @router.message(F.text == L.SHOW_BANNED_USERS())
 async def all_banned_users(message: types.Message, i18n: I18nContext):
     list_of_banned_users = UserRepository().list_of_banned_users()
-    body = ""
+
+    if not list_of_banned_users:
+        await message.answer(i18n.BANNED_USERS_LIST_EMPTY(), reply_markup=kb_ban_system)
+    else:
+        await message.answer(i18n.SHOW_BANNED_USERS_LIST(), reply_markup=kb_ban_system)
 
     for user in list_of_banned_users:
         # ban message if exist
         ban_m = f"\nmessage: {user['ban_message']}" if user['ban_message'] else ""
         # create info about banned user
-        body += (f"id: <code>{user['telegram_id']}</code>\n"
-                 f"username: @{user['username']}"
-                 f"{ban_m}\n\n")
+        body = (f"id: <code>{user['telegram_id']}</code>\n"
+                f"username: @{user['username']}"
+                f"{ban_m}\n\n")
+        await message.answer(body)
 
-    if not body:
-        body = i18n.BANNED_USERS_EMPTY()
 
-    await message.answer(i18n.SHOW_BANNED_USERS_LIST(list=body))
 
 
 @router.message(F.text == L.UNBAN_USER_CATEGORY())
@@ -37,7 +39,7 @@ async def unban_user(message: types.Message, state: FSMContext, i18n: I18nContex
 
 
 @router.message(UnbanUserState.UserData)
-async def ban_message(message: types.Message, state: FSMContext, i18n: I18nContext):
+async def unban_(message: types.Message, state: FSMContext, i18n: I18nContext):
     if UserRepository().unban_user_by_id(message.text):
         await message.answer(i18n.UNBAN_USER_SUCCESSFUL(), reply_markup=kb_ban_system)
         await state.clear()
