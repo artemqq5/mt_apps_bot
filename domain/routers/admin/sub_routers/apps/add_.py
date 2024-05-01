@@ -3,7 +3,7 @@ from aiogram.fsm.context import FSMContext
 from aiogram.utils.markdown import hlink
 from aiogram_i18n import L, I18nContext
 
-from data.constants.access import DRAFT_APP_STATUS, ONELINK, DEFAULT_DESC
+from data.constants.access import DRAFT_APP_STATUS, MASONS_LINK, DEFAULT_DESC
 from data.repositoryDB.AppRepository import AppRepository
 from data.repositoryKeitaro.KeitaroAppRepository import KeitaroAppRepository
 from domain.states.admin.apps_.AddApplication import AddAplicationState
@@ -56,7 +56,7 @@ async def add_source(message: types.Message, state: FSMContext, i18n: I18nContex
     await message.answer(i18n.APP.SET_SOURCE(), reply_markup=kb_source)
 
 
-@router.message(AddAplicationState.Source, F.text.in_((ONELINK, )))
+@router.message(AddAplicationState.Source, F.text.in_((MASONS_LINK,)))
 async def add_desc(message: types.Message, state: FSMContext, i18n: I18nContext):
     await state.set_state(AddAplicationState.Desc)
     await state.update_data(source=message.text)
