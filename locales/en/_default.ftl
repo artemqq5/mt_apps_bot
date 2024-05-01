@@ -166,7 +166,7 @@ FLOW-MY_FLOWS = My Flows
 FLOW-DETAIL_FLOW = <b>Your working link:</b>
      <code>{$link_keitaro}</code>
 
-     ========================================
+     ====================================
      <b>ID:</b> {$id}
      <b>Created date: </b> {$date}
 
@@ -190,9 +190,22 @@ FLOW-HAVNT_FREE_DOMAINS = There are no free domains, a message has been sent to 
 FLOW-DOMAIN_LIMIT_OVER = Daily domain limit for your team exceeded ({$limit})
      To increase the daily limit, write to support
 
-FLOW-EDIT-INPUT_NEW_COMMENT = Enter a new flow comment:
-FLOW-EDIT-INPUT_NEW_COMMENT_SUCCESS = Flow comment successfully updated!
-FLOW-EDIT-INPUT_NEW_COMMENT_FAIL = Failed to update comment, write to support
+# COMMENT
+FLOW-EDIT-NEW_COMMENT = Enter a new comment for the flow:
+FLOW-EDIT-NEW_COMMENT_SUCCESS = Flow comment successfully updated!
+FLOW-EDIT-NEW_COMMENT_FAIL = Failed to update comment, write to support
+# PIXEL
+FLOW-EDIT-NEW_PIXEL = Select new PIXEL
+FLOW-EDIT-NEW_PIXEL_SUCCESS = New PIXEL installed successfully
+FLOW-EDIT-NEW_PIXEL_FAIL = Failed to replace your PIXEL ({$error}), try again or write to support, they will help you!
+# OFFER
+FLOW-EDIT-NEW_OFFER = Enter new offer/tracker link:
+FLOW-EDIT-NEW_OFFER_SUCCESS = Your link has been updated!
+FLOW-EDIT-NEW_OFFER_FAIL = Failed to update your link ({$error}), please try again or contact support, they will help you!
+# APPS
+FLOW-EDIT-NEW_APP = Select new app:
+FLOW-EDIT-NEW_APP_SUCCESS = Your app has been replaced!
+FLOW-EDIT-NEW_APP_FAIL = Failed to replace your app ({$error}), try again or write to support, they will help you!
 
 # notification
 NOTIFY-CATEGORY = Select a category for notification
@@ -205,10 +218,10 @@ NOTIFY-BUTTON_TEXT_LIMIT = up to 50 characters:
 NOTIFY-PREVIEW = If everything is correct, send to users, they will receive exactly the same message
 NOTIFY-RESULT = <b>=== Notification result ===</b>
 
-     <b>{$get}\{$users}</b> - received your messages
-
-     <b>Mistakes by other users:</b>
-     {$error_messaging_list}
+    <b>{$get}\{$users}</b> - received your messages
+    ======================
+    Bot blocked: <b>{$block}</b>
+    Other: <b>{$other}</b>
 
 #admin notification
 ADMIN-NOTIFICATION-HAVENT_DOMAIN = 🆘 Domains have run out 🆘

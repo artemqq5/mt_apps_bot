@@ -36,6 +36,10 @@ class AppRepository(DefaultDataBase):
 
     #  USERS =======================================================================================================
 
+    def get_app_by_id_active(self, app_id):
+        query = "SELECT * FROM `apps` WHERE `id` = %s AND `visibility` = 1 AND `status` = 'Active';"
+        return self._select_one(query, (app_id,))
+
     def show_apps_by_platform_for_users(self, platform):
         query = "SELECT * FROM `apps` WHERE `platform` = %s AND `visibility` = 1 AND `status` = 'Active';"
         return self._select(query, (platform,))

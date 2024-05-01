@@ -59,3 +59,29 @@ class KeitaroAppRepository(DefaultKeitaro):
 
         return response
 
+    def update_distribution(self, cmp_id, pixel, sub3, bundle):
+        update_app = f"{self._base_url}/campaigns/{cmp_id}"
+        data = json.dumps({
+            "parameters": {
+                "keyword": {"name": "keyword", "placeholder": "", "alias": ""},
+                "cost": {"placeholder": "", "alias": ""},
+                "currency": {"name": "currency", "placeholder": "", "alias": ""},
+                "external_id": {"name": "external_id", "placeholder": "", "alias": ""},
+                "creative_id": {"name": "creative_id", "placeholder": "", "alias": ""},
+                "ad_campaign_id": {"name": "ad_campaign_id", "placeholder": "", "alias": ""},
+                "source": {"name": "source", "placeholder": "", "alias": ""},
+                "sub_id_1": {"name": "sub1", "placeholder": "{sub1}", "alias": ""},
+                "sub_id_2": {"name": "sub2", "placeholder": "{sub2}", "alias": ""},
+                "sub_id_3": {"name": "sub3", "placeholder": f"{sub3}", "alias": ""},
+                "sub_id_4": {"name": "pixel", "placeholder": f"{pixel}", "alias": ""},
+                "sub_id_5": {"name": "fbclid", "placeholder": "", "alias": ""},
+                "sub_id_6": {"name": "system_id", "placeholder": f"{self._apps_campaign_alias}", "alias": ""},
+                "sub_id_7": {"name": "bundle", "placeholder": f"{bundle}", "alias": ""}
+            }
+        })
+
+        response = requests.put(update_app, data=data, headers=self._headers)
+        if not response:
+            print(f"update_distribution_app {response.text}")
+
+        return response

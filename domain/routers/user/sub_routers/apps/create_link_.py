@@ -6,7 +6,7 @@ from aiogram.fsm.context import FSMContext
 from aiogram.types import CallbackQuery, Message
 from aiogram_i18n import I18nContext
 
-from data.constants.access import MACROS
+from data.constants.access import MACROS, validate_user_link
 from data.repositoryDB.AccessRepository import AccessRepository
 from data.repositoryDB.AppRepository import AppRepository
 from data.repositoryDB.DomainRepository import DomainRepository
@@ -14,7 +14,7 @@ from data.repositoryDB.FlowRepository import FlowRepository
 from data.repositoryDB.PixelRepository import PixelRepository
 from data.repositoryDB.TeamRepository import TeamRepository
 from data.repositoryKeitaro.KeitaroLinkRepository import KeitaroLink
-from data.repositoryKeitaro.usecase.domains.KeitaroDomainUseCase import KeitaroDomainUseCase
+from data.repositoryKeitaro.usecase.KeitaroDomainUseCase import KeitaroDomainUseCase
 from domain.notify.NotificationAdmin import NotificationAdmin
 from domain.states.user.flow_.CreateFlow import CreateFlowState
 from presenter.keyboards._keyboard import kb_cancel, kb_skip
@@ -138,7 +138,8 @@ async def offer_link(message: Message, i18n: I18nContext, state: FSMContext, bot
             offer_name=response.offer_name,
             domain=response.domain,
             bundle=response.bundle,
-            comment=response.comment
+            comment=response.comment,
+            client_alias=response.alias_client_cmp
     ):
         await state.clear()
         await message.answer(i18n.FLOW.FLOW_FAIL_CREATED(error="db"), reply_markup=kb_menu_user)
@@ -148,5 +149,4 @@ async def offer_link(message: Message, i18n: I18nContext, state: FSMContext, bot
     await state.clear()
 
 
-def validate_user_link(link: str) -> bool:
-    return link.startswith("https://") and link.__contains__(MACROS)
+

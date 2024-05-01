@@ -1,4 +1,5 @@
 from aiogram import Bot
+from aiogram.exceptions import TelegramForbiddenError
 from aiogram_i18n import I18nContext
 from aiogram_i18n.types import ReplyKeyboardRemove, InlineKeyboardMarkup, InlineKeyboardButton
 
@@ -11,18 +12,22 @@ class NotificationUser:
     # Розсилка за списком (текс, медіа, кнопка)
     async def __notify_list_any(self, bot: Bot, users, data, error_message, i18n):
         counter = 0
-        error_list = ""
+        block = 0
+        other = 0
 
         for user in users:
             try:
                 await self.generate_message_users(data, bot, user)
                 counter += 1
+            except TelegramForbiddenError as e:
+                block += 1
+                print(f"user({user}) | {error_message}: {e} ")
             except Exception as e:
-                error_list += f"user({user}) - {e}\n"
-                print(f"{error_message}: {e}")
+                other += 1
+                print(f"user({user}) | {error_message}: {e} ")
 
         print(f"notification {error_message}: {counter}/{len(users)}")
-        return i18n.NOTIFY.RESULT(get=str(counter), users=str(len(users)), error_messaging_list=error_list)
+        return i18n.NOTIFY.RESULT(get=str(counter), users=str(len(users)), block=str(block), other=str(other))
 
     @staticmethod  # Розсилка за id (текс, медіа, кнопка)
     async def generate_message_users(data, bot: Bot, user_id):

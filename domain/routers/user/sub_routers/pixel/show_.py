@@ -30,8 +30,8 @@ async def pixel_detail_handler(callback: CallbackQuery, i18n: I18nContext, state
 
     await callback.message.answer(
         i18n.USER.PIXEL_INFO(
-            pixel_id=pixel['pixel_id'],
-            token=pixel['token'],
+            pixel_id=pixel['pixel_fb'],
+            token=pixel['token_fb'],
             date=pixel['created_at']
         ),
         reply_markup=kb_delte_pixel(_id)
