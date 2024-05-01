@@ -20,7 +20,7 @@ def apps_keyboard_list(list_application) -> InlineKeyboardMarkup:
     inline_kb = []
     for app in list_application:
         inline_kb.append(
-            [InlineKeyboardButton(text=app['name'], callback_data=AppKeyboardList(id=app['id']).pack())]
+            [InlineKeyboardButton(text=f"{app['name']} | {app['status']}", callback_data=AppKeyboardList(id=app['id']).pack())]
         )
 
     return InlineKeyboardMarkup(inline_keyboard=inline_kb)
