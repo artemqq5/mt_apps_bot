@@ -92,7 +92,12 @@ APP-DEFAULT_DESC = To open GEO, contact support
 APP-PREVIEW = Preview, see if everything is correct and publish Draft or go back to the beginning. ⚠️⚠️⚠️
 APP-ALREADY_ADDED = This app has already been added, check in existing or database
 
-APP-SUCCESS_PUBLISHED = You have successfully created an app with the status (Draft), so that it can be seen by other users, you need to activate it (change the status to Active)
+APP-SUCCESS_PUBLISHED = You have successfully created an app with the status (Draft) to be seen by other users you need to activate it (change the status to Active).
+
+    <b>Also here is an organic campaign for this app</b>
+    ID: <code>{$id}</code>
+    Name: <code>{$name}</code>
+    Link in Keitaro: <code>{$link}</code>
 APP-FAIL_PUBLISHED = Failed to create the application, urgently need to look at the logs before they are lost ({$error})
 
 APP-CHOICE_PLATFORM = Choose a platform

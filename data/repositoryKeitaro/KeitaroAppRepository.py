@@ -1,14 +1,16 @@
 import json
+import uuid
 
 import requests
 
 from data.DefaultKeitaro import DefaultKeitaro
+from data.repositoryKeitaro.model.KeitaroAppResponse import KeitaroAppResponse
 
 
 class KeitaroAppRepository(DefaultKeitaro):
 
     # При додаванні прілки, створює поток в кампанії Onelink MT AppsLinks (50)
-    def create_flow_app(self, flow_url, flow_name, sub30):
+    def __create_flow_app(self, flow_url, flow_name, sub30):
         create_flow_url = f"{self._base_url}/streams"
         data = json.dumps({
             "type": "regular",
@@ -48,6 +50,65 @@ class KeitaroAppRepository(DefaultKeitaro):
             print(f"create_flow_app {response.text}")
 
         return response
+
+    def __create_organic_campaign_app(self, campaign_name):
+        create_organic_cmp = f"{self._base_url}/campaigns"
+        data = json.dumps({
+            "alias": str(uuid.uuid4())[:8],
+            "name": campaign_name,
+            "group_id": self._group_id_campaign,
+            "uniqueness_method": "ip_ua",
+            "cost_auto": True
+        })
+
+        response = requests.post(create_organic_cmp, data=data, headers=self._headers)
+        if not response:
+            print(f"create_flow_app {response.text}")
+
+        return response
+
+    def __create_white_flow(self, cmp_id):
+        create_white = f"{self._base_url}/streams"
+        data = json.dumps({
+            "campaign_id": cmp_id,
+            "type": "regular",
+            "name": "White",
+            "action_type": "http",
+            "schema": "landings",
+            "offers": [{"offer_id": self._offer_white, "share": "100"}]
+        })
+
+        response = requests.post(create_white, data=data, headers=self._headers)
+        if not response:
+            print(f"create_white {response.text}")
+
+        return response
+
+    def upload_app_keitaro(self, flow_url, flow_name, bundle, app_name) -> KeitaroAppResponse | None:
+        create_flow_app = self.__create_flow_app(flow_url, flow_name, sub30=bundle)
+
+        if not create_flow_app:
+            print(f"create app keitaro (create_flow_app) | {create_flow_app.text}")
+            return
+
+        create_organic_campaign = self.__create_organic_campaign_app(f"Organic | {app_name} | {bundle}")
+
+        if not create_organic_campaign:
+            print(f"create app keitaro (create_organic_app) | {create_organic_campaign.text}")
+            return
+
+        add_white = self.__create_white_flow(create_organic_campaign.json()['id'])
+
+        if not add_white:
+            print(f"create app keitaro (add_white) | {add_white.text}")
+            return
+
+        return KeitaroAppResponse(
+            flow_app_id=create_flow_app.json()['id'],
+            organic_campaign_id=create_organic_campaign.json()['id'],
+            organic_campaign_name=create_organic_campaign.json()['name'],
+            link_keitaro=f"{self._host_link}/admin/#!/campaigns/{create_organic_campaign.json()['id']}"
+        )
 
     def _get_all_apps_flow(self):
         get_all_flows = f"{self._base_url}/campaigns/{self._campaign_app_id}/streams"
