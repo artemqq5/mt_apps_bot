@@ -6,7 +6,6 @@ from aiogram_i18n import L, I18nContext
 
 from data.constants.access import DEFAULT_DESC
 from data.repositoryDB.AppRepository import AppRepository
-from data.repositoryKeitaro.usecase.domains.KeitaroAppUseCase import KeitaroAppUseCase
 from domain.states.user.apps_.ShowApps import ShowAppsState
 from presenter.keyboards.user_keyboard import apps_keyboard_list, AppKeyboardList, kb_menu_user, kb_create_app_link
 

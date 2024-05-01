@@ -19,18 +19,21 @@ async def edit_flow_comment(callback: CallbackQuery, i18n: I18nContext, state: F
     if not flow:
         return  # потока не існує
 
-    await state.set_state(EditCommentFlowState.Comment)
+    await state.set_state(EditCommentFlowState.NewComment)
     await state.update_data(flow_id=id_)
-    await callback.message.answer(i18n.FLOW.EDIT.INPUT_NEW_COMMENT(), reply_markup=kb_cancel)
+    await callback.message.answer(i18n.FLOW.EDIT.NEW_COMMENT(), reply_markup=kb_cancel)
 
 
-@router.message(EditCommentFlowState.Comment)
+@router.message(EditCommentFlowState.NewComment)
 async def set_new_comment(message: Message, state: FSMContext, i18n: I18nContext):
     data = await state.get_data()
     await state.clear()
 
+    if not FlowRepository().get_flow(data['flow_id']):
+        return  # Потока не інує
+
     if not FlowRepository().update_comment_flow(data['flow_id'], message.text):
-        await message.answer(i18n.FLOW.EDIT.INPUT_NEW_COMMENT_FAIL(), reply_markup=kb_flow_back_edit(data['flow_id']))
+        await message.answer(i18n.FLOW.EDIT.NEW_COMMENT_FAIL(), reply_markup=kb_flow_back_edit(data['flow_id']))
         return
 
-    await message.answer(i18n.FLOW.EDIT.INPUT_NEW_COMMENT_SUCCESS(), reply_markup=kb_flow_back_edit(data['flow_id']))
+    await message.answer(i18n.FLOW.EDIT.NEW_COMMENT_SUCCESS(), reply_markup=kb_flow_back_edit(data['flow_id']))

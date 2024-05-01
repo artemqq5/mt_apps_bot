@@ -142,3 +142,31 @@ def kb_flow_back_edit(flow_id) -> InlineKeyboardMarkup:
         [InlineKeyboardButton(text=L.FLOW.EDIT.COMMENT(), callback_data=EditFlowComment(id=flow_id).pack())],
         [InlineKeyboardButton(text=L.FLOW.CALL_ADMIN(), url=LINK_TO_SUPPORT)],
     ])
+
+
+class PixelEditList(CallbackData, prefix="pixel*edit*list"):
+    id: int
+
+
+def pixel_edit_list(pixels) -> InlineKeyboardMarkup:
+    inline_kb = []
+    for p in pixels:
+        inline_kb.append(
+            [InlineKeyboardButton(text=p['pixel_fb'], callback_data=PixelEditList(id=p['id']).pack())]
+        )
+
+    return InlineKeyboardMarkup(inline_keyboard=inline_kb)
+
+
+class AppEditList(CallbackData, prefix="app*edit*list"):
+    id: int
+
+
+def app_edit_list(apps) -> InlineKeyboardMarkup:
+    inline_kb = []
+    for app in apps:
+        inline_kb.append(
+            [InlineKeyboardButton(text=app['name'], callback_data=AppEditList(id=app['id']).pack())]
+        )
+
+    return InlineKeyboardMarkup(inline_keyboard=inline_kb)

@@ -1,19 +1,14 @@
-from datetime import datetime
-
 from aiogram import Router, types, F
 from aiogram.filters import Command
 from aiogram.fsm.context import FSMContext
 from aiogram_i18n import I18nContext, L
 
 from data.constants.access import ADMIN
-from data.repositoryDB.DomainRepository import DomainRepository
-from data.repositoryKeitaro.usecase.domains.KeitaroDomainUseCase import KeitaroDomainUseCase
 from domain.filters.isAdminFilter import IsAdminFilter
 from domain.middlewares.IsUserRole import UserRoleMiddleware
 from domain.routers.admin.sub_routers.apps import add_, show_
 from domain.routers.admin.sub_routers.bun import ban_system
 from domain.routers.admin.sub_routers.notification import notify_
-from domain.routers.common_route_ import localization_
 from domain.routers.admin.sub_routers.teams import teams
 from domain.states.admin.notify.NotificateUser import NotificateUserState
 from presenter.keyboards._keyboard import kb_settings

@@ -228,5 +228,6 @@ class KeitaroLink(DefaultKeitaro):
             offer_name=create_offer.json()['name'],
             domain=data['domain'],
             bundle=data['bundle'],
-            comment=data.get('comment', None)
+            comment=data.get('comment', None),
+            alias_client_cmp=update_campaign_client.json()['alias']
         )

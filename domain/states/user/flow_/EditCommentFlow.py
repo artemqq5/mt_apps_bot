@@ -2,4 +2,4 @@ from aiogram.fsm.state import StatesGroup, State
 
 
 class EditCommentFlowState(StatesGroup):
-    Comment = State()
+    NewComment = State()
