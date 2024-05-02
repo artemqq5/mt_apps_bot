@@ -79,11 +79,17 @@ class KeitaroPixelRepository(DefaultKeitaro):
             pixel=pixel,
             system_id=self._apps_campaign_alias,
             bundle=flow['bundle'],
-            sub3=update_client.json()['alias']
+            sub3=flow['client_alias']
         )
 
         if not update_distribution:
             print(f"update pixel (update_distribution) | {update_distribution.text}")
             return
 
-        return True
+        return self._generate_client_link(
+            client_campaign_alias=flow['client_campaign_id'],
+            pixel=pixel,
+            bundle_sub30=flow['bundle'],
+            domain=flow['domain'],
+            distribution_campaign_alias=flow['distribution_alias']
+        )

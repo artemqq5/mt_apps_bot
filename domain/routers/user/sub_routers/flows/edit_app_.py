@@ -43,17 +43,16 @@ async def choice_new_app(callback: CallbackQuery, i18n: I18nContext, state: FSMC
 
     await state.clear()
 
-    if not KeitaroAppRepository().update_distribution(
-            cmp_id=flow['distribution_campaign_id'], pixel=flow['pixel_fb'],
-            sub3=flow['client_alias'], bundle=app['bundle']
-    ):
+    response = KeitaroAppRepository().update_distribution_app(flow, app)
+
+    if not response:
         await callback.message.answer(
             i18n.FLOW.EDIT.NEW_APP_FAIL(error="keitaro"),
             reply_markup=kb_flow_back_edit(flow['id'])
         )
         return
 
-    if not FlowRepository().update_bundle_flow(flow['id'], app['bundle']):
+    if not FlowRepository().update_bundle_flow(flow['id'], app['bundle'], response):
         await callback.message.answer(
             i18n.FLOW.EDIT.NEW_APP_FAIL(error="db"),
             reply_markup=kb_flow_back_edit(flow['id'])

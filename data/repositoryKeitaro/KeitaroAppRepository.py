@@ -120,7 +120,12 @@ class KeitaroAppRepository(DefaultKeitaro):
 
         return response
 
-    def update_distribution(self, cmp_id, pixel, sub3, bundle):
+    def update_distribution_app(self, flow, app):
+        cmp_id = flow['distribution_campaign_id']
+        pixel = flow['pixel_fb']
+        sub3 = flow['client_alias']
+        bundle = app['bundle']
+
         update_app = f"{self._base_url}/campaigns/{cmp_id}"
         data = json.dumps({
             "parameters": {
@@ -144,5 +149,12 @@ class KeitaroAppRepository(DefaultKeitaro):
         response = requests.put(update_app, data=data, headers=self._headers)
         if not response:
             print(f"update_distribution_app {response.text}")
+            return
 
-        return response
+        return self._generate_client_link(
+            client_campaign_alias=flow['client_campaign_id'],
+            pixel=pixel,
+            bundle_sub30=bundle,
+            domain=flow['domain'],
+            distribution_campaign_alias=flow['distribution_alias']
+        )

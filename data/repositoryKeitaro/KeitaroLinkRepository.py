@@ -104,18 +104,6 @@ class KeitaroLink(DefaultKeitaro):
 
         return response
 
-    # Лінка 33 кампанії яка повертається користувачу
-    def _generate_client_link(self, client_campaign_alias, pixel, bundle_sub30, domain, destribution_campaign_alias):
-        url = (f"https://{domain}/{destribution_campaign_alias}"
-               "?sub1={sub1}"
-               "&sub2={sub2}"
-               f"&sub3={client_campaign_alias}"
-               f"&pixel={pixel}"
-               f"&system_id={self._apps_campaign_alias}"
-               f"&bundle={bundle_sub30}")
-
-        return url
-
     @staticmethod
     def _generate_campaign_client_name(user_id, team_id, team_name, offer_id) -> str:
         return f"{user_id} | {team_name} #{team_id} | offer #{offer_id}"
@@ -211,7 +199,7 @@ class KeitaroLink(DefaultKeitaro):
             pixel=data['pixel'],
             bundle_sub30=data['bundle'],
             domain=data['domain'],
-            destribution_campaign_alias=update_campaign_distribution.json()['alias']
+            distribution_campaign_alias=update_campaign_distribution.json()['alias']
         )
 
         return KeitaroLinkResponse(
@@ -229,5 +217,6 @@ class KeitaroLink(DefaultKeitaro):
             domain=data['domain'],
             bundle=data['bundle'],
             comment=data.get('comment', None),
-            alias_client_cmp=update_campaign_client.json()['alias']
+            alias_client_cmp=update_campaign_client.json()['alias'],
+            distribution_campaign_alias=update_campaign_distribution.json()['alias']
         )
