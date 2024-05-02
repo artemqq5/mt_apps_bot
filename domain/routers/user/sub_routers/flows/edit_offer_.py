@@ -44,14 +44,14 @@ async def change_offer(message: Message, state: FSMContext, i18n: I18nContext):
 
     if not KeitaroOfferRepository().update_offer_url(flow['offer_id'], message.text):
         await message.answer(
-            i18n.FLOW.EDIT.NEW_OFFER_ERROR(error="keitaro"),
+            i18n.FLOW.EDIT.NEW_OFFER_FAIL(error="keitaro"),
             reply_markup=kb_flow_back_edit(flow['id'])
         )
         return
 
     if not FlowRepository().update_offer_flow(flow['id'], message.text):
         await message.answer(
-            i18n.FLOW.EDIT.NEW_OFFER_ERROR(error="db"),
+            i18n.FLOW.EDIT.NEW_OFFER_FAIL(error="db"),
             reply_markup=kb_flow_back_edit(flow['id'])
         )
         return

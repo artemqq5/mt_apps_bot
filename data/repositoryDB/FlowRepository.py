@@ -30,14 +30,14 @@ class FlowRepository(DefaultDataBase):
         query = "UPDATE `flows` SET `comment` = %s WHERE `id` = %s;"
         return self._update(query, (comment, flow_id))
 
-    def update_pixel_flow(self, flow_id, pixel_id, token):
-        query = "UPDATE `flows` SET `pixel_fb` = %s, `token_fb` = %s WHERE `id` = %s;"
-        return self._update(query, (pixel_id, token, flow_id))
+    def update_pixel_flow(self, flow_id, pixel_id, token, link_keitaro):
+        query = "UPDATE `flows` SET `pixel_fb` = %s, `token_fb` = %s, `link_keitaro` = %s WHERE `id` = %s;"
+        return self._update(query, (pixel_id, token, link_keitaro, flow_id))
 
     def update_offer_flow(self, flow_id, offer_url):
         query = "UPDATE `flows` SET `link_user` = %s WHERE `id` = %s;"
         return self._update(query, (offer_url, flow_id))
 
-    def update_bundle_flow(self, flow_id, bundle):
-        query = "UPDATE `flows` SET `bundle` = %s WHERE `id` = %s;"
-        return self._update(query, (bundle, flow_id))
+    def update_bundle_flow(self, flow_id, bundle, link_keitaro):
+        query = "UPDATE `flows` SET `bundle` = %s, `link_keitaro` = %s WHERE `id` = %s;"
+        return self._update(query, (bundle, link_keitaro, flow_id))

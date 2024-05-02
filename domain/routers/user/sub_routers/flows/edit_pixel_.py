@@ -45,11 +45,13 @@ async def choice_new_pixel(callback: CallbackQuery, i18n: I18nContext, state: FS
 
     await state.clear()
 
-    if not KeitaroPixelRepository().update_pixel(flow, pixel['pixel_fb'], pixel['token_fb']):
+    response = KeitaroPixelRepository().update_pixel(flow, pixel['pixel_fb'], pixel['token_fb'])
+
+    if not response:
         await callback.message.answer(i18n.FLOW.EDIT.NEW_PIXEL_FAIL(error="keitaro"), reply_markup=kb_flow_back_edit(data['flow_id']))
         return
 
-    if not FlowRepository().update_pixel_flow(data['flow_id'], pixel['pixel_fb'], pixel['token_fb']):
+    if not FlowRepository().update_pixel_flow(data['flow_id'], pixel['pixel_fb'], pixel['token_fb'], response):
         await callback.message.answer(i18n.FLOW.EDIT.NEW_PIXEL_FAIL(error="db"), reply_markup=kb_flow_back_edit(data['flow_id']))
         return
 
