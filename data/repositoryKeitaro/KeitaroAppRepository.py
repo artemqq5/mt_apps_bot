@@ -158,3 +158,4 @@ class KeitaroAppRepository(DefaultKeitaro):
             domain=flow['domain'],
             distribution_campaign_alias=flow['distribution_alias']
         )
+
