@@ -49,7 +49,7 @@ async def show_flow_detail(callback: CallbackQuery, i18n: I18nContext, state: FS
             token=flow['token_fb'],
             date=flow['created_at'],
             geo=app['geo'],
-            comment=flow['comment']
+            comment=str(flow['comment'])
         ),
         reply_markup=kb_flow_edit(id_)
     )

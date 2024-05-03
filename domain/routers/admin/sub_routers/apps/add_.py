@@ -37,7 +37,8 @@ async def add_bundle(message: types.Message, state: FSMContext, i18n: I18nContex
 async def add_image(message: types.Message, state: FSMContext, i18n: I18nContext):
     await state.set_state(AddAplicationState.Image)
     data = await state.get_data()
-    await state.update_data(bundle=message.text)
+    sub_name = ''.join(filter(str.isalnum, data['name'].lower()))
+    await state.update_data(bundle=f"{message.text}{sub_name}")
     await state.update_data(url=generate_url(message.text, data['platform'], i18n))
     await message.answer(i18n.APP.SET_IMAGE(), reply_markup=kb_cancel)
 

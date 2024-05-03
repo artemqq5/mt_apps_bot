@@ -70,7 +70,7 @@ async def choice_pixel(callback: CallbackQuery, i18n: I18nContext, state: FSMCon
 
 @router.message(CreateFlowState.CommentFlow)
 async def comment_flow(message: Message, i18n: I18nContext, state: FSMContext):
-    if message.text != SKIP:
+    if message.text != i18n.SKIP():
         await state.update_data(comment=message.text)
 
     await state.set_state(CreateFlowState.LinkOffer)
@@ -139,7 +139,8 @@ async def offer_link(message: Message, i18n: I18nContext, state: FSMContext, bot
             domain=response.domain,
             bundle=response.bundle,
             comment=response.comment,
-            client_alias=response.alias_client_cmp
+            client_alias=response.alias_client_cmp,
+            distribution_alias=response.distribution_campaign_alias
     ):
         await state.clear()
         await message.answer(i18n.FLOW.FLOW_FAIL_CREATED(error="db"), reply_markup=kb_menu_user)
