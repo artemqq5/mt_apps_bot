@@ -94,6 +94,8 @@ APP-ALREADY_ADDED = This app has already been added, check in existing or databa
 
 APP-SUCCESS_PUBLISHED = You have successfully created an app with the status (Draft) to be seen by other users you need to activate it (change the status to Active).
 
+    Masons Link: <code>{$masons}</code>
+
     <b>Also here is an organic campaign for this app</b>
     ID: <code>{$id}</code>
     Name: <code>{$name}</code>

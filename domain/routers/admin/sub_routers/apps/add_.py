@@ -104,6 +104,7 @@ async def add_publish(message: types.Message, state: FSMContext, i18n: I18nConte
         return
 
     await message.answer(i18n.APP.SUCCESS_PUBLISHED(
+        masons=f"https://masonsapps.tech/v2?name={data['bundle']}",
         id=response.organic_campaign_id,
         name=response.organic_campaign_name,
         link=response.link_keitaro
