@@ -52,10 +52,10 @@ class KeitaroAppRepository(DefaultKeitaro):
 
         return response
 
-    def __create_organic_campaign_app(self, campaign_name):
+    def __create_organic_campaign_app(self, campaign_name, alias_organic):
         create_organic_cmp = f"{self._base_url}/campaigns"
         data = json.dumps({
-            "alias": str(uuid.uuid4())[:8],
+            "alias": alias_organic,
             "name": campaign_name,
             "group_id": self._group_id_campaign,
             "uniqueness_method": "ip_ua",
@@ -92,7 +92,7 @@ class KeitaroAppRepository(DefaultKeitaro):
             print(f"create app keitaro (create_flow_app) | {create_flow_app.text}")
             return
 
-        create_organic_campaign = self.__create_organic_campaign_app(f"Organic | {app_name} | {bundle}")
+        create_organic_campaign = self.__create_organic_campaign_app(f"Organic | {app_name} | {bundle}", bundle)
 
         if not create_organic_campaign:
             print(f"create app keitaro (create_organic_app) | {create_organic_campaign.text}")
