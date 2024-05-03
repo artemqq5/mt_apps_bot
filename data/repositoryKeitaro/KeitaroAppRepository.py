@@ -3,6 +3,7 @@ import uuid
 
 import requests
 
+from config import WEBHOOK_PASSWORD
 from data.DefaultKeitaro import DefaultKeitaro
 from data.repositoryKeitaro.model.KeitaroAppResponse import KeitaroAppResponse
 
@@ -37,7 +38,7 @@ class KeitaroAppRepository(DefaultKeitaro):
                     "condition": "not_respond",
                     "target": "stream",
                     "action": "webhook",
-                    "grab_from_page": f"{self._webhook_base_url}/flows?bundle={sub30}",
+                    "grab_from_page": f"{self._webhook_base_url}/flows?bundle={sub30}&key={WEBHOOK_PASSWORD}",
                     "interval": "1",
                     "reverse": "true",
                     "scan_page": "true"
