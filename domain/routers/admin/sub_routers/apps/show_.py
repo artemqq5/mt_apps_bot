@@ -39,7 +39,7 @@ async def show_applications(message: types.Message, state: FSMContext, i18n: I18
     await message.answer(i18n.APP.IOS_APPS(), reply_markup=apps_keyboard_list(applications))
 
 
-@router.callback_query(AppKeyboardList.filter(), IsAdminFilter(True))
+@router.callback_query(AppKeyboardList.filter())
 async def show_application_detail(callback: CallbackQuery, state: FSMContext, i18n: I18nContext):
     app = AppRepository().get_app_by_id(callback.data.split(":")[1])
     if not app:
