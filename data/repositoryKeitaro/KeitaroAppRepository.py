@@ -92,7 +92,7 @@ class KeitaroAppRepository(DefaultKeitaro):
             print(f"create app keitaro (create_flow_app) | {create_flow_app.text}")
             return
 
-        create_organic_campaign = self.__create_organic_campaign_app(f"Organic | {app_name} | {bundle}", bundle)
+        create_organic_campaign = self.__create_organic_campaign_app(f"Organic | {app_name}", bundle)
 
         if not create_organic_campaign:
             print(f"create app keitaro (create_organic_app) | {create_organic_campaign.text}")
