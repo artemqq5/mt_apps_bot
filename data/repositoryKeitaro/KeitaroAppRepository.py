@@ -39,7 +39,7 @@ class KeitaroAppRepository(DefaultKeitaro):
                     "target": "stream",
                     "action": "webhook",
                     "grab_from_page": f"{self._webhook_base_url}/flows?bundle={sub30}&key={WEBHOOK_PASSWORD}",
-                    "interval": "1",
+                    "interval": "5",
                     "reverse": "true",
                     "scan_page": "true"
                 }
