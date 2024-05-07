@@ -124,6 +124,7 @@ APP-GEO_EDIT_FAIL = Error editing geo
 APP-SET_STATUS = Specify new application status <b>{$name}</b>
 APP-STATUS_EDIT_SUCCESS = The status of the application has been changed successfully
 APP-STATUS_EDIT_FAIL = Error editing app status, you may be trying to change to the same status
+APP-STATUS_NOTIFY_NEW_STATUS = Notify users about new app status ({$status})?
 
 APP-DELETE_WARNING = Are you sure you want to delete the app <b>{$name}</b>? (it is not deleted from the database)
 APP-DELETE_SUCCESS = App <b>{$name}</b> was successfully deleted and can be reinstalled directly from the database
@@ -229,6 +230,13 @@ NOTIFY-RESULT = <b>=== Notification result ===</b>
     ======================
     Bot blocked: <b>{$block}</b>
     Other: <b>{$other}</b>
+
+# ban, active notification
+NOYIFY-APP_STATUS_BAN = App <b>{$app_name}</b> has been banned‼️
+
+    Stop traffic!
+NOYIFY-APP_STATUS_ACTIVE = App <b>{$app_name}</b> is active! ✅
+NOYIFY-APP_STATUS_DRAFT = App <b>{$app_name}</b> will be temporarily unavailable for new threads, but feel free to stop old ones, the app is fine!
 
 #admin notification
 ADMIN-NOTIFICATION-HAVENT_DOMAIN = 🆘 Domains have run out 🆘

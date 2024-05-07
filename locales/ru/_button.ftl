@@ -4,6 +4,7 @@ Language-uk = Украинский
 Language-en = Английский
 Language-ru = русский
 
+YES = Да
 SKIP = Пропустить
 CANCEL = Отменить
 
@@ -79,7 +80,7 @@ FLOW-CALL_ADMIN = Чат с поддержкой
 NOTIFY-NOTIFICATION = Рассылка
 NOTIFY-CATEGORY_USERS = В Команде
 NOTIFY-CATEGORY_NO_USERS = Без команды
-NOTIFY-CATEGORY_ALL_USERS = Все (за исключением админов)
+NOTIFY-CATEGORY_ALL_USERS = Все
 NOTIFY-DEFAULT_BUTTON_TEXT = Открыть
 NOTIFY-SEND = Отправить
 

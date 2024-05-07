@@ -173,3 +173,10 @@ def kb_show_access(accesses) -> InlineKeyboardMarkup:
         )
 
     return InlineKeyboardMarkup(inline_keyboard=inline_kb)
+
+
+def kb_notify_status_app() -> ReplyKeyboardMarkup:
+    return ReplyKeyboardMarkup(keyboard=[
+        [KeyboardButton(text=L.YES())],
+        [KeyboardButton(text=L.CANCEL())]
+    ])

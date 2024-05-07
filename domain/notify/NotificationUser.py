@@ -56,6 +56,33 @@ class NotificationUser:
         elif data['category'] == i18n.TEAM_MESSAGING():
             users = [user['telegram_id'] for user in UserRepository().get_users_by_team_id(data['team_id']) if user['banned'] == 0]
         else:
-            users = [user['telegram_id'] for user in UserRepository().get_users() if user['banned'] == 0]
+            users = [user['telegram_id'] for user in UserRepository().get_all_users() if user['banned'] == 0]
 
         return await self.__notify_list_any(bot, users, data, "default user message", i18n)
+
+    async def ban_app_message(self, application, bot, i18n):
+        users = [user['telegram_id'] for user in UserRepository().get_all_users() if user['banned'] == 0]
+        data = {
+            "photo": application['image'],
+            "message": i18n.NOYIFY.APP_STATUS_BAN(app_name=application['name'])
+        }
+
+        return await self.__notify_list_any(bot, users, data, "ban_app_message", i18n)
+
+    async def active_app_message(self, application, bot, i18n):
+        users = [user['telegram_id'] for user in UserRepository().get_all_users() if user['banned'] == 0]
+        data = {
+            "photo": application['image'],
+            "message": i18n.NOYIFY.APP_STATUS_ACTIVE(app_name=application['name'])
+        }
+
+        return await self.__notify_list_any(bot, users, data, "active_app_message", i18n)
+
+    async def draft_app_message(self, application, bot, i18n):
+        users = [user['telegram_id'] for user in UserRepository().get_all_users() if user['banned'] == 0]
+        data = {
+            "photo": application['image'],
+            "message": i18n.NOYIFY.APP_STATUS_DRAFT(app_name=application['name'])
+        }
+
+        return await self.__notify_list_any(bot, users, data, "draft_app_message", i18n)
