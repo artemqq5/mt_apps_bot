@@ -25,14 +25,13 @@ class DefaultKeitaro:
 
     # Лінка 33 кампанії яка повертається користувачу
     def _generate_client_link(self, client_campaign_alias, pixel, bundle_sub30, domain,
-                              distribution_campaign_alias, team_unq) -> str:
+                              distribution_campaign_alias) -> str:
         url = (f"https://{domain}/{distribution_campaign_alias}"
                "?sub1={sub1}"
                "&sub2={sub2}"
                f"&sub3={client_campaign_alias}"
                f"&pixel={pixel}"
                f"&system_id={self._apps_campaign_alias}"
-               f"&bundle={bundle_sub30}"
-               f"&team={team_unq}")
+               f"&bundle={bundle_sub30}")
 
         return url

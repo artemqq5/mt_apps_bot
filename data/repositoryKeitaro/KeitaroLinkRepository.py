@@ -63,7 +63,7 @@ class KeitaroLink(DefaultKeitaro):
         return response
 
     # Оновлюємо клоновану кампанію onelink distribution 33
-    def _update_campaign_distribution(self, campaign_id, name, pixel, system_id, sub3, bundle, domain_id, team_unq):
+    def _update_campaign_distribution(self, campaign_id, name, pixel, system_id, sub3, bundle, domain_id):
         update_campaign_url = f"{self._base_url}/campaigns/{campaign_id}"
         data = json.dumps({
             "name": name,
@@ -83,8 +83,7 @@ class KeitaroLink(DefaultKeitaro):
                 "sub_id_4": {"name": "pixel", "placeholder": f"{pixel}", "alias": ""},
                 "sub_id_5": {"name": "fbclid", "placeholder": "", "alias": ""},
                 "sub_id_6": {"name": "system_id", "placeholder": f"{system_id}", "alias": ""},
-                "sub_id_7": {"name": "bundle", "placeholder": f"{bundle}", "alias": ""},
-                "sub_id_8": {"name": "team", "placeholder": f"{team_unq}", "alias": ""}
+                "sub_id_7": {"name": "bundle", "placeholder": f"{bundle}", "alias": ""}
             }
         })
 
@@ -149,8 +148,7 @@ class KeitaroLink(DefaultKeitaro):
             system_id=self._apps_campaign_alias,
             sub3=clone_campaign_client.json()[0]['alias'],
             bundle=data['bundle'],
-            domain_id=data['domain_id'],
-            team_unq=''.join(filter(str.isalnum, access['team_name'].lower()))
+            domain_id=data['domain_id']
         )
 
         if not update_campaign_distribution:
@@ -201,8 +199,7 @@ class KeitaroLink(DefaultKeitaro):
             pixel=data['pixel'],
             bundle_sub30=data['bundle'],
             domain=data['domain'],
-            distribution_campaign_alias=update_campaign_distribution.json()['alias'],
-            team_unq=''.join(filter(str.isalnum, access['team_name'].lower()))
+            distribution_campaign_alias=update_campaign_distribution.json()['alias']
         )
 
         return KeitaroLinkResponse(
@@ -221,5 +218,5 @@ class KeitaroLink(DefaultKeitaro):
             bundle=data['bundle'],
             comment=data.get('comment', None),
             alias_client_cmp=update_campaign_client.json()['alias'],
-            distribution_campaign_alias=update_campaign_distribution.json()['alias'],
+            distribution_campaign_alias=update_campaign_distribution.json()['alias']
         )
