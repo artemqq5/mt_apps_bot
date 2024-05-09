@@ -87,6 +87,7 @@ async def offer_link(message: Message, i18n: I18nContext, state: FSMContext, bot
     access = AccessRepository().get_access_by_user_id(message.from_user.id)
     team = TeamRepository().get_team_by_id(access['team_id'])
     limit = DomainRepository().check_domain_limit(access['team_id'])
+    team_unq = ''.join(filter(str.isalnum, access['team_name'].lower()))
 
     # Перевіряємо поточні ліміти команди
     if limit['COUNT(*)'] >= team['limit']:
@@ -103,7 +104,7 @@ async def offer_link(message: Message, i18n: I18nContext, state: FSMContext, bot
         await NotificationAdmin().domain_havnt_admins(bot, i18n)
         return
 
-    await state.update_data(offer_link=message.text)
+    await state.update_data(offer_link=f"{message.text}&team={team_unq}")
     await state.update_data(domain_id=domain['domain_id'])
     await state.update_data(domain=domain['domain'])
     data = await state.get_data()

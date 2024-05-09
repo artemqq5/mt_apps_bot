@@ -26,7 +26,7 @@ MACROS = "{subid}"
 
 
 def validate_user_link(link: str) -> bool:
-    return link.startswith("https://") and link.__contains__(MACROS)
+    return link.startswith("https://") and link.__contains__(MACROS) and not link.endswith("/")
 
 
 # source app

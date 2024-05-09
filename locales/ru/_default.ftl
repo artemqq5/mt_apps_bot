@@ -164,8 +164,13 @@ FLOW-SELECT_PIXEL_FB = Выберите пиксель для потока:
 FLOW-HAVENT_PIXEL_FB = У вас нет созданных пикселей, хотите создать?
 FLOW-COMMENT = Добавить комментарий к потоку
 FLOW-OFFER_LINK = Отправьте свою ссылку
-FLOW-OFFER_LINK_ERROR = Внимание! Ссылка должна быть с обязательным макросом ={$subid} и начинаться с https://
-     Например https://example.site/test?asdpg={$subid} – это минимальный пример!
+FLOW-OFFER_LINK_ERROR = Внимание!
+
+    1) Ссылка должна быть с обязательным макросом 'ваш_параметр={$subid}'
+    2) Начинаться с 'https://'
+    3) НЕ заканчиваться '/' символом
+
+    Например https://example.site/test?asdpg={$subid} – это минимальный пример!
 FLOW-FLOW_SUCCESS_CREATED=Поток успешно создан, желаем качественного трафика!
      <code>{$flow}</code>
 FLOW-FLOW_FAIL_CREATED = Не удалось создать поток ({$error}), перешлите админу это сообщение

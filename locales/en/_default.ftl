@@ -164,8 +164,13 @@ FLOW-SELECT_PIXEL_FB = Select your pixel for flow:
 FLOW-HAVENT_PIXEL_FB = You have no created pixels, want to create one?
 FLOW-COMMENT = Add a comment to the flow
 FLOW-OFFER_LINK = Send your link
-FLOW-OFFER_LINK_ERROR = Attention! The link must have the mandatory macro ={$subid} and start with https://
-     For example https://example.site/test?asdpg={$subid} - is a minimal example!
+FLOW-OFFER_LINK_ERROR = Attention!
+
+    1) The link must be with the mandatory macro 'your_parameter={$subid}'
+    2) Start with 'https://'
+    3) DO NOT end with a '/' character
+
+    For example https://example.site/test?asdpg={$subid} is a minimal example!
 FLOW-FLOW_SUCCESS_CREATED = Flow successfully created, we wish you quality traffic!
      <code>{$flow}</code>
 FLOW-FLOW_FAIL_CREATED = Failed to create flow ({$error}), forward this message to admin
