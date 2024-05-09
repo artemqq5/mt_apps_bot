@@ -3,6 +3,7 @@ import json
 import requests
 
 from data.DefaultKeitaro import DefaultKeitaro
+from data.repositoryDB.AccessRepository import AccessRepository
 
 
 class KeitaroPixelRepository(DefaultKeitaro):
@@ -35,8 +36,12 @@ class KeitaroPixelRepository(DefaultKeitaro):
 
         return response
 
-    def __update_pixel_distribution(self, cmp_id, pixel, sub3, system_id, bundle):
+    def __update_pixel_distribution(self, cmp_id, pixel, sub3, system_id, bundle, user_id):
         update_pixel = f"{self._base_url}/campaigns/{cmp_id}"
+
+        access = AccessRepository().get_access_by_user_id(user_id)
+        team_unq = ''.join(filter(str.isalnum, access['team_name'].lower()))
+
         data = json.dumps({
             "parameters": {
                 "keyword": {"name": "keyword", "placeholder": "", "alias": ""},
@@ -52,7 +57,8 @@ class KeitaroPixelRepository(DefaultKeitaro):
                 "sub_id_4": {"name": "pixel", "placeholder": f"{pixel}", "alias": ""},
                 "sub_id_5": {"name": "fbclid", "placeholder": "", "alias": ""},
                 "sub_id_6": {"name": "system_id", "placeholder": f"{system_id}", "alias": ""},
-                "sub_id_7": {"name": "bundle", "placeholder": f"{bundle}", "alias": ""}
+                "sub_id_7": {"name": "bundle", "placeholder": f"{bundle}", "alias": ""},
+                "sub_id_8": {"name": "team", "placeholder": f"{team_unq}", "alias": ""}
             }
         })
 
@@ -79,7 +85,8 @@ class KeitaroPixelRepository(DefaultKeitaro):
             pixel=pixel,
             system_id=self._apps_campaign_alias,
             bundle=flow['bundle'],
-            sub3=flow['client_alias']
+            sub3=flow['client_alias'],
+            user_id=flow['user_id']
         )
 
         if not update_distribution:
@@ -91,5 +98,6 @@ class KeitaroPixelRepository(DefaultKeitaro):
             pixel=pixel,
             bundle_sub30=flow['bundle'],
             domain=flow['domain'],
-            distribution_campaign_alias=flow['distribution_alias']
+            distribution_campaign_alias=flow['distribution_alias'],
+            team_unq=update_distribution.json()['parameters']['sub_id_8']['placeholder']
         )

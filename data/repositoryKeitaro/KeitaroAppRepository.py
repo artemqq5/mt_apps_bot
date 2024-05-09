@@ -5,6 +5,7 @@ import requests
 
 from config import WEBHOOK_PASSWORD
 from data.DefaultKeitaro import DefaultKeitaro
+from data.repositoryDB.AccessRepository import AccessRepository
 from data.repositoryKeitaro.model.KeitaroAppResponse import KeitaroAppResponse
 
 
@@ -127,6 +128,9 @@ class KeitaroAppRepository(DefaultKeitaro):
         sub3 = flow['client_alias']
         bundle = app['bundle']
 
+        access = AccessRepository().get_access_by_user_id(flow['user_id'])
+        team_unq = ''.join(filter(str.isalnum, access['team_name'].lower()))
+
         update_app = f"{self._base_url}/campaigns/{cmp_id}"
         data = json.dumps({
             "parameters": {
@@ -143,7 +147,8 @@ class KeitaroAppRepository(DefaultKeitaro):
                 "sub_id_4": {"name": "pixel", "placeholder": f"{pixel}", "alias": ""},
                 "sub_id_5": {"name": "fbclid", "placeholder": "", "alias": ""},
                 "sub_id_6": {"name": "system_id", "placeholder": f"{self._apps_campaign_alias}", "alias": ""},
-                "sub_id_7": {"name": "bundle", "placeholder": f"{bundle}", "alias": ""}
+                "sub_id_7": {"name": "bundle", "placeholder": f"{bundle}", "alias": ""},
+                "sub_id_8": {"name": "team", "placeholder": f"{team_unq}", "alias": ""}
             }
         })
 
@@ -157,6 +162,7 @@ class KeitaroAppRepository(DefaultKeitaro):
             pixel=pixel,
             bundle_sub30=bundle,
             domain=flow['domain'],
-            distribution_campaign_alias=flow['distribution_alias']
+            distribution_campaign_alias=flow['distribution_alias'],
+            team_unq=team_unq
         )
 

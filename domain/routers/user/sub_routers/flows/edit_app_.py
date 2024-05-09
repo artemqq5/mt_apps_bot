@@ -3,6 +3,7 @@ from aiogram.fsm.context import FSMContext
 from aiogram.types import CallbackQuery
 from aiogram_i18n import I18nContext
 
+from data.repositoryDB.AccessRepository import AccessRepository
 from data.repositoryDB.AppRepository import AppRepository
 from data.repositoryDB.FlowRepository import FlowRepository
 from data.repositoryKeitaro.KeitaroAppRepository import KeitaroAppRepository
