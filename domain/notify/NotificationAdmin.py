@@ -31,3 +31,14 @@ class NotificationAdmin:
         users = [user['telegram_id'] for user in UserRepository().get_admins() if user['banned'] == 0]
         await self.__notify_list_text(bot, users, message, "domain limit over")
 
+    async def new_user_db(self, bot, i18n: I18nContext, user):
+        message = i18n.ADMIN.NOTIFICATION.NEW_USER(
+            username=f"@{user['username']}" if user['username'] else "none",
+            id=user['telegram_id'],
+            firstname=str(user['first_name']),
+            lastname=str(user['last_name']),
+            lang=user['lang'],
+            time=user['join_at']
+        )
+        users = [user['telegram_id'] for user in UserRepository().get_admins() if user['banned'] == 0]
+        await self.__notify_list_text(bot, users, message, "new user")

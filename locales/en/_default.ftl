@@ -247,3 +247,12 @@ NOYIFY-APP_STATUS_DRAFT = App <b>{$app_name}</b> will be temporarily unavailable
 ADMIN-NOTIFICATION-HAVENT_DOMAIN = 🆘 Domains have run out 🆘
     Urgently replenish the domains in keitaro so that users can create links Onelink!!!
 ADMIN-NOTIFICATION-DOMAIN_LIMIT_WAS_OVER = Team ({$team}) has reached its daily domain limit and wants to create a new link 🤷‍♂️
+ADMIN-NOTIFICATION-NEW_USER = New user {$username} has started a bot!
+
+    In detail:
+    <b>telegram id:</b> {$id}
+    <b>username:</b> {$username}
+    <b>first name:</b> {$firstname}
+    <b>last name:</b> {$lastname}
+    <b>lang:</b> {$lang}
+    <b>start time:</b> {$time}

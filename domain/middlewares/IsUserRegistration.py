@@ -4,9 +4,10 @@ from aiogram import BaseMiddleware, types
 from aiogram.types import TelegramObject
 
 from data.repositoryDB.UserRepository import UserRepository
+from domain.notify.NotificationAdmin import NotificationAdmin
 
 
-class UserRegistationMiddleware(BaseMiddleware):
+class UserRegistrationMiddleware(BaseMiddleware):
     async def __call__(
             self,
             handler: Callable[[TelegramObject, Dict[str, Any]], Awaitable[Any]],
@@ -23,8 +24,9 @@ class UserRegistationMiddleware(BaseMiddleware):
                 await event.bot.send_message(chat_id=user.id, text=data['i18n'].REGISTER_FAIL())
                 return None
 
+            await NotificationAdmin().new_user_db(data['bot'], data['i18n'], UserRepository().get_user(user.id))
+
             await event.bot.send_message(chat_id=user.id, text=data['i18n'].REGISTER_SUCCESS())
-            await event.bot.send_message(chat_id=user.id, text=data['i18n'].SEND_REQUEST_ADMIN())
 
         return await handler(event, data)
 
