@@ -65,7 +65,7 @@ DRAFT_STATUS_APP = Черновик
 DELETE_APP = Удалить приложение
 
 #user
-USER-PIXEL_FB = Пикесль FB
+USER-PIXEL_FB = Pixel FB
 USER-ADD_PIXEL_FB = Добавить новый пикесль
 USER-SHOW_MY_PIXELS = Мои пиксели
 
