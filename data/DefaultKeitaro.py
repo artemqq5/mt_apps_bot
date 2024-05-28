@@ -30,6 +30,13 @@ class DefaultKeitaro:
                "?sub1={sub1}"
                "&sub2={sub2}"
                f"&sub3={client_campaign_alias}"
+               "&sub4={sub4}"
+               "&sub5={sub5}"
+               "&sub6={sub6}"
+               "&sub7={sub7}"
+               "&sub8={sub8}"
+               "&sub9={sub9}"
+               "&sub10={sub10}"
                f"&pixel={pixel}"
                f"&system_id={self._apps_campaign_alias}"
                f"&bundle={bundle_sub30}")
