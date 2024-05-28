@@ -35,7 +35,7 @@ class KeitaroLink(DefaultKeitaro):
         return response
 
     # Оновлюємо клоновану кампанію для клієнта 36
-    def _update_campaign_client(self, campaign_id, name, pixel, token):
+    def _update_campaign_client(self, campaign_id, name, pixel, token, team):
         update_campaign_url = f"{self._base_url}/campaigns/{campaign_id}"
         data = json.dumps({
             "name": name,
@@ -60,7 +60,8 @@ class KeitaroLink(DefaultKeitaro):
                 "sub_id_10": {"name": "fbclid", "placeholder": "{fbclid}", "alias": ""},
                 "sub_id_11": {"name": "pixel", "placeholder": pixel, "alias": ""},
                 "sub_id_12": {"name": "token", "placeholder": token, "alias": ""},
-                "sub_id_13": {"name": "domain", "placeholder": "jombos.com", "alias": ""}
+                "sub_id_13": {"name": "domain", "placeholder": "jombos.com", "alias": ""},
+                "sub_id_14": {"name": "timnameidfilter", "placeholder": f"{team}", "alias": ""}
             }
         })
 
@@ -98,7 +99,7 @@ class KeitaroLink(DefaultKeitaro):
                 "sub_id_11": {"name": "sub7", "placeholder": "{sub7}", "alias": ""},
                 "sub_id_12": {"name": "sub8", "placeholder": "{sub8}", "alias": ""},
                 "sub_id_13": {"name": "sub9", "placeholder": "{sub9}", "alias": ""},
-                "sub_id_814": {"name": "sub10", "placeholder": "{sub10}", "alias": ""},
+                "sub_id_14": {"name": "sub10", "placeholder": "{sub10}", "alias": ""},
             }
         })
 
@@ -139,7 +140,7 @@ class KeitaroLink(DefaultKeitaro):
     # Оновлюємо клоновану під юзера кампанію
     # Оновлюємо оффер в потоку клонованої кампанії під юзера, на той оффер, що ми створили
     # Повертаємо користувачу url клонованої 33 кампанії
-    def generate_link_keitaro(self, data, access) -> KeitaroLinkResponse | None:
+    def generate_link_keitaro(self, data, access, team_unq) -> KeitaroLinkResponse | None:
         clone_campaign_client = self._clone_campaign(self._client_company_id)
 
         if not clone_campaign_client:
@@ -192,6 +193,7 @@ class KeitaroLink(DefaultKeitaro):
                 team_name=access['team_name'],
                 offer_id=create_offer.json()['id']
             ),
+            team=team_unq,
             pixel=data['pixel'],
             token=data['token']
         )
