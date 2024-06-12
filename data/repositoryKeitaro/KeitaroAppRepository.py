@@ -152,8 +152,9 @@ class KeitaroAppRepository(DefaultKeitaro):
             print(f"update_distribution_app {response.text}")
             return
 
+        print(flow['client_campaign_id'])
         return self._generate_client_link(
-            client_campaign_alias=flow['client_campaign_id'],
+            client_campaign_alias=flow['client_alias'],
             pixel=pixel,
             bundle_sub30=bundle,
             domain=flow['domain'],

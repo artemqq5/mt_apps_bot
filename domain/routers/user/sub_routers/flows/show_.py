@@ -35,6 +35,8 @@ async def show_flow_detail(callback: CallbackQuery, i18n: I18nContext, state: FS
     else:
         status = f"{ACTIVE_APP_STATUS} ✅"
 
+    link_ = flow['link_user'].split("&team")
+
     await callback.message.answer(
         i18n.FLOW.DETAIL_FLOW(
             link_keitaro=flow['link_keitaro'],
@@ -44,7 +46,7 @@ async def show_flow_detail(callback: CallbackQuery, i18n: I18nContext, state: FS
             source=app['source'],
             status=status,
             domain=flow['domain'],
-            link_user=flow['link_user'],
+            link_user=link_[0],
             pixel=flow['pixel_fb'],
             token=flow['token_fb'],
             date=flow['created_at'],
