@@ -43,12 +43,7 @@ async def change_offer(message: Message, state: FSMContext, i18n: I18nContext):
 
     await state.clear()
 
-    access = AccessRepository().get_access_by_user_id(message.from_user.id)
-    team_unq = ''.join(filter(str.isalnum, access['team_name'].lower()))
-    if message.text.__contains__(f'team={team_unq}'):
-        new_offer = message.text
-    else:
-        new_offer = f"{message.text}&team={team_unq}"
+    new_offer = message.text
 
     if not KeitaroOfferRepository().update_offer_url(flow['offer_id'], new_offer):
         await message.answer(
