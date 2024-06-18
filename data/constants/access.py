@@ -24,6 +24,7 @@ APP_STATUS_LIST = (ACTIVE_APP_STATUS, BANNED_APP_STATUS, DRAFT_APP_STATUS)
 
 MACROS = "{subid}"
 
+DOT_DOMAINS = "2557"
 
 def validate_user_link(link: str) -> bool:
     return link.startswith("https://") and link.__contains__(MACROS) and not link.endswith("/")

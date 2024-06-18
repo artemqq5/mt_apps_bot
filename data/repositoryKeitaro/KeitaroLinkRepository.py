@@ -4,6 +4,7 @@ import requests
 
 from config import KEITARO_CLIENT_CAMPAIGN_GROUP_ID, KEITARO_ROTATOR_CAMPAIGN_GROUP_ID
 from data.DefaultKeitaro import DefaultKeitaro
+from data.constants.access import DOT_DOMAINS
 from data.repositoryKeitaro.model.KeitaroLinkResponse import KeitaroLinkResponse
 
 
@@ -72,8 +73,9 @@ class KeitaroLink(DefaultKeitaro):
         return response
 
     # Оновлюємо клоновану кампанію onelink distribution 33
-    def _update_campaign_distribution(self, campaign_id, name, pixel, system_id, sub3, bundle, domain_id):
+    def _update_campaign_distribution(self, campaign_id, name, pixel, system_id, sub3, bundle, domain_id, domain):
         update_campaign_url = f"{self._base_url}/campaigns/{campaign_id}"
+        domain = str(domain).replace(".", DOT_DOMAINS)
         data = json.dumps({
             "name": name,
             "group_id": KEITARO_ROTATOR_CAMPAIGN_GROUP_ID,
@@ -100,6 +102,7 @@ class KeitaroLink(DefaultKeitaro):
                 "sub_id_12": {"name": "sub8", "placeholder": "{sub8}", "alias": ""},
                 "sub_id_13": {"name": "sub9", "placeholder": "{sub9}", "alias": ""},
                 "sub_id_14": {"name": "sub10", "placeholder": "{sub10}", "alias": ""},
+                "sub_id_15": {"name": "domain", "placeholder": f"{domain}", "alias": ""}
             }
         })
 
@@ -164,7 +167,8 @@ class KeitaroLink(DefaultKeitaro):
             system_id=self._apps_campaign_alias,
             sub3=clone_campaign_client.json()[0]['alias'],
             bundle=data['bundle'],
-            domain_id=data['domain_id']
+            domain_id=data['domain_id'],
+            domain=data['domain']
         )
 
         if not update_campaign_distribution:
