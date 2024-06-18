@@ -5,6 +5,7 @@ import requests
 
 from config import WEBHOOK_PASSWORD
 from data.DefaultKeitaro import DefaultKeitaro
+from data.constants.access import DOT_DOMAINS
 from data.repositoryKeitaro.model.KeitaroAppResponse import KeitaroAppResponse
 
 
@@ -127,6 +128,8 @@ class KeitaroAppRepository(DefaultKeitaro):
         sub3 = flow['client_alias']
         bundle = app['bundle']
 
+        domain = str(flow['domain']).replace(".", DOT_DOMAINS)
+
         update_app = f"{self._base_url}/campaigns/{cmp_id}"
         data = json.dumps({
             "parameters": {
@@ -143,7 +146,15 @@ class KeitaroAppRepository(DefaultKeitaro):
                 "sub_id_4": {"name": "pixel", "placeholder": f"{pixel}", "alias": ""},
                 "sub_id_5": {"name": "fbclid", "placeholder": "", "alias": ""},
                 "sub_id_6": {"name": "system_id", "placeholder": f"{self._apps_campaign_alias}", "alias": ""},
-                "sub_id_7": {"name": "bundle", "placeholder": f"{bundle}", "alias": ""}
+                "sub_id_7": {"name": "bundle", "placeholder": f"{bundle}", "alias": ""},
+                "sub_id_8": {"name": "sub4", "placeholder": "{sub4}", "alias": ""},
+                "sub_id_9": {"name": "sub5", "placeholder": "{sub5}", "alias": ""},
+                "sub_id_10": {"name": "sub6", "placeholder": "{sub6}", "alias": ""},
+                "sub_id_11": {"name": "sub7", "placeholder": "{sub7}", "alias": ""},
+                "sub_id_12": {"name": "sub8", "placeholder": "{sub8}", "alias": ""},
+                "sub_id_13": {"name": "sub9", "placeholder": "{sub9}", "alias": ""},
+                "sub_id_14": {"name": "sub10", "placeholder": "{sub10}", "alias": ""},
+                "sub_id_15": {"name": "domain", "placeholder": f"{domain}", "alias": ""}
             }
         })
 
@@ -160,4 +171,3 @@ class KeitaroAppRepository(DefaultKeitaro):
             domain=flow['domain'],
             distribution_campaign_alias=flow['distribution_alias']
         )
-

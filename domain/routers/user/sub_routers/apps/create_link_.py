@@ -141,7 +141,8 @@ async def offer_link(message: Message, i18n: I18nContext, state: FSMContext, bot
             bundle=response.bundle,
             comment=response.comment,
             client_alias=response.alias_client_cmp,
-            distribution_alias=response.distribution_campaign_alias
+            distribution_alias=response.distribution_campaign_alias,
+            timnameidfilter=team_unq
     ):
         await state.clear()
         await message.answer(i18n.FLOW.FLOW_FAIL_CREATED(error="db"), reply_markup=kb_menu_user)
