@@ -1,7 +1,7 @@
 from config import API_KEY_KEITARO, KEITARO_CAMPAIGN_ID_APPS_FLOW, KEITARO_CAMPAIGN_GROUP_ID, KEITARO_CAMPAIGN_ID_USERS, \
     KEITARO_DOMAIN_SERVER, KEITARO_CAMPAIGN_ONELINK_ALIAS, KEITARO_OFFER_GROUP_ID, KEITARO_BASE_URL, \
     KEITARO_CAMPAIGN_ID_MAIN_URL, WEBHOOK_URL, KEITARO_WHITE_OFFER, KEITARO_HOST_LINK
-from data.constants.access import DOT_DOMAINS
+from data.constants.access import DOT_DOMAINS, TELEGRAM_PLATFORM
 
 
 class DefaultKeitaro:
@@ -26,7 +26,7 @@ class DefaultKeitaro:
 
     # Лінка 33 кампанії яка повертається користувачу
     def _generate_client_link(self, client_campaign_alias, pixel, bundle_sub30, domain,
-                              distribution_campaign_alias) -> str:
+                              distribution_campaign_alias, platform) -> str:
         url = (f"https://{domain}/{distribution_campaign_alias}"
                "?sub1=sub1"
                "&sub2=sub2"
@@ -41,7 +41,9 @@ class DefaultKeitaro:
                f"&pixel={pixel}"
                f"&fbclid=none"
                f"&system_id={self._apps_campaign_alias}"
-               f"&bundle={bundle_sub30}"
-               f"&domain={str(domain).replace('.', DOT_DOMAINS)}")
+               f"&bundle={bundle_sub30}")
+
+        if platform == TELEGRAM_PLATFORM:
+            url += f"&domain={str(domain).replace('.', DOT_DOMAINS)}"
 
         return url

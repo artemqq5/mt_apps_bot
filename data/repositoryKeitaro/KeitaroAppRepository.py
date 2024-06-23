@@ -5,7 +5,7 @@ import requests
 
 from config import WEBHOOK_PASSWORD
 from data.DefaultKeitaro import DefaultKeitaro
-from data.constants.access import DOT_DOMAINS
+from data.constants.access import DOT_DOMAINS, TELEGRAM_PLATFORM
 from data.repositoryKeitaro.model.KeitaroAppResponse import KeitaroAppResponse
 
 
@@ -128,10 +128,9 @@ class KeitaroAppRepository(DefaultKeitaro):
         sub3 = flow['client_alias']
         bundle = app['bundle']
 
-        domain = str(flow['domain']).replace(".", DOT_DOMAINS)
-
         update_app = f"{self._base_url}/campaigns/{cmp_id}"
-        data = json.dumps({
+
+        data = {
             "parameters": {
                 "keyword": {"name": "keyword", "placeholder": "", "alias": ""},
                 "cost": {"placeholder": "", "alias": ""},
@@ -153,12 +152,16 @@ class KeitaroAppRepository(DefaultKeitaro):
                 "sub_id_11": {"name": "sub7", "placeholder": "sub7", "alias": ""},
                 "sub_id_12": {"name": "sub8", "placeholder": "sub8", "alias": ""},
                 "sub_id_13": {"name": "sub9", "placeholder": "sub9", "alias": ""},
-                "sub_id_14": {"name": "sub10", "placeholder": "sub10", "alias": ""},
-                "sub_id_15": {"name": "domain", "placeholder": f"{domain}", "alias": ""}
+                "sub_id_14": {"name": "sub10", "placeholder": "sub10", "alias": ""}
             }
-        })
+        }
 
-        response = requests.put(update_app, data=data, headers=self._headers)
+        # Add domain param to SUB15 for Telegram apps
+        if flow['platform'] == TELEGRAM_PLATFORM:
+            domain = str(flow['domain']).replace(".", DOT_DOMAINS)
+            data["parameters"]["sub_id_15"] = {"name": "domain", "placeholder": f"{domain}", "alias": ""}
+
+        response = requests.put(update_app, data=json.dumps(data), headers=self._headers)
         if not response:
             print(f"update_distribution_app {response.text}")
             return
@@ -169,5 +172,6 @@ class KeitaroAppRepository(DefaultKeitaro):
             pixel=pixel,
             bundle_sub30=bundle,
             domain=flow['domain'],
-            distribution_campaign_alias=flow['distribution_alias']
+            distribution_campaign_alias=flow['distribution_alias'],
+            platform=flow['platform']
         )

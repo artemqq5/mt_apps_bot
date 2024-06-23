@@ -2,9 +2,10 @@ import json
 
 import requests
 
-from config import KEITARO_CLIENT_CAMPAIGN_GROUP_ID, KEITARO_ROTATOR_CAMPAIGN_GROUP_ID
+from config import KEITARO_CLIENT_CAMPAIGN_GROUP_ID, KEITARO_ROTATOR_CAMPAIGN_GROUP_ID, \
+    ONELINK_PARAMS_COLLECTION_OFFER_TELEGRAM
 from data.DefaultKeitaro import DefaultKeitaro
-from data.constants.access import DOT_DOMAINS
+from data.constants.access import DOT_DOMAINS, TELEGRAM_PLATFORM
 from data.repositoryKeitaro.model.KeitaroLinkResponse import KeitaroLinkResponse
 
 
@@ -73,10 +74,11 @@ class KeitaroLink(DefaultKeitaro):
         return response
 
     # Оновлюємо клоновану кампанію onelink distribution 33
-    def _update_campaign_distribution(self, campaign_id, name, pixel, system_id, sub3, bundle, domain_id, domain):
+    def _update_campaign_distribution(self, campaign_id, name, pixel, system_id, sub3, bundle, domain_id, domain,
+                                      platform):
         update_campaign_url = f"{self._base_url}/campaigns/{campaign_id}"
-        domain = str(domain).replace(".", DOT_DOMAINS)
-        data = json.dumps({
+
+        data = {
             "name": name,
             "group_id": KEITARO_ROTATOR_CAMPAIGN_GROUP_ID,
             "domain_id": domain_id,
@@ -101,12 +103,16 @@ class KeitaroLink(DefaultKeitaro):
                 "sub_id_11": {"name": "sub7", "placeholder": "sub7", "alias": ""},
                 "sub_id_12": {"name": "sub8", "placeholder": "sub8", "alias": ""},
                 "sub_id_13": {"name": "sub9", "placeholder": "sub9", "alias": ""},
-                "sub_id_14": {"name": "sub10", "placeholder": "sub10", "alias": ""},
-                "sub_id_15": {"name": "domain", "placeholder": f"{domain}", "alias": ""}
+                "sub_id_14": {"name": "sub10", "placeholder": "sub10", "alias": ""}
             }
-        })
+        }
 
-        response = requests.put(update_campaign_url, data=data, headers=self._headers)
+        # Add domain param to SUB15 for Telegram apps
+        if platform == TELEGRAM_PLATFORM:
+            domain = str(domain).replace(".", DOT_DOMAINS)
+            data["parameters"]["sub_id_15"] = {"name": "domain", "placeholder": f"{domain}", "alias": ""}
+
+        response = requests.put(update_campaign_url, data=json.dumps(data), headers=self._headers)
         if not response:
             print(f"update_campaign_name {response.text}")
 
@@ -168,12 +174,23 @@ class KeitaroLink(DefaultKeitaro):
             sub3=clone_campaign_client.json()[0]['alias'],
             bundle=data['bundle'],
             domain_id=data['domain_id'],
-            domain=data['domain']
+            domain=data['domain'],
+            platform=data['platform']
         )
 
         if not update_campaign_distribution:
             print(f"generate_link_keitaro (update_campaign_distribution) | {update_campaign_distribution.text}")
             return
+
+        # Update Flow in Rotator campaign for Telegram Apps
+        if data['platform'] == TELEGRAM_PLATFORM:
+            update_destribution_tg_offer = self._update_flow_offer(
+                flow_id=update_campaign_distribution.json()['streams'][0]['id'],
+                offer_id=ONELINK_PARAMS_COLLECTION_OFFER_TELEGRAM
+            )
+            if not update_destribution_tg_offer:
+                print(f"generate_link_keitaro (update_offer destribution telegram apps) | {update_destribution_tg_offer.text}")
+                return
 
         create_offer = self._create_offer(
             offer_url=data['offer_link'],
@@ -220,7 +237,8 @@ class KeitaroLink(DefaultKeitaro):
             pixel=data['pixel'],
             bundle_sub30=data['bundle'],
             domain=data['domain'],
-            distribution_campaign_alias=update_campaign_distribution.json()['alias']
+            distribution_campaign_alias=update_campaign_distribution.json()['alias'],
+            platform=data['platform']
         )
 
         return KeitaroLinkResponse(

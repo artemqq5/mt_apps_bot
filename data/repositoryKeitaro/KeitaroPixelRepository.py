@@ -2,9 +2,8 @@ import json
 
 import requests
 
-from config import KEITARO_ROTATOR_CAMPAIGN_GROUP_ID, KEITARO_CLIENT_CAMPAIGN_GROUP_ID
 from data.DefaultKeitaro import DefaultKeitaro
-from data.constants.access import DOT_DOMAINS
+from data.constants.access import DOT_DOMAINS, TELEGRAM_PLATFORM
 
 
 class KeitaroPixelRepository(DefaultKeitaro):
@@ -46,10 +45,10 @@ class KeitaroPixelRepository(DefaultKeitaro):
         return response
 
     # Оновлюємо клоновану кампанію onelink distribution 33
-    def _update_campaign_distribution_pixel(self, campaign_id, pixel, system_id, sub3, bundle, domain):
+    def _update_campaign_distribution_pixel(self, campaign_id, pixel, system_id, sub3, bundle, domain, platform):
         update_campaign_url = f"{self._base_url}/campaigns/{campaign_id}"
-        domain = str(domain).replace(".", DOT_DOMAINS)
-        data = json.dumps({
+
+        data = {
             "parameters": {
                 "keyword": {"name": "keyword", "placeholder": "", "alias": ""},
                 "cost": {"placeholder": "", "alias": ""},
@@ -71,12 +70,16 @@ class KeitaroPixelRepository(DefaultKeitaro):
                 "sub_id_11": {"name": "sub7", "placeholder": "sub7", "alias": ""},
                 "sub_id_12": {"name": "sub8", "placeholder": "sub8", "alias": ""},
                 "sub_id_13": {"name": "sub9", "placeholder": "sub9", "alias": ""},
-                "sub_id_14": {"name": "sub10", "placeholder": "sub10", "alias": ""},
-                "sub_id_15": {"name": "domain", "placeholder": f"{domain}", "alias": ""}
+                "sub_id_14": {"name": "sub10", "placeholder": "sub10", "alias": ""}
             }
-        })
+        }
 
-        response = requests.put(update_campaign_url, data=data, headers=self._headers)
+        # Add domain param to SUB15 for Telegram apps
+        if platform == TELEGRAM_PLATFORM:
+            domain = str(domain).replace(".", DOT_DOMAINS)
+            data["parameters"]["sub_id_15"] = {"name": "domain", "placeholder": f"{domain}", "alias": ""}
+
+        response = requests.put(update_campaign_url, data=json.dumps(data), headers=self._headers)
         if not response:
             print(f"update_campaign_name {response.text}")
 
@@ -101,7 +104,8 @@ class KeitaroPixelRepository(DefaultKeitaro):
             system_id=self._apps_campaign_alias,
             sub3=flow['client_alias'],
             bundle=flow['bundle'],
-            domain=flow['domain']
+            domain=flow['domain'],
+            platform=flow['platform']
         )
 
         if not update_distribution:
@@ -113,5 +117,6 @@ class KeitaroPixelRepository(DefaultKeitaro):
             pixel=pixel,
             bundle_sub30=flow['bundle'],
             domain=flow['domain'],
-            distribution_campaign_alias=flow['distribution_alias']
+            distribution_campaign_alias=flow['distribution_alias'],
+            platform=flow['platform']
         )

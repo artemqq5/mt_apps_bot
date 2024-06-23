@@ -42,3 +42,6 @@ MASONS_LINK = "masons link"
 DEFAULT_DESC = "default"
 
 
+IOS_PLATFORM = "IOS"
+TELEGRAM_PLATFORM = "Telegram"
+
