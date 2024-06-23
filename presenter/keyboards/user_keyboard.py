@@ -26,6 +26,20 @@ def apps_keyboard_list(list_application) -> InlineKeyboardMarkup:
     return InlineKeyboardMarkup(inline_keyboard=inline_kb)
 
 
+class AppKeyboardListUser(CallbackData, prefix="apps*inline*keyboard*user"):
+    id: int
+
+
+def apps_keyboard_list_user(list_application) -> InlineKeyboardMarkup:
+    inline_kb = []
+    for app in list_application:
+        inline_kb.append(
+            [InlineKeyboardButton(text=f"{app['name']}", callback_data=AppKeyboardListUser(id=app['id']).pack())]
+        )
+
+    return InlineKeyboardMarkup(inline_keyboard=inline_kb)
+
+
 kb_pixel_menu = ReplyKeyboardMarkup(keyboard=[
     [KeyboardButton(text=L.USER.ADD_PIXEL_FB())],
     [KeyboardButton(text=L.USER.SHOW_MY_PIXELS())],

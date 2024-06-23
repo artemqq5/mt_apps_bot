@@ -4,6 +4,7 @@ Language-uk = Ukrainian
 Language-en = English
 Language-ru = russian
 
+YES = Yes
 SKIP = Skip
 CANCEL = Cancel
 
@@ -79,7 +80,7 @@ FLOW-CALL_ADMIN = Chat with support
 NOTIFY-NOTIFICATION = Mailing
 NOTIFY-CATEGORY_USERS = In Team
 NOTIFY-CATEGORY_NO_USERS = No command
-NOTIFY-CATEGORY_ALL_USERS = All (except admins)
+NOTIFY-CATEGORY_ALL_USERS = All
 NOTIFY-DEFAULT_BUTTON_TEXT = Open
 NOTIFY-SEND = Send
 

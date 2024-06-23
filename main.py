@@ -10,7 +10,7 @@ from aiogram_i18n.cores import FluentRuntimeCore
 
 import config
 from domain.middlewares.IsUserBanned import UserBannedMiddleware
-from domain.middlewares.IsUserRegistration import UserRegistationMiddleware
+from domain.middlewares.IsUserRegistration import UserRegistrationMiddleware
 from domain.middlewares.LocaleManager import LocaleManager
 from domain.routers.admin import admin_handler
 from domain.routers.common_route_ import localization_
@@ -42,8 +42,8 @@ async def main():
 
         i18n_middleware.setup(dp)
 
-        dp.message.outer_middleware(UserRegistationMiddleware())  # register if user not registered
-        dp.callback_query.outer_middleware(UserRegistationMiddleware())  # register if user not registered
+        dp.message.outer_middleware(UserRegistrationMiddleware())  # register if user not registered
+        dp.callback_query.outer_middleware(UserRegistrationMiddleware())  # register if user not registered
 
         dp.message.outer_middleware(UserBannedMiddleware())  # check if user banned
         dp.callback_query.outer_middleware(UserBannedMiddleware())  # check if user banned

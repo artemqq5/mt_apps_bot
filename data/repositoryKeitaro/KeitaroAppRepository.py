@@ -3,7 +3,9 @@ import uuid
 
 import requests
 
+from config import WEBHOOK_PASSWORD
 from data.DefaultKeitaro import DefaultKeitaro
+from data.constants.access import DOT_DOMAINS
 from data.repositoryKeitaro.model.KeitaroAppResponse import KeitaroAppResponse
 
 
@@ -37,8 +39,8 @@ class KeitaroAppRepository(DefaultKeitaro):
                     "condition": "not_respond",
                     "target": "stream",
                     "action": "webhook",
-                    "grab_from_page": f"{self._webhook_base_url}/flows?bundle={sub30}",
-                    "interval": "1",
+                    "grab_from_page": f"{self._webhook_base_url}/flows?bundle={sub30}&key={WEBHOOK_PASSWORD}",
+                    "interval": "5",
                     "reverse": "true",
                     "scan_page": "true"
                 }
@@ -51,10 +53,10 @@ class KeitaroAppRepository(DefaultKeitaro):
 
         return response
 
-    def __create_organic_campaign_app(self, campaign_name):
+    def __create_organic_campaign_app(self, campaign_name, alias_organic):
         create_organic_cmp = f"{self._base_url}/campaigns"
         data = json.dumps({
-            "alias": str(uuid.uuid4())[:8],
+            "alias": alias_organic,
             "name": campaign_name,
             "group_id": self._group_id_campaign,
             "uniqueness_method": "ip_ua",
@@ -91,7 +93,7 @@ class KeitaroAppRepository(DefaultKeitaro):
             print(f"create app keitaro (create_flow_app) | {create_flow_app.text}")
             return
 
-        create_organic_campaign = self.__create_organic_campaign_app(f"Organic | {app_name} | {bundle}")
+        create_organic_campaign = self.__create_organic_campaign_app(f"Organic | {app_name}", bundle)
 
         if not create_organic_campaign:
             print(f"create app keitaro (create_organic_app) | {create_organic_campaign.text}")
@@ -126,6 +128,8 @@ class KeitaroAppRepository(DefaultKeitaro):
         sub3 = flow['client_alias']
         bundle = app['bundle']
 
+        domain = str(flow['domain']).replace(".", DOT_DOMAINS)
+
         update_app = f"{self._base_url}/campaigns/{cmp_id}"
         data = json.dumps({
             "parameters": {
@@ -136,13 +140,21 @@ class KeitaroAppRepository(DefaultKeitaro):
                 "creative_id": {"name": "creative_id", "placeholder": "", "alias": ""},
                 "ad_campaign_id": {"name": "ad_campaign_id", "placeholder": "", "alias": ""},
                 "source": {"name": "source", "placeholder": "", "alias": ""},
-                "sub_id_1": {"name": "sub1", "placeholder": "{sub1}", "alias": ""},
-                "sub_id_2": {"name": "sub2", "placeholder": "{sub2}", "alias": ""},
+                "sub_id_1": {"name": "sub1", "placeholder": "sub1", "alias": ""},
+                "sub_id_2": {"name": "sub2", "placeholder": "sub2", "alias": ""},
                 "sub_id_3": {"name": "sub3", "placeholder": f"{sub3}", "alias": ""},
                 "sub_id_4": {"name": "pixel", "placeholder": f"{pixel}", "alias": ""},
                 "sub_id_5": {"name": "fbclid", "placeholder": "", "alias": ""},
                 "sub_id_6": {"name": "system_id", "placeholder": f"{self._apps_campaign_alias}", "alias": ""},
-                "sub_id_7": {"name": "bundle", "placeholder": f"{bundle}", "alias": ""}
+                "sub_id_7": {"name": "bundle", "placeholder": f"{bundle}", "alias": ""},
+                "sub_id_8": {"name": "sub4", "placeholder": "sub4", "alias": ""},
+                "sub_id_9": {"name": "sub5", "placeholder": "sub5", "alias": ""},
+                "sub_id_10": {"name": "sub6", "placeholder": "sub6", "alias": ""},
+                "sub_id_11": {"name": "sub7", "placeholder": "sub7", "alias": ""},
+                "sub_id_12": {"name": "sub8", "placeholder": "sub8", "alias": ""},
+                "sub_id_13": {"name": "sub9", "placeholder": "sub9", "alias": ""},
+                "sub_id_14": {"name": "sub10", "placeholder": "sub10", "alias": ""},
+                "sub_id_15": {"name": "domain", "placeholder": f"{domain}", "alias": ""}
             }
         })
 
@@ -151,8 +163,9 @@ class KeitaroAppRepository(DefaultKeitaro):
             print(f"update_distribution_app {response.text}")
             return
 
+        print(flow['client_campaign_id'])
         return self._generate_client_link(
-            client_campaign_alias=flow['client_campaign_id'],
+            client_campaign_alias=flow['client_alias'],
             pixel=pixel,
             bundle_sub30=bundle,
             domain=flow['domain'],

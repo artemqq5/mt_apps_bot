@@ -1,6 +1,7 @@
 from config import API_KEY_KEITARO, KEITARO_CAMPAIGN_ID_APPS_FLOW, KEITARO_CAMPAIGN_GROUP_ID, KEITARO_CAMPAIGN_ID_USERS, \
     KEITARO_DOMAIN_SERVER, KEITARO_CAMPAIGN_ONELINK_ALIAS, KEITARO_OFFER_GROUP_ID, KEITARO_BASE_URL, \
     KEITARO_CAMPAIGN_ID_MAIN_URL, WEBHOOK_URL, KEITARO_WHITE_OFFER, KEITARO_HOST_LINK
+from data.constants.access import DOT_DOMAINS
 
 
 class DefaultKeitaro:
@@ -30,8 +31,16 @@ class DefaultKeitaro:
                "?sub1={sub1}"
                "&sub2={sub2}"
                f"&sub3={client_campaign_alias}"
+               "&sub4={sub4}"
+               "&sub5={sub5}"
+               "&sub6={sub6}"
+               "&sub7={sub7}"
+               "&sub8={sub8}"
+               "&sub9={sub9}"
+               "&sub10={sub10}"
                f"&pixel={pixel}"
                f"&system_id={self._apps_campaign_alias}"
-               f"&bundle={bundle_sub30}")
+               f"&bundle={bundle_sub30}"
+               f"&domain={str(domain).replace('.', DOT_DOMAINS)}")
 
         return url

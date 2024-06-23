@@ -4,6 +4,7 @@ Language-uk = Украинский
 Language-en = Английский
 Language-ru = русский
 
+YES = Да
 SKIP = Пропустить
 CANCEL = Отменить
 
@@ -64,7 +65,7 @@ DRAFT_STATUS_APP = Черновик
 DELETE_APP = Удалить приложение
 
 #user
-USER-PIXEL_FB = Пикесль FB
+USER-PIXEL_FB = Pixel FB
 USER-ADD_PIXEL_FB = Добавить новый пикесль
 USER-SHOW_MY_PIXELS = Мои пиксели
 
@@ -79,7 +80,7 @@ FLOW-CALL_ADMIN = Чат с поддержкой
 NOTIFY-NOTIFICATION = Рассылка
 NOTIFY-CATEGORY_USERS = В Команде
 NOTIFY-CATEGORY_NO_USERS = Без команды
-NOTIFY-CATEGORY_ALL_USERS = Все (за исключением админов)
+NOTIFY-CATEGORY_ALL_USERS = Все
 NOTIFY-DEFAULT_BUTTON_TEXT = Открыть
 NOTIFY-SEND = Отправить
 

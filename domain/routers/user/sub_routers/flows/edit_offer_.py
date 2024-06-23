@@ -4,6 +4,7 @@ from aiogram.types import CallbackQuery, Message
 from aiogram_i18n import I18nContext
 
 from data.constants.access import validate_user_link, MACROS
+from data.repositoryDB.AccessRepository import AccessRepository
 from data.repositoryDB.FlowRepository import FlowRepository
 from data.repositoryKeitaro.KeitaroOfferRepository import KeitaroOfferRepository
 from domain.states.user.flow_.EditOfferFlow import EditOfferFlowState
@@ -42,14 +43,16 @@ async def change_offer(message: Message, state: FSMContext, i18n: I18nContext):
 
     await state.clear()
 
-    if not KeitaroOfferRepository().update_offer_url(flow['offer_id'], message.text):
+    new_offer = message.text
+
+    if not KeitaroOfferRepository().update_offer_url(flow['offer_id'], new_offer):
         await message.answer(
             i18n.FLOW.EDIT.NEW_OFFER_FAIL(error="keitaro"),
             reply_markup=kb_flow_back_edit(flow['id'])
         )
         return
 
-    if not FlowRepository().update_offer_flow(flow['id'], message.text):
+    if not FlowRepository().update_offer_flow(flow['id'], new_offer):
         await message.answer(
             i18n.FLOW.EDIT.NEW_OFFER_FAIL(error="db"),
             reply_markup=kb_flow_back_edit(flow['id'])

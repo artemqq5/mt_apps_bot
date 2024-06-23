@@ -37,7 +37,8 @@ async def add_bundle(message: types.Message, state: FSMContext, i18n: I18nContex
 async def add_image(message: types.Message, state: FSMContext, i18n: I18nContext):
     await state.set_state(AddAplicationState.Image)
     data = await state.get_data()
-    await state.update_data(bundle=message.text)
+    sub_name = ''.join(filter(str.isalnum, data['name'].lower()))
+    await state.update_data(bundle=f"{message.text}{sub_name}")
     await state.update_data(url=generate_url(message.text, data['platform'], i18n))
     await message.answer(i18n.APP.SET_IMAGE(), reply_markup=kb_cancel)
 
@@ -103,6 +104,7 @@ async def add_publish(message: types.Message, state: FSMContext, i18n: I18nConte
         return
 
     await message.answer(i18n.APP.SUCCESS_PUBLISHED(
+        masons=f"https://masonsapps.tech/v2?name={data['bundle']}",
         id=response.organic_campaign_id,
         name=response.organic_campaign_name,
         link=response.link_keitaro
