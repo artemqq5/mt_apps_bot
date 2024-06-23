@@ -55,6 +55,7 @@ async def create_link_handler(callback: CallbackQuery, bot: Bot, i18n: I18nConte
 
     await state.set_state(CreateFlowState.ChoicePixelFB)
     await state.update_data(bundle=app['bundle'])
+    await state.update_data(platform=app['platform'])
     await callback.message.answer(i18n.FLOW.SELECT_PIXEL_FB(), reply_markup=pixel_choice_keyboard_list(pixels))
 
 
@@ -142,7 +143,8 @@ async def offer_link(message: Message, i18n: I18nContext, state: FSMContext, bot
             comment=response.comment,
             client_alias=response.alias_client_cmp,
             distribution_alias=response.distribution_campaign_alias,
-            timnameidfilter=team_unq
+            timnameidfilter=team_unq,
+            platform=data['platform']
     ):
         await state.clear()
         await message.answer(i18n.FLOW.FLOW_FAIL_CREATED(error="db"), reply_markup=kb_menu_user)

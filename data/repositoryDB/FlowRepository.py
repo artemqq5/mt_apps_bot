@@ -8,15 +8,15 @@ class FlowRepository(DefaultDataBase):
 
     def add_flow(self, link_user, link_keitaro, user_id, pixel, token, client_campain_id, client_campaign_name,
                  offer_id, offer_name, domain, bundle, comment, distribution_campaign_id, distribution_campaign_name,
-                 client_alias, distribution_alias, timnameidfilter):
+                 client_alias, distribution_alias, timnameidfilter, platform):
         query = '''INSERT INTO `flows` (`link_user`, `link_keitaro`, `user_id`, `pixel_fb`, `token_fb`, `client_campaign_id`,
         `client_campaign_name`, `offer_id`, `comment`, `offer_name`, `domain`, `bundle`, `distribution_campaign_id`,
-         `distribution_campaign_name`, `client_alias`, `distribution_alias`, `timnameidfilter`) 
-        VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s);'''
+         `distribution_campaign_name`, `client_alias`, `distribution_alias`, `timnameidfilter`, `platform`) 
+        VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s);'''
         return self._insert(query,
                             (link_user, link_keitaro, user_id, pixel, token, client_campain_id, client_campaign_name,
                              offer_id, comment, offer_name, domain, bundle, distribution_campaign_id,
-                             distribution_campaign_name, client_alias, distribution_alias, timnameidfilter))
+                             distribution_campaign_name, client_alias, distribution_alias, timnameidfilter, platform))
 
     def get_flow(self, flow_id):
         query = "SELECT * FROM `flows` WHERE `id` = %s;"

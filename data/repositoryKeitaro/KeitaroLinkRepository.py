@@ -92,7 +92,7 @@ class KeitaroLink(DefaultKeitaro):
                 "sub_id_2": {"name": "sub2", "placeholder": "sub2", "alias": ""},
                 "sub_id_3": {"name": "sub3", "placeholder": f"{sub3}", "alias": ""},
                 "sub_id_4": {"name": "pixel", "placeholder": f"{pixel}", "alias": ""},
-                "sub_id_5": {"name": "fbclid", "placeholder": "", "alias": ""},
+                "sub_id_5": {"name": "fbclid", "placeholder": "none", "alias": ""},
                 "sub_id_6": {"name": "system_id", "placeholder": f"{system_id}", "alias": ""},
                 "sub_id_7": {"name": "bundle", "placeholder": f"{bundle}", "alias": ""},
                 "sub_id_8": {"name": "sub4", "placeholder": "sub4", "alias": ""},

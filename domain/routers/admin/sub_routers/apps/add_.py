@@ -3,7 +3,7 @@ from aiogram.fsm.context import FSMContext
 from aiogram.utils.markdown import hlink
 from aiogram_i18n import L, I18nContext
 
-from data.constants.access import MASONS_LINK, DEFAULT_DESC
+from data.constants.access import MASONS_LINK, DEFAULT_DESC, validate_link
 from data.repositoryDB.AppRepository import AppRepository
 from data.repositoryKeitaro.KeitaroAppRepository import KeitaroAppRepository
 from domain.states.admin.apps_.AddApplication import AddAplicationState
@@ -19,7 +19,7 @@ async def add_platform(message: types.Message, state: FSMContext, i18n: I18nCont
     await message.answer(i18n.APP.SET_PLATFORM(), reply_markup=kb_apps_platform)
 
 
-@router.message(AddAplicationState.Platform, F.text.in_((L.IOS(),)))  # L.ANDROID(), L.PWA()
+@router.message(AddAplicationState.Platform, F.text.in_((L.IOS(), L.TELEGRAM())))  # L.ANDROID(), L.PWA()
 async def add_name(message: types.Message, state: FSMContext, i18n: I18nContext):
     await state.set_state(AddAplicationState.Name)
     await state.update_data(platform=message.text)
@@ -34,12 +34,24 @@ async def add_bundle(message: types.Message, state: FSMContext, i18n: I18nContex
 
 
 @router.message(AddAplicationState.Bundle)
-async def add_image(message: types.Message, state: FSMContext, i18n: I18nContext):
-    await state.set_state(AddAplicationState.Image)
+async def add_url(message: types.Message, state: FSMContext, i18n: I18nContext):
     data = await state.get_data()
-    sub_name = ''.join(filter(str.isalnum, data['name'].lower()))
-    await state.update_data(bundle=f"{message.text}{sub_name}")
-    await state.update_data(url=generate_url(message.text, data['platform'], i18n))
+
+    my_bundle = get_format_bundle(message.text, data['name'], data['platform'], i18n)
+    await state.update_data(bundle=my_bundle)
+
+    await state.set_state(AddAplicationState.Url)
+    await message.answer(i18n.APP.SET_LINK(), reply_markup=kb_cancel)
+
+
+@router.message(AddAplicationState.Url)
+async def add_image(message: types.Message, state: FSMContext, i18n: I18nContext):
+    if not validate_link(message.text):
+        await message.answer(i18n.LINK.VALIDATION_ERROR(), reply_markup=kb_cancel)
+        return
+
+    await state.update_data(url=message.text)
+    await state.set_state(AddAplicationState.Image)
     await message.answer(i18n.APP.SET_IMAGE(), reply_markup=kb_cancel)
 
 
@@ -128,10 +140,17 @@ def preview_app(data, i18n) -> str:
     )
 
 
-def generate_url(bundle, platform, i18n) -> str | None:
+def get_format_bundle(bundle: str, name: str, platform: str, i18n: I18nContext) -> str:
+
+    formmated_bundle = ''.join(filter(str.isalnum, bundle.lower()))
+    formmated_name = ''.join(filter(str.isalnum, name.lower()))
+
     if platform == i18n.IOS():
-        return f"https://apps.apple.com/app/id{bundle}"
-    elif platform == i18n.ANDROID():
-        return f"https://play.google.com/store/apps/details?id={bundle}"
+        return f"{bundle}{formmated_name}"
     else:
-        return None
+        return formmated_bundle
+
+
+
+
+

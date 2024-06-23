@@ -83,7 +83,7 @@ FAIL_CHANGE_LANG = Error language change (maybe you are trying to change the lan
 # applications (add, preview template, publish, show)
 APP-SET_PLATFORM = What platform is the app for?
 APP-SET_NAME = App Name:
-APP-SET_BUNDLE = Specify the application bundle (IOS=1451177077, Android=com.af.smart):
+APP-SET_BUNDLE = Specify the application bundle (IOS=1451177077, Android=com.af.smart, Telegram=Gates_of_Olymp_bot):
 APP-SET_IMAGE = An image for the application has been sent (not a file):
 APP-SET_GEO = Specify open geo, for example (UA, AL, BR):
 APP-SET_SOURCE = Specify which source the application is targeting:
@@ -256,3 +256,6 @@ ADMIN-NOTIFICATION-NEW_USER = New user {$username} has started a bot!
     <b>last name:</b> {$lastname}
     <b>lang:</b> {$lang}
     <b>start time:</b> {$time}
+
+APP-SET_LINK = Send link to app or telegram web (not bot)
+LINK-VALIDATION_ERROR = Link must start with https://

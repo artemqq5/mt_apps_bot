@@ -27,7 +27,7 @@ async def show_platform(message: types.Message, state: FSMContext, i18n: I18nCon
     await message.answer(i18n.APP.CHOICE_PLATFORM(), reply_markup=kb_apps_platform)
 
 
-@router.message(ShowApplicationState.platform, F.text.in_((L.IOS(),)))  # L.ANDROID(), L.PWA()
+@router.message(ShowApplicationState.platform, F.text.in_((L.IOS(), L.TELEGRAM())))  # L.ANDROID(), L.PWA()
 async def show_applications(message: types.Message, state: FSMContext, i18n: I18nContext):
     applications = AppRepository().show_apps_by_platform(message.text)
     if not applications:

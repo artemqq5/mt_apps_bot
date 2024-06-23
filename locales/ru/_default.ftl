@@ -83,7 +83,7 @@ FAIL_CHANGE_LANG = Ошибка изменения языка (возможно,
 # applications (add, preview template, publish, show)
 APP-SET_PLATFORM = Под какую платформу приложение?
 APP-SET_NAME = Имя приложения:
-APP-SET_BUNDLE = Укажи bundle приложения (IOS=1451177077, Android=com.af.smart):
+APP-SET_BUNDLE = Укажи bundle приложения (IOS=1451177077, Android=com.af.smart, Telegram=Gates_of_Olymp_bot):
 APP-SET_IMAGE = Пришли картинку для приложения (не файлом):
 APP-SET_GEO = Укажи открытые гео, например (UA, AL, BR):
 APP-SET_SOURCE = Укажи под какой источник направлено приложение:
@@ -255,3 +255,6 @@ ADMIN-NOTIFICATION-NEW_USER = Новый пользователь {$username} з
     <b>last name:</b> {$lastname}
     <b>lang:</b> {$lang}
     <b>start time:</b> {$time}
+
+APP-SET_LINK = Отправьте ссылку на приложение или на telegram web (не бот)
+LINK-VALIDATION_ERROR = Ссылка должна начинаться с https://

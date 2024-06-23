@@ -16,7 +16,7 @@ router = Router()
 async def edit_flow_app(callback: CallbackQuery, i18n: I18nContext, state: FSMContext):
     id_ = callback.data.split(":")[1]
     flow = FlowRepository().get_flow(id_)
-    apps = AppRepository().show_apps_by_platform_for_users(i18n.IOS())
+    apps = AppRepository().show_apps_by_platform_for_users(flow['platform'])
 
     if not flow:
         return  # потока не існує

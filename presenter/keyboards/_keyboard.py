@@ -50,6 +50,7 @@ def keyboard_access(from_user_id) -> ReplyKeyboardMarkup:
 
 kb_apps_platform = ReplyKeyboardMarkup(keyboard=[
     [KeyboardButton(text=L.IOS())],
+    [KeyboardButton(text=L.TELEGRAM())],
     # [KeyboardButton(text=L.ANDROID())],
     # [KeyboardButton(text=L.PWA())],
     [KeyboardButton(text=L.CANCEL())]

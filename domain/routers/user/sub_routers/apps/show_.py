@@ -14,7 +14,7 @@ from presenter.keyboards.user_keyboard import apps_keyboard_list, AppKeyboardLis
 router = Router()
 
 
-@router.message(ShowAppsState.Show, F.text.in_((L.IOS(),)))  # L.ANDROID(), L.PWA()
+@router.message(ShowAppsState.Show, F.text.in_((L.IOS(), L.TELEGRAM())))  # L.ANDROID(), L.PWA()
 async def show_applications(message: types.Message, state: FSMContext, i18n: I18nContext):
     # KeitaroAppUseCase().check_available_apps()  # Перевіряємо чи не видалили з кейтаро додаток
 

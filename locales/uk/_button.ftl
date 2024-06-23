@@ -47,6 +47,7 @@ APPS = Додатки
 ADD_APP = Створити додаток
 SHOW_APPS = Показати додатки
 IOS = IOS
+TELEGRAM = Telegram
 ANDROID = Android
 PWA = PWA
 
