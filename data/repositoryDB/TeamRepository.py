@@ -18,7 +18,7 @@ class TeamRepository(DefaultDataBase):
         return self._select_one(query, (team_uuid,))
 
     def get_teams(self):
-        query = "SELECT * FROM `teams`;"
+        query = "SELECT * FROM `teams` ORDER BY `team_id` DESC;"
         return self._select(query)
 
     def delete_team(self, team_id):
