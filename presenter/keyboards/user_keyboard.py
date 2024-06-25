@@ -9,7 +9,7 @@ kb_menu_user = ReplyKeyboardMarkup(keyboard=[
     [KeyboardButton(text=L.FLOW.MY_FLOWS())],
     [KeyboardButton(text=L.USER.PIXEL_FB())],
     [KeyboardButton(text=L.SETTINGS())],
-])
+], resize_keyboard=True)
 
 
 class AppKeyboardList(CallbackData, prefix="apps*inline*keyboard"):
@@ -23,7 +23,7 @@ def apps_keyboard_list(list_application) -> InlineKeyboardMarkup:
             [InlineKeyboardButton(text=f"{app['name']} | {app['status']}", callback_data=AppKeyboardList(id=app['id']).pack())]
         )
 
-    return InlineKeyboardMarkup(inline_keyboard=inline_kb)
+    return InlineKeyboardMarkup(inline_keyboard=inline_kb, resize_keyboard=True)
 
 
 class AppKeyboardListUser(CallbackData, prefix="apps*inline*keyboard*user"):
@@ -37,14 +37,14 @@ def apps_keyboard_list_user(list_application) -> InlineKeyboardMarkup:
             [InlineKeyboardButton(text=f"{app['name']}", callback_data=AppKeyboardListUser(id=app['id']).pack())]
         )
 
-    return InlineKeyboardMarkup(inline_keyboard=inline_kb)
+    return InlineKeyboardMarkup(inline_keyboard=inline_kb, resize_keyboard=True)
 
 
 kb_pixel_menu = ReplyKeyboardMarkup(keyboard=[
     [KeyboardButton(text=L.USER.ADD_PIXEL_FB())],
     [KeyboardButton(text=L.USER.SHOW_MY_PIXELS())],
     [KeyboardButton(text=L.CANCEL())],
-])
+], resize_keyboard=True)
 
 
 class PixelKeyboardList(CallbackData, prefix="pixel*show*keyboard"):
@@ -58,7 +58,7 @@ def pixel_keyboard_list(pixels) -> InlineKeyboardMarkup:
             [InlineKeyboardButton(text=p['pixel_fb'], callback_data=PixelKeyboardList(id=p['id']).pack())]
         )
 
-    return InlineKeyboardMarkup(inline_keyboard=inline_kb)
+    return InlineKeyboardMarkup(inline_keyboard=inline_kb, resize_keyboard=True)
 
 
 class PixelChoiceKeyboardList(CallbackData, prefix="pixel*choice*keyboard"):
@@ -72,7 +72,7 @@ def pixel_choice_keyboard_list(pixels) -> InlineKeyboardMarkup:
             [InlineKeyboardButton(text=p['pixel_fb'], callback_data=PixelChoiceKeyboardList(id=p['id']).pack())]
         )
 
-    return InlineKeyboardMarkup(inline_keyboard=inline_kb)
+    return InlineKeyboardMarkup(inline_keyboard=inline_kb, resize_keyboard=True)
 
 
 class PixelDeleteKeyboard(CallbackData, prefix="pixel*delete*keyboard"):
@@ -82,7 +82,7 @@ class PixelDeleteKeyboard(CallbackData, prefix="pixel*delete*keyboard"):
 def kb_delte_pixel(_id):
     return InlineKeyboardMarkup(inline_keyboard=[
         [InlineKeyboardButton(text=L.USER.DELETE_PIXEL(), callback_data=PixelDeleteKeyboard(id=_id).pack())]
-    ])
+    ], resize_keyboard=True)
 
 
 class AppCreateLinkKeyboard(CallbackData, prefix="app*createlink*keyboard"):
@@ -92,13 +92,13 @@ class AppCreateLinkKeyboard(CallbackData, prefix="app*createlink*keyboard"):
 def kb_create_app_link(app_id):
     return InlineKeyboardMarkup(inline_keyboard=[
         [InlineKeyboardButton(text=L.USER.CREATE_APP_LINK(), callback_data=AppCreateLinkKeyboard(id=app_id).pack())]
-    ])
+    ], resize_keyboard=True)
 
 
 kb_create_pixelfb = ReplyKeyboardMarkup(keyboard=[
     [KeyboardButton(text=L.USER.ADD_PIXEL_FB())],
     [KeyboardButton(text=L.CANCEL())]
-])
+], resize_keyboard=True)
 
 
 class FlowShowKeyboard(CallbackData, prefix="flow*show*keyboard"):
@@ -113,12 +113,12 @@ def kb_user_flows(flows) -> InlineKeyboardMarkup:
                                   callback_data=FlowShowKeyboard(id=flow['id']).pack())]
         )
 
-    return InlineKeyboardMarkup(inline_keyboard=inline_kb)
+    return InlineKeyboardMarkup(inline_keyboard=inline_kb, resize_keyboard=True)
 
 
 kb_call_admin = InlineKeyboardMarkup(inline_keyboard=[
     [InlineKeyboardButton(text=L.FLOW.CALL_ADMIN(), url=LINK_TO_SUPPORT)],
-])
+], resize_keyboard=True)
 
 
 class EditFlowComment(CallbackData, prefix="flow*edit*comment"):
@@ -144,7 +144,7 @@ def kb_flow_edit(flow_id) -> InlineKeyboardMarkup:
         [InlineKeyboardButton(text=L.FLOW.EDIT.PIXEL(), callback_data=EditFlowPixel(id=flow_id).pack())],
         [InlineKeyboardButton(text=L.FLOW.EDIT.COMMENT(), callback_data=EditFlowComment(id=flow_id).pack())],
         [InlineKeyboardButton(text=L.FLOW.CALL_ADMIN(), url=LINK_TO_SUPPORT)],
-    ])
+    ], resize_keyboard=True)
 
 
 def kb_flow_back_edit(flow_id) -> InlineKeyboardMarkup:
@@ -155,7 +155,7 @@ def kb_flow_back_edit(flow_id) -> InlineKeyboardMarkup:
         [InlineKeyboardButton(text=L.FLOW.EDIT.PIXEL(), callback_data=EditFlowPixel(id=flow_id).pack())],
         [InlineKeyboardButton(text=L.FLOW.EDIT.COMMENT(), callback_data=EditFlowComment(id=flow_id).pack())],
         [InlineKeyboardButton(text=L.FLOW.CALL_ADMIN(), url=LINK_TO_SUPPORT)],
-    ])
+    ], resize_keyboard=True)
 
 
 class PixelEditList(CallbackData, prefix="pixel*edit*list"):
@@ -169,7 +169,7 @@ def pixel_edit_list(pixels) -> InlineKeyboardMarkup:
             [InlineKeyboardButton(text=p['pixel_fb'], callback_data=PixelEditList(id=p['id']).pack())]
         )
 
-    return InlineKeyboardMarkup(inline_keyboard=inline_kb)
+    return InlineKeyboardMarkup(inline_keyboard=inline_kb, resize_keyboard=True)
 
 
 class AppEditList(CallbackData, prefix="app*edit*list"):
@@ -183,4 +183,4 @@ def app_edit_list(apps) -> InlineKeyboardMarkup:
             [InlineKeyboardButton(text=app['name'], callback_data=AppEditList(id=app['id']).pack())]
         )
 
-    return InlineKeyboardMarkup(inline_keyboard=inline_kb)
+    return InlineKeyboardMarkup(inline_keyboard=inline_kb, resize_keyboard=True)

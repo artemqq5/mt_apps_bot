@@ -91,3 +91,4 @@ FLOW-EDIT-PIXEL = Замінити Pixel
 FLOW-EDIT-COMMENT = Редагувати коментар
 FLOW-EDIT-BACK = Повернутись до потоку
 
+BACK = Назад

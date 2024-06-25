@@ -91,3 +91,6 @@ FLOW-EDIT-OFFER = Редактировать оффер
 FLOW-EDIT-PIXEL = Заменить Pixel
 FLOW-EDIT-COMMENT = Редактировать комментарий
 FLOW-EDIT-BACK = Возврат к потоку
+
+BACK = Назад
+

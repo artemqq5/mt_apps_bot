@@ -1,3 +1,4 @@
+import math
 import uuid
 
 from aiogram import Router, F, types
@@ -12,7 +13,8 @@ from domain.routers.admin.sub_routers.teams import delete_team_, generate_deepli
     domain_limit_, team_messaging_
 from domain.states.admin.team_.CreateTeam import CreateTeamState
 from presenter.keyboards._keyboard import kb_cancel
-from presenter.keyboards.admin_keyboard import kb_teams, kb_team_managment, kb_show_teams, TeamShowCallback
+from presenter.keyboards.admin_keyboard import kb_teams, kb_team_managment, kb_show_teams, TeamShowCallback, \
+    TeamPageCallback, TeamDetailBack
 
 router = Router()
 router.include_routers(
@@ -55,12 +57,14 @@ async def show_teams(message: types.Message, state: FSMContext, i18n: I18nContex
         await message.answer(i18n.TEAM_LIST_IS_EMPTY(), reply_markup=kb_teams)
         return
 
-    await message.answer(i18n.TEAMS(), reply_markup=kb_show_teams(team_list))
+    await message.answer(i18n.TEAMS() + f" {1}/{math.ceil(len(team_list) / 10)}",
+                         reply_markup=kb_show_teams(1, team_list))
 
 
 @router.callback_query(TeamShowCallback.filter())
 async def team_detail(callback: CallbackQuery, i18n: I18nContext, state: FSMContext):
     id_ = callback.data.split(":")[1]
+    page = int(callback.data.split(":")[2])
     team = TeamRepository().get_team_by_id(id_)
 
     team_users = AccessRepository().get_team_users(team['team_id'])
@@ -73,5 +77,30 @@ async def team_detail(callback: CallbackQuery, i18n: I18nContext, state: FSMCont
         "Status: ", Bold(team['status']), "\n",
         "Created at: ", Bold(team['created_at'])
     )
-    await callback.message.answer(**team_template.as_kwargs(), reply_markup=kb_team_managment(team['team_id']))
+    await callback.message.edit_text(**team_template.as_kwargs(), reply_markup=kb_team_managment(team['team_id'], page))
 
+
+@router.callback_query(TeamPageCallback.filter())
+async def team_page_manager(callback: CallbackQuery, i18n: I18nContext):
+    page = int(callback.data.split(":")[1])
+    team_list = TeamRepository().get_teams()
+
+    if not len(team_list):
+        await callback.message.answer(i18n.TEAM_LIST_IS_EMPTY(), reply_markup=kb_teams)
+        return
+
+    await callback.message.edit_text(i18n.TEAMS() + f" {page}/{math.ceil(len(team_list) / 10)}",
+                                     reply_markup=kb_show_teams(page, team_list))
+
+
+@router.callback_query(TeamDetailBack.filter())
+async def team_detail_back(callback: CallbackQuery, i18n: I18nContext):
+    page = int(callback.data.split(":")[1])
+    team_list = TeamRepository().get_teams()
+
+    if not len(team_list):
+        await callback.message.answer(i18n.TEAM_LIST_IS_EMPTY(), reply_markup=kb_teams)
+        return
+
+    await callback.message.edit_text(i18n.TEAMS() + f" {page}/{math.ceil(len(team_list) / 10)}",
+                                     reply_markup=kb_show_teams(page, team_list))

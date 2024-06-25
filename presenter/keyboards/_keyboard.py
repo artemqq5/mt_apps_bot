@@ -13,16 +13,16 @@ from presenter.keyboards.user_keyboard import kb_menu_user
 kb_skip = ReplyKeyboardMarkup(keyboard=[
     [KeyboardButton(text=L.SKIP())],
     [KeyboardButton(text=L.CANCEL())]
-])
+], resize_keyboard=True)
 
 kb_cancel = ReplyKeyboardMarkup(keyboard=[
     [KeyboardButton(text=L.CANCEL())]
-])
+], resize_keyboard=True)
 
 kb_settings = ReplyKeyboardMarkup(keyboard=[
     [KeyboardButton(text=L.LOCALIZATION())],
     [KeyboardButton(text=L.CANCEL())]
-])
+], resize_keyboard=True)
 
 
 class LanguageCD(CallbackData, prefix="lang"):
@@ -33,7 +33,7 @@ kb_languages = InlineKeyboardMarkup(inline_keyboard=[
     [InlineKeyboardButton(text=L.Language.uk(), callback_data=LanguageCD(lang="uk").pack())],
     [InlineKeyboardButton(text=L.Language.en(), callback_data=LanguageCD(lang="en").pack())],
     [InlineKeyboardButton(text=L.Language.ru(), callback_data=LanguageCD(lang="ru").pack())],
-])
+], resize_keyboard=True)
 
 
 def keyboard_access(from_user_id) -> ReplyKeyboardMarkup:
@@ -54,4 +54,4 @@ kb_apps_platform = ReplyKeyboardMarkup(keyboard=[
     # [KeyboardButton(text=L.ANDROID())],
     # [KeyboardButton(text=L.PWA())],
     [KeyboardButton(text=L.CANCEL())]
-])
+], resize_keyboard=True)
